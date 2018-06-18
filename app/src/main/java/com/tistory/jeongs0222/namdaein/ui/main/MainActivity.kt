@@ -1,7 +1,8 @@
-package com.tistory.jeongs0222.namdaein
+package com.tistory.jeongs0222.namdaein.ui.main
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.tistory.jeongs0222.namdaein.R
 
 class MainActivity : AppCompatActivity() {
 
