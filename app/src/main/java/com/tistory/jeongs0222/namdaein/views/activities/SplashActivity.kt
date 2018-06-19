@@ -1,9 +1,9 @@
-package com.tistory.jeongs0222.namdaein.ui.splash
+package com.tistory.jeongs0222.namdaein.views.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import com.tistory.jeongs0222.namdaein.ui.intro.IntroActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -15,9 +15,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun skip() {
-        val intent = Intent(this, IntroActivity::class.java)
-        startActivity(intent)
+        Handler().postDelayed({
+            val mainIntent = Intent(this, MainActivity::class.java)
+            startActivity(mainIntent)
 
-        finish()
+            finish()
+        }, 1000)
     }
 }

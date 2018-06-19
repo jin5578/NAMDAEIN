@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1071974519952",
+    "firebase_url": "https://namdaein-420ae.firebaseio.com",
+    "project_id": "namdaein-420ae",
+    "storage_bucket": "namdaein-420ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071974519952:android:81652e0768794c97",
+        "android_client_info": {
+          "package_name": "com.tistory.jeongs0222.namdaein"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071974519952-a9di7eou2m9dc4d7a6hfi6ddmhfb2knh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tistory.jeongs0222.namdaein",
+            "certificate_hash": "b9f08c585a5b709bb4f43023efc66cbc06b2d29d"
+          }
+        },
+        {
+          "client_id": "1071974519952-cm900k46eb8snpoqjhs4abhpe5jk8qja.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1071974519952-cm900k46eb8snpoqjhs4abhpe5jk8qja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxhq30ajoA7KiFxKFL9yKlA5IuYRKWvLM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071974519952-cm900k46eb8snpoqjhs4abhpe5jk8qja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

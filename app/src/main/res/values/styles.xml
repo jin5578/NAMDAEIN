@@ -6,8 +6,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:textViewStyle">@style/TextViewStyle</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -15,12 +13,18 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
+
+    <style name="LoginTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:background">@color/colorWhite</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="TextViewStyle" parent="@android:style/Widget.DeviceDefault.TextView">
-        <item name="android:fontFamily">@fonts/goyang</item>
+
+
+    <!-- 폰트 적용 -->
+    <style name="TabLayoutTextStyle" parent="@android:style/TextAppearance.DeviceDefault.Widget.TabWidget">
+        <item name="android:fontFamily">@font/goyang</item>
+        <item name="android:textSize">@dimen/tabLayout_textSize</item>
     </style>
 
 </resources>
