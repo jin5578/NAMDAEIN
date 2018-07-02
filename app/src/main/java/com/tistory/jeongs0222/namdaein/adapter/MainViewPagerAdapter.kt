@@ -1,12 +1,12 @@
-package com.tistory.jeongs0222.namdaein.views.adapters
+package com.tistory.jeongs0222.namdaein.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.tistory.jeongs0222.namdaein.views.fragments.MainBoardFragment
-import com.tistory.jeongs0222.namdaein.views.fragments.MainHomeFragment
-import com.tistory.jeongs0222.namdaein.views.fragments.MainMarketFragment
-import com.tistory.jeongs0222.namdaein.views.fragments.MainMoreFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainBoardFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainHomeFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainMarketFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainMoreFragment
 
 
 class MainViewPagerAdapter(fm: FragmentManager, internal var numOfTabs: Int) : FragmentStatePagerAdapter(fm) {

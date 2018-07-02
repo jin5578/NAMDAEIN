@@ -1,15 +1,16 @@
-package com.tistory.jeongs0222.namdaein.views.activities
+package com.tistory.jeongs0222.namdaein.ui.activity.main
 
-import android.databinding.BaseObservable
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import com.tistory.jeongs0222.namdaein.R
-import com.tistory.jeongs0222.namdaein.views.adapters.MainViewPagerAdapter
+import com.tistory.jeongs0222.namdaein.adapter.MainViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
+
 
     private lateinit var pagerAdapter : MainViewPagerAdapter
 
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         init()
     }
@@ -93,4 +95,6 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }
+
+
 }

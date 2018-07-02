@@ -1,21 +1,17 @@
-package com.tistory.jeongs0222.namdaein.views.fragments
+package com.tistory.jeongs0222.namdaein.ui.fragment.main
 
-import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 
-class MainMoreFragment : Fragment() {
+class MainBoardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.activity_main_more_fragment, container, false)
+        val view: View = layoutInflater.inflate(R.layout.activity_main_board_fragment, container, false)
 
         return view
     }
-
 }

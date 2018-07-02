@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.views.activities
+package com.tistory.jeongs0222.namdaein.ui.activity.login
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
