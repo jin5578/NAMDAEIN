@@ -27,4 +27,9 @@
         <item name="android:textSize">@dimen/tabLayout_textSize</item>
     </style>
 
+    <style name="InnerTabLayoutTextStyle" parent="@android:style/TextAppearance.DeviceDefault.Widget.TabWidget">
+        <item name="android:fontFamily">@font/goyang</item>
+        <item name="android:textSize">@dimen/inner_tabLayout_textSize</item>
+    </style>
+
 </resources>

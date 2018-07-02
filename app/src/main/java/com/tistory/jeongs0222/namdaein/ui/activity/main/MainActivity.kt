@@ -1,55 +1,51 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.main
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import com.tistory.jeongs0222.namdaein.R
-import com.tistory.jeongs0222.namdaein.adapter.MainViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
+class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener, MainContract.View {
 
 
-    private lateinit var pagerAdapter : MainViewPagerAdapter
+    private lateinit var mPresenter: MainContract.Presenter
+    private lateinit var mPagerAdapter : MainViewPagerAdapter
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         init()
     }
 
+
+
     private fun init() {
+        mPresenter = MainPresenter()
+
+        mPresenter.setView(this, this)
 
         setUpTabLayout()
 
         setUpViewPager()
-
-
     }
 
     private fun setUpTabLayout() {
 
-        main_tabLayout.apply {
-            addTab(main_tabLayout.newTab().setText("홈"))
-            addTab(main_tabLayout.newTab().setText("장터"))
-            addTab(main_tabLayout.newTab().setText("게시판"))
-            addTab(main_tabLayout.newTab().setText("더보기"))
+        main_tabLayout.addOnTabSelectedListener(this@MainActivity)
 
-            addOnTabSelectedListener(this@MainActivity)
-        }
     }
 
     private fun setUpViewPager() {
 
-        pagerAdapter = MainViewPagerAdapter(supportFragmentManager, main_tabLayout.tabCount)
+        mPagerAdapter = MainViewPagerAdapter(supportFragmentManager, main_tabLayout.tabCount)
 
         main_viewPager.apply {
-            adapter = pagerAdapter
+            adapter = mPagerAdapter
             currentItem = 0
             offscreenPageLimit = main_tabLayout.tabCount
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tabLayout))

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".ui.activity.main.MainActivity">
 
     <android.support.v7.widget.Toolbar
@@ -51,13 +52,34 @@
         android:id="@+id/main_tabLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:background="@color/colorWhite"
+        app:tabTextColor="@color/colorBlack"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
         app:tabSelectedTextColor="@color/colorTabSelected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홈"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장터"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시판"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더보기"/>
+    </android.support.design.widget.TabLayout>
 
 </android.support.constraint.ConstraintLayout>

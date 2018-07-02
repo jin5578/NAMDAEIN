@@ -1,9 +1,9 @@
-package com.tistory.jeongs0222.namdaein.adapter
+package com.tistory.jeongs0222.namdaein.ui.activity.main
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainBoardFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.board.MainBoardFragment
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainHomeFragment
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainMarketFragment
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainMoreFragment

@@ -24,8 +24,12 @@
             android:theme="@style/LoginTheme" />
         <activity android:name=".ui.fragment.main.MainHomeFragment" />
         <activity android:name=".ui.fragment.main.MainMarketFragment" />
-        <activity android:name=".ui.fragment.main.MainBoardFragment" />
-        <activity android:name=".ui.fragment.main.MainMoreFragment"></activity>
+        <activity android:name=".ui.fragment.main.board.MainBoardFragment" />
+        <activity android:name=".ui.fragment.main.MainMoreFragment" />
+        <activity android:name=".ui.fragment.board.BoardFreeFragment" />
+        <activity android:name=".ui.fragment.board.BoardLostFragment" />
+        <activity android:name=".ui.fragment.board.BoardPromoteFragment" />
+        <activity android:name=".ui.fragment.board.BoardClubFragment"></activity>
     </application>
 
 </manifest>
