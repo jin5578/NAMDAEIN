@@ -13,6 +13,7 @@ interface BoardFreeContract {
     interface Presenter {
         fun setView(view: View, context: Context)
 
+        fun setUpRecyclerView()
         fun setUpData()
     }
 }

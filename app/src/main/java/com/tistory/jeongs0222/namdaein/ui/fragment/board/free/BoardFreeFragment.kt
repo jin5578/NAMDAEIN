@@ -28,6 +28,9 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
         mPresenter = BoardFreePresenter()
 
         mPresenter.setView(this, activity!!)
+
+        mPresenter.setUpRecyclerView()
+
         mPresenter.setUpData()
     }
 

@@ -34,6 +34,15 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
         this.context = context
     }
 
+    override fun setUpRecyclerView() {
+        view.recyclerView().apply {
+            layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            scrollToPosition(0)
+        }
+    }
+
     override fun setUpData() {
 
         disposable = apiClient.bringBoard(0, 0)
@@ -42,22 +51,25 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
                 .doOnNext {
                     item = it.board
                 }
-                .doOnComplete { setUpRecyclerView() }
+                .doOnComplete {
+                    mAdapter = BoardItemAdapter(item, context)
+                    view.recyclerView().adapter = mAdapter
+                }
                 .subscribe(
                         { result -> Log.v("ARTICLES",""+result)},
                         { error -> Log.e("ERROR", error.message) }
                 )
     }
 
-    private fun setUpRecyclerView() {
+    /*private fun setUpRecyclerView() {
         mAdapter = BoardItemAdapter(item, context)
         view.recyclerView().apply {
-            Log.e("456", "456")
-            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
+            scrollToPosition(0)
 
             adapter = mAdapter
         }
-    }
+    }*/
 }
