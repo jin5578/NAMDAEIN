@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
         init()
     }
 
-
-
     private fun init() {
         mPresenter = MainPresenter()
 

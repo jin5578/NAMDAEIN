@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.main.MainActivity"
+            android:name=".ui.activity.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,18 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.splash.SplashActivity" />
+        <activity android:name=".ui.activity.main.MainActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name=".ui.fragment.main.MainHomeFragment" />
-        <activity android:name=".ui.fragment.main.MainMarketFragment" />
-        <activity android:name=".ui.fragment.main.board.MainBoardFragment" />
-        <activity android:name=".ui.fragment.main.MainMoreFragment" />
-        <activity android:name=".ui.fragment.board.free.BoardFreeFragment" />
-        <activity android:name=".ui.fragment.board.lost.BoardLostFragment" />
-        <activity android:name=".ui.fragment.board.promote.BoardPromoteFragment" />
-        <activity android:name=".ui.fragment.board.club.BoardClubFragment"/>
     </application>
 
 </manifest>

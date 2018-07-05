@@ -10,7 +10,7 @@
     android:layout_marginRight="1dp"
     android:layout_marginTop="1dp"
     android:layout_marginBottom="1dp"
-    android:background="@drawable/rectangle2_background">
+    android:background="@drawable/rectangle_background">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -32,7 +32,8 @@
             android:gravity="left|center_vertical"
             android:maxLines="1"
             android:textColor="@color/colorBlack"
-            android:textSize="9sp"
+            android:textSize="11sp"
+            android:fontFamily="@font/goyang"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/board_date_textView"
             app:layout_constraintHorizontal_bias="0.5"
@@ -46,7 +47,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
-            android:textSize="7sp"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -68,7 +70,8 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="left|center_vertical"
-        android:textSize="8sp"
+        android:textSize="10sp"
+        android:fontFamily="@font/goyang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
@@ -95,11 +98,13 @@
         app:layout_constraintTop_toBottomOf="@+id/view3">
 
         <TextView
+            android:id="@+id/board_nickname_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:textColor="@color/colorBlack"
-            android:textSize="7sp"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_weight="5"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,20 +123,21 @@
                 android:id="@+id/imageView"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/ic_thumb_up_black_24dp"
+                android:src="@drawable/ic_thumb_up_black_15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/board_content_thumbUp_textView"
+                android:id="@+id/board_thumbUp_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:textSize="7sp"
+                android:textSize="9sp"
+                android:fontFamily="@font/goyang"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@id/imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="123" />
 
@@ -140,22 +146,24 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="5dp"
-                android:src="@drawable/ic_thumb_down_black_24dp"
+                android:src="@drawable/ic_thumb_down_black_15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/board_content_thumbUp_textView"
+                app:layout_constraintStart_toEndOf="@id/board_thumbUp_textView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/board_content_thumbDown_textView"
+                android:id="@+id/board_thumbDown_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:textSize="7sp"
+                android:textSize="9sp"
+                android:fontFamily="@font/goyang"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@id/imageView2"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="123" />
+
         </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
