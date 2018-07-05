@@ -3,6 +3,7 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.board
 import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,7 @@ import com.tistory.jeongs0222.namdaein.model.Model
 //추후에 ViewHolder 뜯어내
 
 
-class BoardItemAdapter(internal var item: MutableList<Model.boardItem>, internal var context: Context): RecyclerView.Adapter<BoardItemAdapter.ViewHolder>() {
+class BoardItemAdapter(internal var item: MutableList<Object>, internal var context: Context): RecyclerView.Adapter<BoardItemAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,12 +40,18 @@ class BoardItemAdapter(internal var item: MutableList<Model.boardItem>, internal
     }
 
     override fun getItemCount(): Int {
+        Log.e("testSize", item.size.toString())
         if(item == null) {
             return 0
         } else {
             return item.size
 
         }
+    }
+
+    fun addItems(e: Model.boardItem) {
+        item.add(e as Object)
+        notifyDataSetChanged()
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
