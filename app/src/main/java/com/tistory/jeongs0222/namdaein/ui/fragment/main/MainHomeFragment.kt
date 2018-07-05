@@ -10,8 +10,6 @@ import com.tistory.jeongs0222.namdaein.R
 class MainHomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.activity_main_home_fragment, container, false)
-
-        return view
+        return inflater.inflate(R.layout.activity_main_home_fragment, container, false)
     }
 }

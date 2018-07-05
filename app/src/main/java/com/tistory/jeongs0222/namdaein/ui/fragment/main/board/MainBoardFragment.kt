@@ -1,11 +1,9 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.main.board
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +23,7 @@ class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        setUpTabLayout()
-
-        setUpViewPager()
-        //init()
+        init()
     }
 
     private fun init() {
@@ -40,7 +34,6 @@ class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager
     }
 
     private fun setUpTabLayout() {
-        Log.e("!","!")
         main_board_tabLayout.addOnTabSelectedListener(this@MainBoardFragment)
 
     }

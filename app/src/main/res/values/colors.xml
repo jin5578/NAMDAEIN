@@ -7,7 +7,10 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
 
-    <color name="colorLightGray">#F6F6F6</color>
+    <color name="colorLightGray">#D5D5D5</color>
+    <color name="colorLightLightGray">#F6F6F6</color>
+
+    <color name="colorDeepGray">#90A4AE</color>
 
     <color name="colorBackground">#DBEBC2</color>
     <color name="colorTabSelected">#F7A7A6</color>

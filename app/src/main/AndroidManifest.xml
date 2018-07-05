@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tistory.jeongs0222.namdaein">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.activity.splash.SplashActivity"
+            android:name=".ui.activity.main.MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.main.MainActivity" />
+        <activity android:name=".ui.activity.splash.SplashActivity" />
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/LoginTheme" />
@@ -26,10 +28,10 @@
         <activity android:name=".ui.fragment.main.MainMarketFragment" />
         <activity android:name=".ui.fragment.main.board.MainBoardFragment" />
         <activity android:name=".ui.fragment.main.MainMoreFragment" />
-        <activity android:name=".ui.fragment.board.BoardFreeFragment" />
-        <activity android:name=".ui.fragment.board.BoardLostFragment" />
-        <activity android:name=".ui.fragment.board.BoardPromoteFragment" />
-        <activity android:name=".ui.fragment.board.BoardClubFragment"></activity>
+        <activity android:name=".ui.fragment.board.free.BoardFreeFragment" />
+        <activity android:name=".ui.fragment.board.lost.BoardLostFragment" />
+        <activity android:name=".ui.fragment.board.promote.BoardPromoteFragment" />
+        <activity android:name=".ui.fragment.board.club.BoardClubFragment"/>
     </application>
 
 </manifest>

@@ -3,10 +3,10 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.main.board
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardClubFragment
-import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardFreeFragment
-import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardLostFragment
-import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardPromoteFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.board.club.BoardClubFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.board.free.BoardFreeFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.board.lost.BoardLostFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.board.promote.BoardPromoteFragment
 
 
 class MainBoardViewPagerAdapter(fm: FragmentManager, internal val numOfTabs: Int): FragmentStatePagerAdapter(fm) {
