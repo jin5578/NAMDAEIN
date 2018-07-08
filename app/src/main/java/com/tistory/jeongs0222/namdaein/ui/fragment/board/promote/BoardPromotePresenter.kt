@@ -5,7 +5,6 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
@@ -94,5 +93,9 @@ class BoardPromotePresenter: BoardPromoteContract.Presenter {
                 }
             }
         })
+    }
+
+    override fun disposableClear() {
+        disposable!!.dispose()
     }
 }

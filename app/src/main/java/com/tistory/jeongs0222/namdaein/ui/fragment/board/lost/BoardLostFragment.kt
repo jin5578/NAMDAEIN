@@ -3,6 +3,7 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.board.lost
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class BoardLostFragment : Fragment(), BoardLostContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.e("BoardLost_Created", "BoardLost_Created")
         super.onViewCreated(view, savedInstanceState)
 
         init()
@@ -50,5 +52,11 @@ class BoardLostFragment : Fragment(), BoardLostContract.View {
 
             1 -> board_lost_progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mPresenter.disposableClear()
     }
 }

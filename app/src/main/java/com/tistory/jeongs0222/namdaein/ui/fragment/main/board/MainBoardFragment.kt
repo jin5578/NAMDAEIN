@@ -43,7 +43,7 @@ class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager
 
         main_board_viewPager.apply {
             currentItem = 0
-            offscreenPageLimit = 3
+            offscreenPageLimit = main_board_tabLayout.tabCount
             adapter = mPagerAdapter
             //offscreenPageLimit = main_board_tabLayout.tabCount
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_board_tabLayout))

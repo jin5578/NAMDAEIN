@@ -21,5 +21,7 @@ interface BoardFreeContract {
         fun setUpData(loadValue: Int)
 
         fun loadMore()
+
+        fun disposableClear()
     }
 }

@@ -3,6 +3,7 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.board.free
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.e("BoardFree_Created", "BoardFree_Created")
         super.onViewCreated(view, savedInstanceState)
 
         init()
@@ -49,5 +51,11 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
 
             1 -> board_free_progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mPresenter.disposableClear()
     }
 }

@@ -102,4 +102,8 @@ class BoardLostPresenter: BoardLostContract.Presenter {
         })
     }
 
+    override fun disposableClear() {
+        disposable!!.dispose()
+    }
+
 }

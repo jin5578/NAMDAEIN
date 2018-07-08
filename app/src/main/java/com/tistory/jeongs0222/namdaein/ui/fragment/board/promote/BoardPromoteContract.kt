@@ -20,5 +20,7 @@ interface BoardPromoteContract {
         fun setUpData(loadValue: Int)
 
         fun loadMore()
+
+        fun disposableClear()
     }
 }

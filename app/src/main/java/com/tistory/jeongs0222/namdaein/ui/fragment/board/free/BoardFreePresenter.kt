@@ -104,4 +104,8 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
             }
         })
     }
+
+    override fun disposableClear() {
+        disposable!!.dispose()
+    }
 }

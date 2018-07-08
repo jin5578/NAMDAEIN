@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
         mPagerAdapter = MainViewPagerAdapter(supportFragmentManager, main_tabLayout.tabCount)
 
         main_viewPager.apply {
-            adapter = mPagerAdapter
             currentItem = 0
             offscreenPageLimit = main_tabLayout.tabCount
+            adapter = mPagerAdapter
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tabLayout))
             setOnPageChangeListener(this@MainActivity)
         }

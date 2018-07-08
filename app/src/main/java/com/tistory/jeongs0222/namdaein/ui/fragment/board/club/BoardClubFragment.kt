@@ -3,6 +3,7 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.board.club
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.e("BoardClub_Created", "BoardClub_Created")
         super.onViewCreated(view, savedInstanceState)
 
         init()
@@ -48,5 +50,11 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
 
             1 -> board_club_progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mPresenter.disposableClear()
     }
 }
