@@ -15,7 +15,7 @@ interface BoardClubContract {
     interface Presenter {
         fun setView(view: View, context: Context)
 
-        fun setRecyclerView()
+        fun setUpRecyclerView()
 
         fun setUpData(loadValue: Int)
 

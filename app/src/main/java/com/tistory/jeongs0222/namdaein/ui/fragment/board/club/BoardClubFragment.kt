@@ -33,7 +33,7 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
 
         mPresenter.setView(this, activity!!)
 
-        mPresenter.setRecyclerView()
+        mPresenter.setUpRecyclerView()
 
         mPresenter.setUpData(FIRST_LOAD)
 

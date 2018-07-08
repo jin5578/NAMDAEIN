@@ -42,16 +42,16 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
         this.context = context
     }
 
-    override fun setUpRecyclerView() {
+    /*override fun setUpRecyclerView() {
         view.recyclerView().apply {
             layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             scrollToPosition(0)
         }
-    }
+    }*/
 
-    override fun setUpData(loadValue: Int) {
+    /*override fun setUpData(loadValue: Int) {
 
         view.progressBar(0)
 
@@ -80,6 +80,47 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
                             for(i in item.indices) {
                                 mAdapter.addItems(item.get(i))
                             }
+
+                            isLoading = false
+                            pageNumber += item.size
+                        }
+                    }
+                }
+                .subscribe(
+                        {view.progressBar(1)}
+                )
+    }*/
+
+    override fun setUpRecyclerView() {
+        mAdapter = BoardItemAdapter(context)
+        view.recyclerView().apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            scrollToPosition(0)
+        }
+    }
+
+    override fun setUpData(loadValue: Int) {
+        view.progressBar(0)
+
+        disposable = apiClient.bringBoard(0, pageNumber)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext {
+                    item = it.board
+                }
+                .doOnComplete {
+                    if(loadValue == FIRST_LOAD) {
+                        mAdapter.addAllItems(item)
+                        mAdapter.notifyDataSetChanged()
+
+                        pageNumber += item.size
+                    } else if(loadValue == MORE_LOAD) {
+                        if(item.size > 0) {
+                            for(i in item.indices)
+                                mAdapter.addItems(item.get(i))
 
                             isLoading = false
                             pageNumber += item.size
