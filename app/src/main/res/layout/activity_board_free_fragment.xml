@@ -22,6 +22,6 @@
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         tools:visibility="visible"
-        style="?android:attr/progressBarStyleSmall" />
+        style="?android:attr/progressBarStyleSmall"/>
 
 </RelativeLayout>

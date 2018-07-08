@@ -1,11 +1,10 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.board.free
+package com.tistory.jeongs0222.namdaein.ui.fragment.board.lost
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.widget.ProgressBar
 
 
-interface BoardFreeContract {
+interface BoardLostContract {
 
     interface View {
         fun recyclerView(): RecyclerView

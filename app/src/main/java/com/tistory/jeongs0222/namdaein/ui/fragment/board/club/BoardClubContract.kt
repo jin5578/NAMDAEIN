@@ -1,11 +1,10 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.board.free
+package com.tistory.jeongs0222.namdaein.ui.fragment.board.club
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.widget.ProgressBar
 
 
-interface BoardFreeContract {
+interface BoardClubContract {
 
     interface View {
         fun recyclerView(): RecyclerView
@@ -16,7 +15,7 @@ interface BoardFreeContract {
     interface Presenter {
         fun setView(view: View, context: Context)
 
-        fun setUpRecyclerView()
+        fun setRecyclerView()
 
         fun setUpData(loadValue: Int)
 

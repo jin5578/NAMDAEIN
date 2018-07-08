@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_board_free_fragment.*
 
@@ -44,7 +43,11 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
         return board_free_recyclerView
     }
 
-    override fun progressBar(): ProgressBar {
-        return board_free_progressBar
+    override fun progressBar(value: Int) {
+        when(value) {
+            0 -> board_free_progressBar.visibility = View.VISIBLE
+
+            1 -> board_free_progressBar.visibility = View.GONE
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.board.free
+package com.tistory.jeongs0222.namdaein.ui.fragment.board.lost
 
 import android.content.Context
 import android.support.v7.widget.DefaultItemAnimator
@@ -13,9 +13,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class BoardFreePresenter: BoardFreeContract.Presenter {
+class BoardLostPresenter: BoardLostContract.Presenter {
 
-    private lateinit var view: BoardFreeContract.View
+    private lateinit var view: BoardLostContract.View
     private lateinit var context: Context
 
     private var disposable: Disposable? = null
@@ -23,21 +23,21 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
     private var pageNumber: Int = 0
 
     private lateinit var item: MutableList<Model.boardItem>
-    //private var items: MutableList<Object> = ArrayList()
 
-        private val FIRST_LOAD = 0
-        private val MORE_LOAD = 1
+    private val FIRST_LOAD = 0
+    private val MORE_LOAD = 1
 
-        private var isLoading = false
+    private var isLoading = false
 
-        private lateinit var mAdapter: BoardItemAdapter
+    private lateinit var mAdapter: BoardItemAdapter
 
     private val apiClient by lazy {
         ApiClient.create()
     }
 
 
-    override fun setView(view: BoardFreeContract.View, context: Context) {
+
+    override fun setView(view: BoardLostContract.View, context: Context) {
         this.view = view
         this.context = context
     }
@@ -55,18 +55,15 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
 
         view.progressBar(0)
 
-        disposable = apiClient.bringBoard(0, pageNumber)
+        disposable = apiClient.bringBoard(1, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
                     item = it.board
                 }
                 .doOnComplete {
-                    if(loadValue == FIRST_LOAD) {           //item 하나 없애
-                        /*for (i in item.indices) {
-                            items.add(item[i] as Object)
-                        }*/
 
+                    if(loadValue == FIRST_LOAD) {
                         mAdapter = BoardItemAdapter(item, context)
 
                         view.recyclerView().adapter = mAdapter
@@ -76,6 +73,7 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
                         pageNumber += item.size
 
                     } else if(loadValue == MORE_LOAD) {
+
                         if(item.size > 0) {
                             for(i in item.indices) {
                                 mAdapter.addItems(item.get(i))
@@ -86,6 +84,7 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
                         }
                     }
                 }
+
                 .subscribe(
                         {view.progressBar(1)}
                 )
@@ -95,8 +94,6 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
         val linearLayoutManager: LinearLayoutManager = view.recyclerView().layoutManager as LinearLayoutManager
         view.recyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
                 if(isLoading == false && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
                     isLoading = true
                     setUpData(MORE_LOAD)
@@ -104,4 +101,5 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
             }
         })
     }
+
 }
