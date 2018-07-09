@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.market.book
+package com.tistory.jeongs0222.namdaein.ui.fragment.market.etc
 
 import android.content.Context
 import android.support.v7.widget.DefaultItemAnimator
@@ -13,9 +13,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class MarketBookPresenter: MarketBookContract.Presenter {
+class MarketEtcPresenter: MarketEtcContract.Presenter {
 
-    private lateinit var view: MarketBookContract.View
+    private lateinit var view: MarketEtcContract.View
     private lateinit var context: Context
 
     private var disposable: Disposable? = null
@@ -36,7 +36,7 @@ class MarketBookPresenter: MarketBookContract.Presenter {
     }
 
 
-    override fun setView(view: MarketBookContract.View, context: Context) {
+    override fun setView(view: MarketEtcContract.View, context: Context) {
         this.view = view
         this.context = context
     }
@@ -57,7 +57,7 @@ class MarketBookPresenter: MarketBookContract.Presenter {
     override fun setUpData(loadValue: Int) {
         view.progressBar(0)
 
-        disposable = apiClient.bringMarket(4, pageNumber)
+        disposable = apiClient.bringMarket(9, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
@@ -82,7 +82,6 @@ class MarketBookPresenter: MarketBookContract.Presenter {
                 .subscribe( {
                     view.progressBar(1)
                 })
-
     }
 
     override fun loadMore() {
