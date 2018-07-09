@@ -1,7 +1,10 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.market.female
+package com.tistory.jeongs0222.namdaein.ui.fragment.market.male
 
 import android.content.Context
-import android.support.v7.widget.*
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.market.MarketItemAdapter
@@ -10,9 +13,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class MarketFemalePresenter: MarketFemaleContract.Presenter {
+class MarketMalePresenter: MarketMaleContract.Presenter {
 
-    private lateinit var view: MarketFemaleContract.View
+    private lateinit var view: MarketMaleContract.View
     private lateinit var context: Context
 
     private var disposable: Disposable? = null
@@ -33,7 +36,7 @@ class MarketFemalePresenter: MarketFemaleContract.Presenter {
     }
 
 
-    override fun setView(view: MarketFemaleContract.View, context: Context) {
+    override fun setView(view: MarketMaleContract.View, context: Context) {
         this.view = view
         this.context = context
     }
@@ -54,7 +57,7 @@ class MarketFemalePresenter: MarketFemaleContract.Presenter {
     override fun setUpData(loadValue: Int) {
         view.progressBar(0)
 
-        disposable = apiClient.bringMarket(0, pageNumber)
+        disposable = apiClient.bringMarket(1, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
@@ -76,7 +79,7 @@ class MarketFemalePresenter: MarketFemaleContract.Presenter {
                         }
                     }
                 }
-                .subscribe( {
+                .subscribe({
                     view.progressBar(1)
                 })
     }
