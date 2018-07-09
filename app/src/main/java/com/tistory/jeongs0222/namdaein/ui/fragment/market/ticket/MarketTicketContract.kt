@@ -1,10 +1,10 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.market.female
+package com.tistory.jeongs0222.namdaein.ui.fragment.market.ticket
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 
 
-interface MarketFemaleContract {
+interface MarketTicketContract {
 
     interface View {
         fun recyclerView(): RecyclerView

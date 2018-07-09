@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_market_female_fragment.*
 
+
 class MarketFemaleFragment : Fragment(), MarketFemaleContract.View {
 
     private lateinit var mPresenter: MarketFemalePresenter
