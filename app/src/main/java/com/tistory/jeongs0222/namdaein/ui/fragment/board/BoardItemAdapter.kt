@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.board
 
 import android.content.Context
+import android.content.Intent
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.boarddetail.BoardDetailActivity
 
 
 //추후에 ViewHolder 뜯어내야함
@@ -33,6 +35,14 @@ class BoardItemAdapter(internal var context: Context) : RecyclerView.Adapter<Boa
         holder.board_nickname_textView.text = items.nickname
         holder.board_thumbUp_textView.text = items.nice
         holder.board_thumbDown_textView.text = items.dislike
+
+        holder.board_entire_layout.setOnClickListener {
+            val order = items.order
+
+            var intent = Intent(context, BoardDetailActivity::class.java)
+            intent.putExtra("order", order)
+            context.startActivity(intent)
+        }
 
     }
 
