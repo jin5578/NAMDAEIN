@@ -19,7 +19,7 @@ interface MarketMerchandiseContract {
 
         fun setUpRecyclerView()
 
-        fun setUpData(loadValue: Int)
+        fun setUpData()
 
         fun loadMore()
 

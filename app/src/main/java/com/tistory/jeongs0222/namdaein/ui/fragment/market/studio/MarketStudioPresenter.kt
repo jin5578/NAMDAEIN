@@ -23,19 +23,13 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
 
     private var pageNumber: Int = 0
 
-    private lateinit var item: MutableList<Model.marketItem>
-
-    private val FIRST_LOAD = 0
-    private val MORE_LOAD = 1
+    private var isFirstLoad = true
 
     private var isLoading = false
 
     private lateinit var mAdapter: MarketItemAdapter
 
-    private val apiClient by lazy {
-        ApiClient.create()
-    }
-
+    private val apiClient by lazy { ApiClient.create() }
 
     override fun setView(view: MarketStudioContract.View, context: Context) {
         this.view = view
@@ -47,7 +41,6 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
 
         view.recyclerView().apply {
             adapter = mAdapter
-
             layoutManager = GridLayoutManager(context, 3)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
@@ -55,39 +48,33 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
         }
     }
 
-    override fun setUpData(loadValue: Int) {
+    override fun setUpData() {
         view.progressBar(0)
+        isLoading = true
 
         disposable = apiClient.bringMarket(8, pageNumber)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    item = it.market
-                }
-                .doOnComplete {
-                    if(loadValue == FIRST_LOAD) {
-                        mAdapter.addAllItems(item)
-
-                        pageNumber += item.size
-
-                        if(item.size == 0) {
-                            view.emptyTextVisible()
-                        }
-
-                    } else if(loadValue == MORE_LOAD) {
-                        if(item.size > 0) {
-                            for(i in item.indices)
-                                mAdapter.addItems(item.get(i))
-
-                            isLoading = false
-
-                            pageNumber += item.size
-                        }
+                    if(it.market.isNotEmpty()) {
+                        mAdapter.addAllItems(it.market)
+                        pageNumber += it.market.size
                     }
                 }
-                .subscribe( {
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    if(isFirstLoad) {
+                        isFirstLoad = true
+                    }
+                    mAdapter.notifyChanged()
+                    isLoading = false
                     view.progressBar(1)
-                })
+                }
+                .doOnError {
+                    it.printStackTrace()
+                    isLoading = false
+                    view.progressBar(1)
+                }
+                .subscribe()
     }
 
     override fun loadMore() {
@@ -96,15 +83,12 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(isLoading == false && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
-                    isLoading = true
-                    setUpData(MORE_LOAD)
+                if(!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastCompletelyVisibleItemPosition()) {
+                    setUpData()
                 }
             }
         })
     }
 
-    override fun disposableClear() {
-        disposable!!.dispose()
-    }
+    override fun disposableClear() = disposable!!.dispose()
 }

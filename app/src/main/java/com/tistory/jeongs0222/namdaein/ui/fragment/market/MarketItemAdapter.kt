@@ -1,7 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.market
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -38,24 +37,19 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
     }
 
     override fun getItemCount(): Int {
-        if(item == null) {
-            return 0
+        return if(item.isEmpty()) {
+            0
         } else {
-            return item.size
+            item.size
         }
     }
 
-    fun addAllItems(e: MutableList<Model.marketItem>) {
-        item.addAll(e)
+    fun addAllItems(e: MutableList<Model.marketItem>) = item.addAll(e)
 
-        notifyDataSetChanged()
-    }
+    fun addItems(e: Model.marketItem) = item.add(e)
 
-    fun addItems(e: Model.marketItem) {
-        item.add(e)
+    fun notifyChanged() = notifyDataSetChanged()
 
-        notifyDataSetChanged()
-    }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val market_entire_layout: ConstraintLayout

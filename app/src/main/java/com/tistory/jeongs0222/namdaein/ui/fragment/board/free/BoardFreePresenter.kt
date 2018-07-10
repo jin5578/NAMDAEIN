@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +29,7 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
     private lateinit var mAdapter: BoardItemAdapter
 
     private val apiClient by lazy { ApiClient.create() }
+
 
     override fun setView(view: BoardFreeContract.View, context: Context) {
         this.view = view
@@ -82,9 +84,13 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if (!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
+                if(!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastCompletelyVisibleItemPosition()) {
+                    Log.e("1", "1")
                     setUpData()
                 }
+                /*if (!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
+
+                }*/
             }
         })
     }

@@ -13,8 +13,6 @@ class MarketBeautyFragment : Fragment(), MarketBeautyContract.View {
 
     private lateinit var mPresenter: MarketBeautyPresenter
 
-    private val FIRST_LOAD = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_market_beauty_fragment, container, false)
@@ -33,7 +31,7 @@ class MarketBeautyFragment : Fragment(), MarketBeautyContract.View {
 
         mPresenter.setUpRecyclerView()
 
-        mPresenter.setUpData(FIRST_LOAD)
+        mPresenter.setUpData()
 
         mPresenter.loadMore()
     }
