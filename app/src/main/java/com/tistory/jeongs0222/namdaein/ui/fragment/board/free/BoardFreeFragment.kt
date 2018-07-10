@@ -51,6 +51,10 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        board_free_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

@@ -14,6 +14,22 @@
         android:layout_height="match_parent"
         android:scrollbars="none"/>
 
+    <TextView
+        android:id="@+id/board_promote_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="center"
+        android:text="등록된 게시글이 없습니다."
+        android:textColor="@color/colorBlack"
+        android:textSize="20sp"
+        android:fontFamily="@font/goyang"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        tools:visibility="visible"/>
+
     <ProgressBar
         android:id="@+id/board_promote_progressBar"
         android:layout_width="match_parent"

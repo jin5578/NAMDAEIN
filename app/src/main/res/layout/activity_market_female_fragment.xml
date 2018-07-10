@@ -30,7 +30,6 @@
         android:layout_alignParentBottom="true"
         tools:visibility="visible"/>
 
-
     <ProgressBar
         android:id="@+id/market_female_progressBar"
         android:layout_width="match_parent"

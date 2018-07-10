@@ -66,14 +66,18 @@ class BoardLostPresenter: BoardLostContract.Presenter {
                     }
                     mAdapter.notifyChanged()
                     isLoading = false
-                    view.progressBar(1)
                 }
                 .doOnError {
                     it.printStackTrace()
                     isLoading = false
-                    view.progressBar(1)
                 }
-                .subscribe()
+                .subscribe {
+                    view.progressBar(1)
+
+                    if(mAdapter.itemCount == 0) {
+                        view.emptyTextVisible()
+                    }
+                }
     }
 
     override fun loadMore() {

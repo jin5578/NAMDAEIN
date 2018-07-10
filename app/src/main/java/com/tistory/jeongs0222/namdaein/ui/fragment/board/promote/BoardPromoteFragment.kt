@@ -49,6 +49,10 @@ class BoardPromoteFragment : Fragment(), BoardPromoteContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        board_promote_progressBar.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

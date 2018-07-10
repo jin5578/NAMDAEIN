@@ -10,6 +10,8 @@ interface BoardLostContract {
         fun recyclerView(): RecyclerView
 
         fun progressBar(value: Int)
+
+        fun emptyTextVisible()
     }
 
     interface Presenter {

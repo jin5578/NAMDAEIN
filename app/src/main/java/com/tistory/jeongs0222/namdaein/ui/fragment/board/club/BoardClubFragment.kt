@@ -48,6 +48,10 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        board_club_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

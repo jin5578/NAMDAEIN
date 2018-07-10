@@ -52,6 +52,10 @@ class BoardLostFragment : Fragment(), BoardLostContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        board_lost_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 
