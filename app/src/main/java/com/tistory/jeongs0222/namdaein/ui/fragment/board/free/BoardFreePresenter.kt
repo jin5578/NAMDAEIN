@@ -58,7 +58,7 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
         isLoading = true
 
         Log.e("TAG", pageNumber.toString())
-
+ 
         disposable = apiClient.bringBoard(0, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .doOnNext {
