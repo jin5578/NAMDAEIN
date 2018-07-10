@@ -51,6 +51,10 @@ class MarketFemaleFragment : Fragment(), MarketFemaleContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        market_female_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

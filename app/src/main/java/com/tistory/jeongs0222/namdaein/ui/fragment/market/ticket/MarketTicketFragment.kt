@@ -50,6 +50,10 @@ class MarketTicketFragment : Fragment(), MarketTicketContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        market_ticket_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

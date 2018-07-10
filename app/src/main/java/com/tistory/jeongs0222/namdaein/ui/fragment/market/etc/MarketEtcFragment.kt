@@ -50,4 +50,14 @@ class MarketEtcFragment : Fragment(), MarketEtcContract.View {
             1 -> market_etc_progressBar.visibility = View.GONE
         }
     }
+
+    override fun emptyTextVisible() {
+        market_etc_textView.visibility = View.VISIBLE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mPresenter.disposableClear()
+    }
 }

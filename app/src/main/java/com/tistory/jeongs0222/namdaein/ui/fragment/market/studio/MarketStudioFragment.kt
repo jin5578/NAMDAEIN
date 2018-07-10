@@ -50,4 +50,14 @@ class MarketStudioFragment : Fragment(), MarketStudioContract.View {
             1 -> market_studio_progressBar.visibility = View.GONE
         }
     }
+
+    override fun emptyTextVisible() {
+        market_studio_textView.visibility = View.VISIBLE
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mPresenter.disposableClear()
+    }
 }

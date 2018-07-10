@@ -68,6 +68,11 @@ class MarketEtcPresenter: MarketEtcContract.Presenter {
                         mAdapter.addAllItems(item)
 
                         pageNumber += item.size
+
+                        if(item.size == 0) {
+                            view.emptyTextVisible()
+                        }
+
                     } else if(loadValue == MORE_LOAD) {
                         if(item.size > 0) {
                             for(i in item.indices)

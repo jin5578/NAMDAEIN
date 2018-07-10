@@ -52,6 +52,10 @@ class MarketApplianceFragment : Fragment(), MarketApplianceContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        market_appliance_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

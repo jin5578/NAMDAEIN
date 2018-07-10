@@ -50,6 +50,10 @@ class MarketLifeFragment : Fragment(), MarketLifeContract.View {
         }
     }
 
+    override fun emptyTextVisible() {
+        market_life_textView.visibility = View.VISIBLE
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
 

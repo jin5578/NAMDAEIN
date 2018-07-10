@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.market.MarketItemAdapter
@@ -68,6 +69,10 @@ class MarketTicketPresenter: MarketTicketContract.Presenter {
                         mAdapter.addAllItems(item)
 
                         pageNumber += item.size
+
+                        if(item.size == 0) {
+                            view.emptyTextVisible()
+                        }
                     } else if(loadValue == MORE_LOAD) {
                         if(item.size > 0) {
                             for(i in item.indices)
@@ -101,6 +106,4 @@ class MarketTicketPresenter: MarketTicketContract.Presenter {
     override fun disposableClear() {
         disposable!!.dispose()
     }
-
-
 }
