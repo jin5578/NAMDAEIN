@@ -5,9 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
-import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,9 +21,6 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
 
     private var pageNumber: Int = 0
 
-    private lateinit var item: MutableList<Model.boardItem>
-    //private var items: MutableList<Object> = ArrayList()
-
     private var isFirstLoad = true
 
     private var isLoading = false
@@ -33,8 +28,6 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
     private lateinit var mAdapter: BoardItemAdapter
 
     private val apiClient by lazy { ApiClient.create() }
-
-    override fun disposableClear() = disposable!!.dispose()
 
     override fun setView(view: BoardFreeContract.View, context: Context) {
         this.view = view
@@ -57,8 +50,6 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
         view.progressBar(0)
         isLoading = true
 
-        Log.e("TAG", pageNumber.toString())
-
         disposable = apiClient.bringBoard(0, pageNumber)
                 .subscribeOn(Schedulers.io())
                 .doOnNext {
@@ -69,7 +60,7 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete {
-                    if (isFirstLoad) {
+                    if(isFirstLoad) {
                         isFirstLoad = false
                     }
                     mAdapter.notifyChanged()
@@ -97,4 +88,6 @@ class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollLis
             }
         })
     }
+
+    override fun disposableClear() = disposable!!.dispose()
 }

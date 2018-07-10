@@ -15,8 +15,6 @@ class BoardLostFragment : Fragment(), BoardLostContract.View {
 
     private lateinit var mPresenter: BoardLostPresenter
 
-    private val FIRST_LOAD = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_board_lost_fragment, container, false)
@@ -37,7 +35,7 @@ class BoardLostFragment : Fragment(), BoardLostContract.View {
 
         mPresenter.setUpRecyclerView()
 
-        mPresenter.setUpData(FIRST_LOAD)
+        mPresenter.setUpData()
 
         mPresenter.loadMore()
     }

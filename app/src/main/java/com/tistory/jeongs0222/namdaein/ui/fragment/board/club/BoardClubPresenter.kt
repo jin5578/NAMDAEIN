@@ -22,70 +22,22 @@ class BoardClubPresenter: BoardClubContract.Presenter {
 
     private var pageNumber: Int = 0
 
-    private lateinit var item: MutableList<Model.boardItem>
-
-    private val FIRST_LOAD = 0
-    private val MORE_LOAD = 1
+    private var isFirstLoad = true
 
     private var isLoading = false
 
     private lateinit var mAdapter: BoardItemAdapter
 
-    private val apiClient by lazy {
-        ApiClient.create()
-    }
+    private val apiClient by lazy { ApiClient.create() }
 
     override fun setView(view: BoardClubContract.View, context: Context) {
         this.view = view
         this.context = context
     }
 
-    /*override fun setUpRecyclerView() {
-        view.recyclerView().apply {
-            layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
-            setHasFixedSize(true)
-            itemAnimator = DefaultItemAnimator()
-            scrollToPosition(0)
-        }
-    }
-
-    override fun setUpData(loadValue: Int) {
-        view.progressBar(0)
-
-        disposable = apiClient.bringBoard(3, pageNumber)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext {
-                    item = it.board
-                }
-                .doOnComplete {
-                    if(loadValue == FIRST_LOAD) {
-                        mAdapter = BoardItemAdapter(item, context)
-
-                        view.recyclerView().adapter = mAdapter
-
-                        mAdapter.notifyDataSetChanged()
-
-                        pageNumber += item.size
-
-                    } else if(loadValue == MORE_LOAD) {
-                        if(item.size > 0) {
-                            for(i in item.indices) {
-                                mAdapter.addItems(item.get(i))
-                            }
-
-                            isLoading = false
-                            pageNumber += item.size
-                        }
-                    }
-                }
-                .subscribe(
-                        {view.progressBar(1)}
-                )
-    }*/
-
     override fun setUpRecyclerView() {
         mAdapter = BoardItemAdapter(context)
+
         view.recyclerView().apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
@@ -95,34 +47,34 @@ class BoardClubPresenter: BoardClubContract.Presenter {
         }
     }
 
-    override fun setUpData(loadValue: Int) {
+    override fun setUpData() {
         view.progressBar(0)
+        isLoading = true
 
         disposable = apiClient.bringBoard(3, pageNumber)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    item = it.board
-                }
-                .doOnComplete {
-                    if(loadValue == FIRST_LOAD) {
-                        mAdapter.addAllItems(item)
-                        mAdapter.notifyDataSetChanged()
-
-                        pageNumber += item.size
-                    } else if(loadValue == MORE_LOAD) {
-                        if(item.size > 0) {
-                            for(i in item.indices)
-                                mAdapter.addItems(item.get(i))
-
-                            isLoading = false
-                            pageNumber += item.size
-                        }
+                    if(it.board.isNotEmpty()) {
+                        mAdapter.addAllItems(it.board)
+                        pageNumber += it.board.size
                     }
                 }
-                .subscribe(
-                        {view.progressBar(1)}
-                )
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    if(isFirstLoad) {
+                        isFirstLoad = false
+                    }
+
+                    mAdapter.notifyChanged()
+                    isLoading = false
+                    view.progressBar(1)
+                }
+                .doOnError {
+                    it.printStackTrace()
+                    isLoading = false
+                    view.progressBar(1)
+                }
+                .subscribe()
     }
 
     override fun loadMore() {
@@ -131,15 +83,12 @@ class BoardClubPresenter: BoardClubContract.Presenter {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(isLoading == false && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
-                    isLoading = true
-                    setUpData(MORE_LOAD)
+                if(!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
+                    setUpData()
                 }
             }
         })
     }
 
-    override fun disposableClear() {
-        disposable!!.dispose()
-    }
+    override fun disposableClear() = disposable!!.dispose()
 }

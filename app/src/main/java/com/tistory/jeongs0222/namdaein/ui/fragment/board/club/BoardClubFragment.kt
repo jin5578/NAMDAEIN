@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.board.club
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +13,12 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
 
     private lateinit var mPresenter: BoardClubPresenter
 
-    private val FIRST_LOAD = 0
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_board_club_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.e("BoardClub_Created", "BoardClub_Created")
         super.onViewCreated(view, savedInstanceState)
 
         init()
@@ -35,7 +31,7 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
 
         mPresenter.setUpRecyclerView()
 
-        mPresenter.setUpData(FIRST_LOAD)
+        mPresenter.setUpData()
 
         mPresenter.loadMore()
     }
