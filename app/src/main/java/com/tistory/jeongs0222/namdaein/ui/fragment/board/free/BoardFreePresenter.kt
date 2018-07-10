@@ -5,6 +5,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
@@ -13,7 +14,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class BoardFreePresenter: BoardFreeContract.Presenter {
+class BoardFreePresenter : BoardFreeContract.Presenter, RecyclerView.OnScrollListener() {
 
     private lateinit var view: BoardFreeContract.View
     private lateinit var context: Context
@@ -25,17 +26,15 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
     private lateinit var item: MutableList<Model.boardItem>
     //private var items: MutableList<Object> = ArrayList()
 
-    private val FIRST_LOAD = 0
-    private val MORE_LOAD = 1
+    private var isFirstLoad = true
 
     private var isLoading = false
 
     private lateinit var mAdapter: BoardItemAdapter
 
-    private val apiClient by lazy {
-        ApiClient.create()
-    }
+    private val apiClient by lazy { ApiClient.create() }
 
+    override fun disposableClear() = disposable!!.dispose()
 
     override fun setView(view: BoardFreeContract.View, context: Context) {
         this.view = view
@@ -54,55 +53,48 @@ class BoardFreePresenter: BoardFreeContract.Presenter {
         }
     }
 
-    override fun setUpData(loadValue: Int) {
+    override fun setUpData() {
         view.progressBar(0)
+        isLoading = true
+
+        Log.e("TAG", pageNumber.toString())
 
         disposable = apiClient.bringBoard(0, pageNumber)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    item = it.board
-                }
-                .doOnComplete {
-                    if(loadValue == FIRST_LOAD) {
-
-                        mAdapter.addAllItems(item)
-
-                        pageNumber += item.size
-
-                    } else if(loadValue == MORE_LOAD) {
-
-                        if(item.size > 0) {
-
-                            for(i in item.indices)
-                                mAdapter.addItems(item.get(i))
-
-                            isLoading = false
-
-                            pageNumber += item.size
-                        }
+                    if (it.board.isNotEmpty()) {
+                        mAdapter.addAllItems(it.board)
+                        pageNumber += it.board.size
                     }
                 }
-                .subscribe({
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    if (isFirstLoad) {
+                        isFirstLoad = false
+                    }
+                    mAdapter.notifyChanged()
+                    isLoading = false
                     view.progressBar(1)
-                })
+                }
+                .doOnError {
+                    it.printStackTrace()
+                    isLoading = false
+                    view.progressBar(1)
+                }
+                .subscribe()
     }
 
     override fun loadMore() {
         val linearLayoutManager: LinearLayoutManager = view.recyclerView().layoutManager as LinearLayoutManager
+
         view.recyclerView().addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
-                if(isLoading == false && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
-                    isLoading = true
-                    setUpData(MORE_LOAD)
+                if (!isLoading && linearLayoutManager.itemCount - 1 == linearLayoutManager.findLastVisibleItemPosition()) {
+                    setUpData()
                 }
             }
         })
-    }
-
-    override fun disposableClear() {
-        disposable!!.dispose()
     }
 }

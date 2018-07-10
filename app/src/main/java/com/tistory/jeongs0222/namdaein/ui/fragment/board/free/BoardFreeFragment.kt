@@ -14,9 +14,6 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
 
     private lateinit var mPresenter: BoardFreePresenter
 
-    private val FIRST_LOAD = 0
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_board_free_fragment, container, false)
     }
@@ -36,7 +33,7 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
 
         mPresenter.setUpRecyclerView()
 
-        mPresenter.setUpData(FIRST_LOAD)
+        mPresenter.setUpData()
 
         mPresenter.loadMore()
     }
@@ -46,7 +43,7 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
     }
 
     override fun progressBar(value: Int) {
-        when(value) {
+        when (value) {
             0 -> board_free_progressBar.visibility = View.VISIBLE
 
             1 -> board_free_progressBar.visibility = View.GONE

@@ -12,7 +12,7 @@ import com.tistory.jeongs0222.namdaein.model.Model
 
 
 //추후에 ViewHolder 뜯어내야함
-class BoardItemAdapter(internal var context: Context): RecyclerView.Adapter<BoardItemAdapter.ViewHolder>() {
+class BoardItemAdapter(internal var context: Context) : RecyclerView.Adapter<BoardItemAdapter.ViewHolder>() {
 
     var item: MutableList<Model.boardItem> = ArrayList()
 
@@ -37,27 +37,20 @@ class BoardItemAdapter(internal var context: Context): RecyclerView.Adapter<Boar
     }
 
     override fun getItemCount(): Int {
-        if(item == null) {
-            return 0
+        return if (item.isEmpty()) {
+            0
         } else {
-            return item.size
-
+            item.size
         }
     }
 
-    fun addAllItems(e: MutableList<Model.boardItem>) {
-        item.addAll(e)
+    fun addAllItems(e: MutableList<Model.boardItem>) = item.addAll(e)
 
-        notifyDataSetChanged()
-    }
+    fun notifyChanged() = notifyDataSetChanged()
 
-    fun addItems(e: Model.boardItem) {
-        item.add(e)
+    fun addItems(e: Model.boardItem) = item.add(e)
 
-        notifyDataSetChanged()
-    }
-
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val board_entire_layout: ConstraintLayout
         val board_title_textView: TextView
         val board_date_textView: TextView
