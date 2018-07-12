@@ -29,4 +29,8 @@ object Model {
                           val date: String,
                           val price: String,
                           val writtenUserkey: String)
+
+    data class boardCommentItem(val nickname: String,
+                                val date: String,
+                                val content: String)
 }

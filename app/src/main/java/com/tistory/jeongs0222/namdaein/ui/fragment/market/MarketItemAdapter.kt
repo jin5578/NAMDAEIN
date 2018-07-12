@@ -56,7 +56,7 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
 
     fun addAllItems(e: MutableList<Model.marketItem>) = item.addAll(e)
 
-    fun addItems(e: Model.marketItem) = item.add(e)
+    //fun addItems(e: Model.marketItem) = item.add(e)
 
     fun notifyChanged() = notifyDataSetChanged()
 

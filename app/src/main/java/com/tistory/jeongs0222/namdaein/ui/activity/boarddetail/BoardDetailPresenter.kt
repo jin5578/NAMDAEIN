@@ -1,10 +1,15 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.boarddetail
 
 import android.content.Context
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.OrientationHelper
 import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.CommentAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -18,7 +23,7 @@ class BoardDetailPresenter: BoardDetailContract.Presenter {
 
     private var order: Int = 0
 
-    private lateinit var images: MutableList<String>
+    private lateinit var mAdapter: CommentAdapter
 
     private val apiClient by lazy {
         ApiClient.create()
@@ -36,19 +41,6 @@ class BoardDetailPresenter: BoardDetailContract.Presenter {
 
         disposable = apiClient.bringBoardDetail(order)
                 .subscribeOn(Schedulers.io())
-                /*.doOnNext {
-                    if(it.image0.isNotEmpty()) {
-                        images.add(it.image0)
-
-                        if(it.image1.isNotEmpty()) {
-                            images.add(it.image1)
-
-                            if(it.image2.isNotEmpty()) {
-                                images.add(it.image2)
-                            }
-                        }
-                    }
-                }*/
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete {
 
@@ -68,4 +60,36 @@ class BoardDetailPresenter: BoardDetailContract.Presenter {
                     callback("complete", it)
                 })
     }
+
+    override fun setUpRecyclerView() {
+        mAdapter = CommentAdapter(context)
+
+        view.recyclerView().apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            scrollToPosition(0)
+        }
+    }
+
+    override fun setUpCommentData() {
+        disposable = apiClient.bringBoardComment(order)
+                .subscribeOn(Schedulers.io())
+                .doOnNext {
+                    if(it.comment.isNotEmpty()) {
+                        mAdapter.addAllItems(it.comment)
+                    }
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    mAdapter.notifyChanged()
+                }
+                .doOnError {
+                    it.printStackTrace()
+                }
+                .subscribe()
+    }
+
+    override fun disposableClear() = disposable!!.dispose()
 }

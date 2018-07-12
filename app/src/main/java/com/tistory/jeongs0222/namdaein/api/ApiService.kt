@@ -30,4 +30,11 @@ interface ApiService {
     @POST("boardDetail.php")
     fun bringBoardDetail(@Field("order") order: Int): Observable<Model.boardItem>
 
+    //BoardCommentItem
+    @FormUrlEncoded
+    @POST("boardcomment.php")
+    fun bringBoardComment(@Field("order") order: Int):Observable<boardCommentItems>
+
+    data class boardCommentItems(val comment: MutableList<Model.boardCommentItem>)
+
 }
