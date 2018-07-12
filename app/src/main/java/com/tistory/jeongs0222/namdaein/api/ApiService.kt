@@ -25,4 +25,9 @@ interface ApiService {
 
     data class marketItems(val market: MutableList<Model.marketItem>)
 
+    //BoardDetail
+    @FormUrlEncoded
+    @POST("boardDetail.php")
+    fun bringBoardDetail(@Field("order") order: Int): Observable<Model.boardItem>
+
 }
