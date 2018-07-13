@@ -24,7 +24,8 @@
         <activity
             android:name=".ui.activity.login.LoginActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name=".ui.activity.boarddetail.BoardDetailActivity"/>
+        <activity android:name=".ui.activity.boarddetail.BoardDetailActivity" />
+        <activity android:name=".ui.activity.marketdetail.MarketDetailActivity"></activity>
     </application>
 
 </manifest>

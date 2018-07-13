@@ -1,22 +1,19 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.boarddetail
 
-import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethod
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.ui.activity.PictureViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_board_detail.*
+
 
 class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
 
@@ -87,7 +84,6 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
 
             mPresenter.setUpSendFunc()
         }
-
 
         /*detail_entire_layout.setOnClickListener {
             Log.e("123", "123123123")
