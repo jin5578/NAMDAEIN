@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.activity
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -13,6 +14,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.ImageViewPager
 import kotlinx.android.synthetic.main.picture_image.view.*
 
 
@@ -44,6 +46,11 @@ class PictureViewPagerAdapter(val context: Context, val images: MutableList<Stri
                 .into(imageView)
 
         //이 부분에 이미지 전체화면으로 보여주는 부분 넣어줘야한다.
+        imageView.setOnClickListener {
+            val intent = Intent(it.context, ImageViewPager::class.java)
+            intent.putStringArrayListExtra("imagesList", images as ArrayList<String>)
+            it.context.startActivity(intent)
+        }
 
         viewPager.addView(view, 0)
 
