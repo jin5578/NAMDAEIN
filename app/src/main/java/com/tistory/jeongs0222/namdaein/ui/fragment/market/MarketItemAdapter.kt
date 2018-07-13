@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.market
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.marketdetail.MarketDetailActivity
 
 
 class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<MarketItemAdapter.ViewHolder>() {
@@ -44,6 +46,15 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
 
         holder.market_title_textView.text = items.title
         holder.market_price_textView.text = items.price
+
+        holder.market_entire_layout.setOnClickListener {
+            val order = items.order
+
+            val intent = Intent(it.context, MarketDetailActivity::class.java)
+            intent.putExtra("order", order)
+
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -55,8 +66,6 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
     }
 
     fun addAllItems(e: MutableList<Model.marketItem>) = item.addAll(e)
-
-    //fun addItems(e: Model.marketItem) = item.add(e)
 
     fun notifyChanged() = notifyDataSetChanged()
 

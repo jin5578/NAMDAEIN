@@ -41,6 +41,7 @@ class BoardItemAdapter(internal var context: Context) : RecyclerView.Adapter<Boa
 
             var intent = Intent(it.context, BoardDetailActivity::class.java)
             intent.putExtra("order", order)
+
             it.context.startActivity(intent)
         }
 

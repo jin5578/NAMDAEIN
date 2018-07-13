@@ -1,9 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:context=".ui.activity.marketdetail.MarketDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/detail_progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp"
+        android:scrollbars="none">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/detail_viewPager"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible"/>
+
+            <LinearLayout
+                android:id="@+id/detail_dots_linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_viewPager"
+                tools:visibility="visible"/>
+
+            <TextView
+                android:id="@+id/detail_title_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/goyang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_dots_linearLayout"
+                tools:text="아이폰x 256G 판매합니다."/>
+
+            <TextView
+                android:id="@+id/detail_price_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:textSize="12sp"
+                android:textColor="@color/colorRed"
+                android:fontFamily="@font/goyang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_title_textView"
+                tools:text="₩ 210000"/>
+
+            <TextView
+                android:id="@+id/detail_content_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="9sp"
+                android:padding="25dp"
+                android:fontFamily="@font/goyang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_price_textView"
+                tools:text="아이폰X 256G 판매합니다. 한 번도 사용한 적 없는 미개봉 상품입니다."/>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/detail_message_constraint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingBottom="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_content_textView">
+
+                <TextView
+                    android:id="@+id/detail_nickname_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="7sp"
+                    android:fontFamily="@font/goyang"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:text="관리자"/>
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_send_pink_24dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@id/detail_nickname_textView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/detail_date_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="15dp"
+                android:paddingBottom="15dp"
+                android:textSize="7sp"
+                android:fontFamily="@font/goyang"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_content_textView"
+                tools:text="18.07.13 20:00"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/detail_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_message_constraint"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="3dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+
+        <EditText
+            android:id="@+id/detail_send_editText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/rectangle1_background"
+            android:hint="댓글을 입력해주세요."
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/detail_send_textView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="7"/>
+
+        <TextView
+            android:id="@+id/detail_send_textView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="게시"
+            android:textSize="7sp"
+            android:gravity="center"
+            android:fontFamily="@font/goyang"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/detail_send_editText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="visible"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
