@@ -37,4 +37,20 @@ interface ApiService {
 
     data class boardCommentItems(val comment: MutableList<Model.boardCommentItem>)
 
+    //BoardCommentWriting
+    @FormUrlEncoded
+    @POST("commentwriting.php")
+    fun writingBoardComment(@Field("order") order: Int,
+                            @Field("userkey") userkey: String,
+                            @Field("content") content: String,
+                            @Field("date") date: String) : Observable<writeBoardComment>
+
+    data class writeBoardComment(val value: Int, val message: String)   //0: 성공, 1: 실패
+
+    //BoardFavorite
+    @FormUrlEncoded
+    @POST("nice.php")
+    fun writingFavorite(@Field("order") order: Int) : Observable<writeFavorite>
+
+    data class writeFavorite(val value: Int, val message: String)   //0: 성공, 1: 실패
 }
