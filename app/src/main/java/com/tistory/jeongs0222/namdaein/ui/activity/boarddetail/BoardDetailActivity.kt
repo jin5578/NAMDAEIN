@@ -59,7 +59,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
                     }
                 }
 
-                pictureViewPager(images)
+                pictureViewPager()
 
                 addDots()
 
@@ -99,7 +99,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
         order = intent.extras.getInt("order")
     }
 
-    private fun pictureViewPager(images: MutableList<String>) {
+    private fun pictureViewPager() {
         mAdapter = PictureViewPagerAdapter(this, images)
         detail_viewPager.adapter = mAdapter
     }

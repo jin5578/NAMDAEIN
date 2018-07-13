@@ -17,14 +17,6 @@ interface ApiService {
 
     data class boardItems(val board : MutableList<Model.boardItem>)
 
-    //MarketItem
-    @FormUrlEncoded
-    @POST("market.php")
-    fun bringMarket(@Field("category") category: Int,
-                    @Field("category_order_page") pageNumber: Int): Observable<marketItems>
-
-    data class marketItems(val market: MutableList<Model.marketItem>)
-
     //BoardDetail
     @FormUrlEncoded
     @POST("boardDetail.php")
@@ -53,4 +45,18 @@ interface ApiService {
     fun writingFavorite(@Field("order") order: Int) : Observable<writeFavorite>
 
     data class writeFavorite(val value: Int, val message: String)   //0: 성공, 1: 실패
+
+    //MarketItem
+    @FormUrlEncoded
+    @POST("market.php")
+    fun bringMarket(@Field("category") category: Int,
+                    @Field("category_order_page") pageNumber: Int): Observable<marketItems>
+
+    data class marketItems(val market: MutableList<Model.marketItem>)
+
+    //MarketDetail
+    @FormUrlEncoded
+    @POST("marketDetail.php")
+    fun bringMarketDetail(@Field("order") order: Int): Observable<Model.marketItem>
+
 }
