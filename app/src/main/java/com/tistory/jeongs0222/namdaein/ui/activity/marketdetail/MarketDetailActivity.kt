@@ -2,11 +2,13 @@ package com.tistory.jeongs0222.namdaein.ui.activity.marketdetail
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.R
@@ -78,6 +80,14 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         mPresenter.setUpRecyclerView()
 
         mPresenter.setUpCommentData()
+
+        mPresenter.setUpCommentFunc()
+
+        detail_send_textView.setOnClickListener {
+            sendClickable(1)
+
+            mPresenter.setUpSendFunc()
+        }
     }
 
     private fun getValue() {
@@ -158,6 +168,39 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
     override fun recyclerView(): RecyclerView {
         return detail_recyclerView
     }
+
+    override fun sendEditText(): EditText {
+        return detail_send_editText
+    }
+
+    override fun sendVisible(value: Int) {
+        when(value) {
+            0 -> detail_send_textView.visibility = View.VISIBLE
+
+            1 -> detail_send_textView.visibility = View.GONE
+        }
+    }
+
+    override fun sendClickable(value: Int) {
+        when(value) {
+            0 -> detail_send_textView.isClickable = true
+
+            1 -> detail_send_textView.isClickable = false
+        }
+    }
+
+    override fun snackBar(message: String) {
+        val snackbar = Snackbar.make(detail_entire_layout, message, Snackbar.LENGTH_SHORT)
+
+        snackbar.show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mPresenter.disposableClear()
+    }
+
 
     override fun onBackPressed() {
         super.onBackPressed()

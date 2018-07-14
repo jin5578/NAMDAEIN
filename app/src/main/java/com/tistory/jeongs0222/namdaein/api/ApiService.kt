@@ -66,4 +66,14 @@ interface ApiService {
 
     data class marketCommentItems(val comment: MutableList<Model.commentItem>)
 
+    //MarketCommentWriting
+    @FormUrlEncoded
+    @POST("marketCommentWriting.php")
+    fun writingMarketComment(@Field("order") order: Int,
+                             @Field("userkey") userkey: String,
+                             @Field("content") content: String,
+                             @Field("date") date: String) : Observable<writeMarketComment>
+
+    data class writeMarketComment(val value: Int, val message: String)
+
 }
