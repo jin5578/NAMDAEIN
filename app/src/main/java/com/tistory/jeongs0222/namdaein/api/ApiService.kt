@@ -27,7 +27,7 @@ interface ApiService {
     @POST("boardcomment.php")
     fun bringBoardComment(@Field("order") order: Int):Observable<boardCommentItems>
 
-    data class boardCommentItems(val comment: MutableList<Model.boardCommentItem>)
+    data class boardCommentItems(val comment: MutableList<Model.commentItem>)
 
     //BoardCommentWriting
     @FormUrlEncoded
@@ -58,5 +58,12 @@ interface ApiService {
     @FormUrlEncoded
     @POST("marketDetail.php")
     fun bringMarketDetail(@Field("order") order: Int): Observable<Model.marketItem>
+
+    //MarketCommentItem
+    @FormUrlEncoded
+    @POST("marketComment.php")
+    fun bringMarketComment(@Field("order") order: Int):Observable<marketCommentItems>
+
+    data class marketCommentItems(val comment: MutableList<Model.commentItem>)
 
 }

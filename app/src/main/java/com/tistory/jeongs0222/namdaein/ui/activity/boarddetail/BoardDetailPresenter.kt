@@ -29,9 +29,7 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
 
     private lateinit var mAdapter: CommentAdapter
 
-    private val apiClient by lazy {
-        ApiClient.create()
-    }
+    private val apiClient by lazy { ApiClient.create() }
 
     override fun setView(view: BoardDetailContract.View, context: Context) {
         this.view = view

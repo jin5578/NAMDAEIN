@@ -2,6 +2,7 @@ package com.tistory.jeongs0222.namdaein.ui.activity
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.tistory.jeongs0222.namdaein.model.Model
 
 class CommentAdapter(internal val context: Context): RecyclerView.Adapter<CommentAdapter.ViewHolder>() {
 
-    var item: MutableList<Model.boardCommentItem> = ArrayList()
+    var item: MutableList<Model.commentItem> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_comment, parent, false))
@@ -29,6 +30,7 @@ class CommentAdapter(internal val context: Context): RecyclerView.Adapter<Commen
     }
 
     override fun getItemCount(): Int {
+        Log.e("item.size", item.size.toString())
         return if(item.isEmpty()) {
             0
         } else {
@@ -36,7 +38,7 @@ class CommentAdapter(internal val context: Context): RecyclerView.Adapter<Commen
         }
     }
 
-    fun addAllItems(e: MutableList<Model.boardCommentItem>) = item.addAll(e)
+    fun addAllItems(e: MutableList<Model.commentItem>) = item.addAll(e)
 
     fun notifyChanged() = notifyDataSetChanged()
 
