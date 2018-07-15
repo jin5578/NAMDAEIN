@@ -3,23 +3,23 @@ package com.tistory.jeongs0222.namdaein.ui.activity.login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.facebook.*
 import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.firebase.auth.*
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_login.*
+import com.facebook.login.widget.LoginButton
+
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
 
     private lateinit var mPresenter: LoginPresenter
 
-    private lateinit var mGoogleApiClient: GoogleApiClient
+    //Facebook Login 관련
+    private lateinit var mCallbackManager: CallbackManager
 
     //Google Login 관련
     private val RC_SIGN_IN = 10
-    private var Google_key: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,25 +34,31 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         mPresenter.setView(this, this)
 
-        //setUpGoogleLogin()
         mPresenter.setUpGoogleLogin()
 
         onClickEvent()
     }
 
     private fun onClickEvent() {
-        login_signIn_button.setOnClickListener {
-            Log.e("1", "1")
+        login_google_button.setOnClickListener {
             val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mPresenter.mGoogleApiClient)
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
+
+        login_facebook_button.setOnClickListener {
+            mCallbackManager = CallbackManager.Factory.create()
+            mPresenter.setUpFacebookLogin( this@LoginActivity)
+        }
     }
+
 
     //Google Login 관련
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        //Facebook Login 관련
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
         super.onActivityResult(requestCode, resultCode, data)
 
-        Log.e("2", "2")
 
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
@@ -65,15 +71,23 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
-    override fun startActivity(activityClass: Class<*>, google_id: String) {
+    override fun startActivity(activityClass: Class<*>, google_uId: String) {
         val intent = Intent(this, activityClass)
 
-        if(google_id.isNotEmpty()) {
-            intent.putExtra("google_id", google_id)
+        if(google_uId.isNotEmpty()) {
+            intent.putExtra("google_uId", google_uId)
             startActivity(intent)
         } else {
             startActivity(intent)
         }
+    }
+
+    override fun facebookButton(): LoginButton {
+        return login_facebook_button
+    }
+
+    override fun mCallbackManager(): CallbackManager {
+        return mCallbackManager
     }
 
     override fun onStop() {

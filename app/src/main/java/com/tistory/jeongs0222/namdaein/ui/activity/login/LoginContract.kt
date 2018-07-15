@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.login
 
 import android.content.Context
+import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 
@@ -8,6 +9,10 @@ interface LoginContract {
 
     interface View {
         fun startActivity(activityClass: Class<*>, google_id: String)
+
+        fun facebookButton(): com.facebook.login.widget.LoginButton
+
+        fun mCallbackManager(): CallbackManager
     }
 
     interface Presenter {
@@ -16,5 +21,7 @@ interface LoginContract {
         fun setUpGoogleLogin()
 
         fun firebaseAuthWithGoogle(acct: GoogleSignInAccount)
+
+        fun setUpFacebookLogin(activity: LoginActivity)
     }
 }

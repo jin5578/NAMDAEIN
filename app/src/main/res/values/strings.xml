@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">NAMDAEIN</string>
 
+    <string name="facebook_app_id">236278376987137</string>
+    <string name="fb_login_protocol_scheme">fb236278376987137</string>
+
     <string name="termsOfuse">
 \n개인정보처리방침\n\n
 

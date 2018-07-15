@@ -10,6 +10,12 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.tistory.jeongs0222.namdaein.R
 import android.app.Activity
 import android.util.Log
+import com.facebook.AccessToken
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
@@ -19,17 +25,20 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFailedListener {
-
+class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFailedListener, FacebookCallback<LoginResult> {
 
     private lateinit var view: LoginContract.View
     private lateinit var context: Context
 
+    private lateinit var activity: LoginActivity
+
     private var disposable: Disposable? = null
 
+    //Google Login 관련
     lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mAuth: FirebaseAuth
-    //private var google_id: String? = null
+
+    //facebook Login 관련
 
     private val apiClient by lazy { ApiClient.create()}
 
@@ -39,8 +48,8 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
         this.context = context
     }
 
+    //Google Login 관련
     override fun setUpGoogleLogin() {
-        Log.e("3", "3")
         mAuth = FirebaseAuth.getInstance()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -54,10 +63,12 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 .build()
     }
 
+    //Google Login 관련
     override fun onConnectionFailed(p0: ConnectionResult) {
 
     }
 
+    //Google Login 관련
     override fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.e("4", "4")
         val credential: AuthCredential = GoogleAuthProvider.getCredential(acct.idToken, null)
@@ -65,11 +76,21 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 .addOnCompleteListener(context as Activity) { task ->
                     if (task.isSuccessful) {
                         val user = FirebaseAuth.getInstance().currentUser
-                        val google_id = user!!.uid
+                        val google_uId = user!!.uid
 
-                        keyCheck(google_id)
+                        keyCheck(google_uId)
                     }
                 }
+    }
+
+    override fun setUpFacebookLogin(activity: LoginActivity) {
+        this.activity = activity
+
+        view.facebookButton().apply {
+            setReadPermissions("email", "public_profile")
+            registerCallback(view.mCallbackManager(), this@LoginPresenter)
+        }
+
     }
 
     private fun keyCheck(google_id: String) {
@@ -89,6 +110,36 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                     } else {
                         view.startActivity(MainActivity::class.java, null!!)
                     }
+                })
+    }
+
+    //Facebook Login 관련
+    override fun onSuccess(result: LoginResult?) {
+        handleFacebookAccessToken(result!!.accessToken)
+    }
+
+    override fun onCancel() {
+
+    }
+
+    override fun onError(error: FacebookException?) {
+
+    }
+
+    //Facebook Login 관련
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential: AuthCredential = FacebookAuthProvider.getCredential(token.token)
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(activity, object : OnCompleteListener<AuthResult> {
+                    override fun onComplete(task: Task<AuthResult>) {
+                        if(task.isSuccessful) {
+                            val user = FirebaseAuth.getInstance().currentUser
+                            val google_uId = user!!.uid
+
+                            keyCheck(google_uId)
+                        }
+                    }
+
                 })
     }
 }

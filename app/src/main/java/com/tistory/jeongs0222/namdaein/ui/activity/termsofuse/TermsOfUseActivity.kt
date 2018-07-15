@@ -12,7 +12,7 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
 
     private lateinit var mPresenter: TermsOfUsePresenter
 
-    private lateinit var google_id: String
+    private lateinit var google_uId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +34,13 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
     private fun getValue() {
         val intent = intent
 
-        google_id = intent.getStringExtra("google_id")
-
-        Log.e("google_id", google_id)
+        google_uId = intent.getStringExtra("google_uId")
     }
 
     private fun onClickEvent() {
         terms_checkBox.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            intent.putExtra("google_id", google_id)
+            intent.putExtra("google_uId", google_uId)
 
             startActivity(intent)
         }
