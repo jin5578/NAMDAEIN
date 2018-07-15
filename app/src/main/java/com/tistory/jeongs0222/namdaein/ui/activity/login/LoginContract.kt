@@ -8,7 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 interface LoginContract {
 
     interface View {
-        fun startActivity(activityClass: Class<*>, google_id: String)
+        fun startActivity(activityClass: Class<*>)
 
         fun facebookButton(): com.facebook.login.widget.LoginButton
 
@@ -23,5 +23,7 @@ interface LoginContract {
         fun firebaseAuthWithGoogle(acct: GoogleSignInAccount)
 
         fun setUpFacebookLogin(activity: LoginActivity)
+
+        fun disposableClear()
     }
 }

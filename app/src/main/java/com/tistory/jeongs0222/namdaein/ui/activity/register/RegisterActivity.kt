@@ -1,5 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.register
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
@@ -18,7 +19,6 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     private lateinit var mPresenter: RegisterPresenter
 
-    private lateinit var google_uId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,22 +32,17 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
         mPresenter.setView(this, this)
 
-        getValue()
-
         onClickEvent()
     }
 
-    private fun getValue() {
-        val intent = intent
-
-        google_uId = intent.getStringExtra("google_uId")
-
-        Log.e("Register Google", google_uId)
-    }
 
     private fun onClickEvent() {
         register_validate_textView.setOnClickListener {
             mPresenter.setUpValidate()
+        }
+
+        register_confirm_ImageView.setOnClickListener {
+            mPresenter.setUpSignIn()
         }
     }
 
@@ -69,5 +64,18 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         }
 
         snackbar.show()
+    }
+
+    override fun startActivity(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
+
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mPresenter.disposableClear()
     }
 }

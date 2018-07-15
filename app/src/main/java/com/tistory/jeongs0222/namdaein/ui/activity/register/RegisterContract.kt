@@ -12,11 +12,16 @@ interface RegisterContract {
 
         fun snackBar(message: String)
 
+        fun startActivity(activityClass: Class<*>)
     }
 
     interface Presenter {
         fun setView(view: View, context: Context)
 
         fun setUpValidate()
+
+        fun setUpSignIn()
+
+        fun disposableClear()
     }
 }

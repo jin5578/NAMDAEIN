@@ -12,7 +12,6 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
 
     private lateinit var mPresenter: TermsOfUsePresenter
 
-    private lateinit var google_uId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,28 +25,27 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
 
         mPresenter.setView(this, this)
 
-        getValue()
-
         onClickEvent()
-    }
-
-    private fun getValue() {
-        val intent = intent
-
-        google_uId = intent.getStringExtra("google_uId")
     }
 
     private fun onClickEvent() {
         terms_checkBox.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            intent.putExtra("google_uId", google_uId)
 
             startActivity(intent)
+
+            finish()
         }
     }
 
     override fun onStop() {
         super.onStop()
+
+        finish()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
 
         finish()
     }

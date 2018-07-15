@@ -131,14 +131,15 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 .doOnError { it.printStackTrace() }
                 .subscribe( {
                     if(it.value == 0) {
-                        view.startActivity(TermsOfUseActivity::class.java, google_id)
+                        view.startActivity(TermsOfUseActivity::class.java)
                     } else if(it.value == 1) {
-                        view.startActivity(TermsOfUseActivity::class.java, google_id)
+                        view.startActivity(TermsOfUseActivity::class.java)
                     } else {
-                        view.startActivity(MainActivity::class.java, null!!)
+                        view.startActivity(MainActivity::class.java)
                     }
                 })
     }
 
+    override fun disposableClear() = disposable!!.dispose()
 
 }

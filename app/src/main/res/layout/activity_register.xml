@@ -1,97 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register_entire_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:background="@color/colorWhite"
+    android:gravity="center"
     tools:context=".ui.activity.register.RegisterActivity">
 
     <ImageView
         android:id="@+id/register_confirm_ImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:visibility="gone"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:src="@drawable/ic_check_pink_24dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        tools:visibility="visible"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="120dp">
+    <TextView
+        android:id="@+id/register_null"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:fontFamily="@font/goyang"
+        android:gravity="center"
+        android:text="남대인"
+        android:textColor="@color/colorBlack"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_confirm_ImageView" />
 
-        <TextView
-            android:id="@+id/register_null"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/goyang"
-            android:text="남대인"
-            android:textColor="@color/colorBlack"
-            android:textSize="30dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/register_null2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/goyang"
+        android:gravity="center"
+        android:text="닉네임을 작성해주세요."
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_null" />
 
-        <TextView
-            android:id="@+id/register_null2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="닉네임을 작성해주세요."
-            android:textSize="10sp"
-            android:fontFamily="@font/goyang"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_null"/>
+    <EditText
+        android:id="@+id/register_nickname_editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:fontFamily="@font/goyang"
+        android:gravity="center"
+        android:hint="NICKNAME"
+        android:lines="1"
+        android:padding="20dp"
+        android:textSize="9sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_null2" />
 
-        <EditText
-            android:id="@+id/register_nickname_editText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:padding="20dp"
-            android:gravity="center"
-            android:lines="1"
-            android:hint="NICKNAME"
-            android:textSize="9sp"
-            android:fontFamily="@font/goyang"
-            android:background="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/register_null2"/>
+    <View
+        android:id="@+id/register_null3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintTop_toBottomOf="@id/register_nickname_editText" />
 
-        <View
-            android:id="@+id/register_null3"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/colorLightLightGray"
-            app:layout_constraintTop_toBottomOf="@id/register_nickname_editText"/>
-
-        <TextView
-            android:id="@+id/register_validate_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:text="중복체크"
-            android:textSize="9sp"
-            android:textColor="@color/colorRed"
-            android:fontFamily="@font/goyang"
-            app:layout_constraintTop_toBottomOf="@id/register_null3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/register_validate_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/goyang"
+        android:padding="20dp"
+        android:text="중복체크"
+        android:textColor="@color/colorRed"
+        android:textSize="9sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_null3" />
 
 
-
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

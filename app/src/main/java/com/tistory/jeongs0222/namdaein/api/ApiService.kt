@@ -90,4 +90,15 @@ interface ApiService {
 
     data class nicknameChecks(val value: Int, val message: String)  //0: 사용가능, 1: 이미 존재, 2: 2 ~ 6자
 
+    //Register
+    @FormUrlEncoded
+    @POST("register.php")
+    fun register(@Field("userkey") userkey: String,
+                 @Field("usernickname") usernickname: String,
+                 @Field("userage") userage: Int,
+                 @Field("usermajor") usermajor: String,
+                 @Field("usersex") usersex: String,
+                 @Field("usertoken") usertoken: String): Observable<registers>
+
+    data class registers(val value: Int, val message: String)   //0: 성공, 1: 실패
 }

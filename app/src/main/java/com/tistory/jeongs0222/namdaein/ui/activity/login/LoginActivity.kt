@@ -73,15 +73,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
-    override fun startActivity(activityClass: Class<*>, google_uId: String) {
+    override fun startActivity(activityClass: Class<*>) {
         val intent = Intent(this, activityClass)
+        startActivity(intent)
 
-        if(google_uId.isNotEmpty()) {
-            intent.putExtra("google_uId", google_uId)
-            startActivity(intent)
-        } else {
-            startActivity(intent)
-        }
     }
 
     override fun facebookButton(): LoginButton {
@@ -94,6 +89,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun onStop() {
         super.onStop()
+
+        mPresenter.disposableClear()
 
         finish()
     }
