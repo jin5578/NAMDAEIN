@@ -32,7 +32,7 @@ interface ApiService {
     //BoardCommentItem
     @FormUrlEncoded
     @POST("boardcomment.php")
-    fun bringBoardComment(@Field("order") order: Int):Observable<boardCommentItems>
+    fun bringBoardComment(@Field("order") order: Int): Observable<boardCommentItems>
 
     data class boardCommentItems(val comment: MutableList<Model.commentItem>)
 
@@ -42,16 +42,16 @@ interface ApiService {
     fun writingBoardComment(@Field("order") order: Int,
                             @Field("userkey") userkey: String,
                             @Field("content") content: String,
-                            @Field("date") date: String) : Observable<writeBoardComment>
+                            @Field("date") date: String): Observable<writeBoardComments>
 
-    data class writeBoardComment(val value: Int, val message: String)   //0: 성공, 1: 실패
+    data class writeBoardComments(val value: Int, val message: String)   //0: 성공, 1: 실패
 
     //BoardFavorite
     @FormUrlEncoded
     @POST("nice.php")
-    fun writingFavorite(@Field("order") order: Int) : Observable<writeFavorite>
+    fun writingFavorite(@Field("order") order: Int): Observable<writeFavorites>
 
-    data class writeFavorite(val value: Int, val message: String)   //0: 성공, 1: 실패
+    data class writeFavorites(val value: Int, val message: String)   //0: 성공, 1: 실패
 
     //MarketItem
     @FormUrlEncoded
@@ -69,7 +69,7 @@ interface ApiService {
     //MarketCommentItem
     @FormUrlEncoded
     @POST("marketComment.php")
-    fun bringMarketComment(@Field("order") order: Int):Observable<marketCommentItems>
+    fun bringMarketComment(@Field("order") order: Int): Observable<marketCommentItems>
 
     data class marketCommentItems(val comment: MutableList<Model.commentItem>)
 
@@ -79,8 +79,15 @@ interface ApiService {
     fun writingMarketComment(@Field("order") order: Int,
                              @Field("userkey") userkey: String,
                              @Field("content") content: String,
-                             @Field("date") date: String) : Observable<writeMarketComment>
+                             @Field("date") date: String): Observable<writeMarketComments>
 
-    data class writeMarketComment(val value: Int, val message: String)  //0: 성공, 1: 실패
+    data class writeMarketComments(val value: Int, val message: String)  //0: 성공, 1: 실패
+
+    //Nickname Validate
+    @FormUrlEncoded
+    @POST("nicknamecheck.php")
+    fun nicknameCheck(@Field("usernickname") usernickname: String): Observable<nicknameChecks>
+
+    data class nicknameChecks(val value: Int, val message: String)  //0: 사용가능, 1: 이미 존재, 2: 2 ~ 6자
 
 }

@@ -2,8 +2,11 @@ package com.tistory.jeongs0222.namdaein.ui.activity.register
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.util.Log
+import android.widget.EditText
 import com.tistory.jeongs0222.namdaein.R
+import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
@@ -24,6 +27,8 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         mPresenter.setView(this, this)
 
         getValue()
+
+        onClickEvent()
     }
 
     private fun getValue() {
@@ -32,5 +37,21 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         google_uId = intent.getStringExtra("google_uId")
 
         Log.e("Register Google", google_uId)
+    }
+
+    private fun onClickEvent() {
+        register_validate_textView.setOnClickListener {
+            mPresenter.setUpValidate()
+        }
+    }
+
+    override fun register_nickname(): EditText {
+        return register_nickname_editText
+    }
+
+    override fun snackBar(message: String) {
+        val snackbar = Snackbar.make(register_entire_layout, message, Snackbar.LENGTH_SHORT)
+
+        snackbar.show()
     }
 }
