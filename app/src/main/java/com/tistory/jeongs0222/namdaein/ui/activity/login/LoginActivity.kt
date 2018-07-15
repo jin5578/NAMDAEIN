@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     //Google Login 관련
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         //Facebook Login 관련
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        //mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -68,6 +68,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             } else {
 
             }
+        } else {
+            mCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 

@@ -9,7 +9,6 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.tistory.jeongs0222.namdaein.R
 import android.app.Activity
-import android.util.Log
 import com.facebook.AccessToken
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -37,8 +36,6 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
     //Google Login 관련
     lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mAuth: FirebaseAuth
-
-    //facebook Login 관련
 
     private val apiClient by lazy { ApiClient.create()}
 
@@ -70,7 +67,6 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
 
     //Google Login 관련
     override fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.e("4", "4")
         val credential: AuthCredential = GoogleAuthProvider.getCredential(acct.idToken, null)
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(context as Activity) { task ->
@@ -83,6 +79,7 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 }
     }
 
+    //facebook Login 관련
     override fun setUpFacebookLogin(activity: LoginActivity) {
         this.activity = activity
 
@@ -91,26 +88,6 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
             registerCallback(view.mCallbackManager(), this@LoginPresenter)
         }
 
-    }
-
-    private fun keyCheck(google_id: String) {
-        disposable = apiClient.keyCheck(google_id)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete { }
-                .doOnError { it.printStackTrace() }
-                .subscribe( {
-                    if(it.value == 0) {
-                        view.startActivity(TermsOfUseActivity::class.java, google_id)
-                    } else if(it.value == 1) {
-                        view.startActivity(TermsOfUseActivity::class.java, google_id)
-                    } else {
-                        view.startActivity(MainActivity::class.java, null!!)
-                    }
-                })
     }
 
     //Facebook Login 관련
@@ -142,4 +119,26 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
 
                 })
     }
+
+    private fun keyCheck(google_id: String) {
+        disposable = apiClient.keyCheck(google_id)
+                .subscribeOn(Schedulers.io())
+                .doOnNext {
+
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete { }
+                .doOnError { it.printStackTrace() }
+                .subscribe( {
+                    if(it.value == 0) {
+                        view.startActivity(TermsOfUseActivity::class.java, google_id)
+                    } else if(it.value == 1) {
+                        view.startActivity(TermsOfUseActivity::class.java, google_id)
+                    } else {
+                        view.startActivity(MainActivity::class.java, null!!)
+                    }
+                })
+    }
+
+
 }
