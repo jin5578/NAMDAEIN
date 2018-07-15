@@ -76,24 +76,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
 
         mPresenter.setUpCommentFunc()
 
-        detail_favorite_imageView.setOnClickListener {
-            favoriteClickable(1)
-
-            mPresenter.setUpFavoriteFunc()
-        }
-
-        detail_send_textView.setOnClickListener {
-            sendClickable(1)
-
-            mPresenter.setUpSendFunc()
-        }
-
-        /*detail_entire_layout.setOnClickListener {
-            Log.e("123", "123123123")
-            val inputMethodManager = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-
-            inputMethodManager.hideSoftInputFromWindow(detail_send_editText.windowToken, 0)
-        }*/ //Relative 위에 있어서 그런지 작동 X
+        onClickEvent()
     }
 
     private fun getValue() {
@@ -145,6 +128,27 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
                 }
             })
         }
+    }
+
+    private fun onClickEvent() {
+        detail_favorite_imageView.setOnClickListener {
+            favoriteClickable(1)
+
+            mPresenter.setUpFavoriteFunc()
+        }
+
+        detail_send_textView.setOnClickListener {
+            sendClickable(1)
+
+            mPresenter.setUpSendFunc()
+        }
+
+        /*detail_entire_layout.setOnClickListener {
+            Log.e("123", "123123123")
+            val inputMethodManager = applicationContext.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+            inputMethodManager.hideSoftInputFromWindow(detail_send_editText.windowToken, 0)
+        }*/ //Relative 위에 있어서 그런지 작동 X
     }
 
     override fun progressBar(value: Int) {

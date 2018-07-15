@@ -83,11 +83,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
         mPresenter.setUpCommentFunc()
 
-        detail_send_textView.setOnClickListener {
-            sendClickable(1)
-
-            mPresenter.setUpSendFunc()
-        }
+        onClickEvent()
     }
 
     private fun getValue() {
@@ -140,6 +136,18 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
                 }
             })
+        }
+    }
+
+    private fun onClickEvent() {
+        detail_message_constraint.setOnClickListener {
+
+        }
+
+        detail_send_textView.setOnClickListener {
+            sendClickable(1)
+
+            mPresenter.setUpSendFunc()
         }
     }
 
