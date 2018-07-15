@@ -18,7 +18,8 @@ class SplashActivity : AppCompatActivity() {
 
     private fun skip() {
         Handler().postDelayed({
-            val mainIntent = Intent(this, MainActivity::class.java)
+            //val mainIntent = Intent(this, MainActivity::class.java)
+            val mainIntent = Intent(this, LoginActivity::class.java)
             startActivity(mainIntent)
 
             finish()

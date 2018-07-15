@@ -27,7 +27,9 @@
         <activity android:name=".ui.activity.boarddetail.BoardDetailActivity" />
         <activity android:name=".ui.activity.marketdetail.MarketDetailActivity" />
         <activity android:name=".utils.ImageViewPager" />
-        <activity android:name=".ui.activity.chatroom.ChatRoomActivity"></activity>
+        <activity android:name=".ui.activity.chatroom.ChatRoomActivity" />
+        <activity android:name=".ui.activity.termsofuse.TermsOfUseActivity" />
+        <activity android:name=".ui.activity.register.RegisterActivity"/>
     </application>
 
 </manifest>

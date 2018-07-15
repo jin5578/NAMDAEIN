@@ -1,5 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.marketdetail
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.ui.activity.PictureViewPagerAdapter
+import com.tistory.jeongs0222.namdaein.ui.activity.chatroom.ChatRoomActivity
 import kotlinx.android.synthetic.main.activity_market_detail.*
 
 class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
@@ -141,7 +143,9 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
     private fun onClickEvent() {
         detail_message_constraint.setOnClickListener {
+            val intent = Intent(this, ChatRoomActivity::class.java)
 
+            startActivity(intent)
         }
 
         detail_send_textView.setOnClickListener {

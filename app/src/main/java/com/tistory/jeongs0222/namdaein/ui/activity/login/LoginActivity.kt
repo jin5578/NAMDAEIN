@@ -3,35 +3,28 @@ package com.tistory.jeongs0222.namdaein.ui.activity.login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.*
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.OnConnectionFailedListener {
+class LoginActivity : AppCompatActivity(), LoginContract.View {
+
 
     private lateinit var mPresenter: LoginPresenter
 
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var mGoogleApiClient: GoogleApiClient
 
+    //Google Login 관련
     private val RC_SIGN_IN = 10
-    private var user: FirebaseUser? = null
     private var Google_key: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        login_signIn_button.setOnClickListener {
-            val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-        }
 
         init()
     }
@@ -41,54 +34,58 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, GoogleApiClient.O
 
         mPresenter.setView(this, this)
 
-        //mPresenter.setUpGoogleLogin()
+        //setUpGoogleLogin()
+        mPresenter.setUpGoogleLogin()
 
-        setUpGoogleLogin()
+        onClickEvent()
     }
 
-    private fun setUpGoogleLogin() {
-        mAuth = FirebaseAuth.getInstance()
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-        mGoogleApiClient = GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build()
+    private fun onClickEvent() {
+        login_signIn_button.setOnClickListener {
+            Log.e("1", "1")
+            val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mPresenter.mGoogleApiClient)
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
     }
 
-    override fun onConnectionFailed(p0: ConnectionResult) {
-
-    }
-
+    //Google Login 관련
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        Log.e("2", "2")
 
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result.isSuccess) {
                 val account = result.signInAccount
-                firebaseAuthWithGoogle(account!!)
+                mPresenter.firebaseAuthWithGoogle(account!!)
             } else {
 
             }
         }
     }
 
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential: AuthCredential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        user = FirebaseAuth.getInstance().currentUser
-                        Google_key = user!!.getUid()
+    override fun startActivity(activityClass: Class<*>, google_id: String) {
+        val intent = Intent(this, activityClass)
 
-                        //presenter.keyCheck(Google_key)
-                    }
-                }
+        if(google_id.isNotEmpty()) {
+            intent.putExtra("google_id", google_id)
+            startActivity(intent)
+        } else {
+            startActivity(intent)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        finish()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        finish()
     }
 
 }

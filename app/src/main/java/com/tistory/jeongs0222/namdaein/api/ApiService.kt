@@ -9,6 +9,13 @@ import retrofit2.http.POST
 
 interface ApiService {
 
+    //keyCheck
+    @FormUrlEncoded
+    @POST("keycheck.php")
+    fun keyCheck(@Field("userkey") userkey: String): Observable<keyChecks>
+
+    data class keyChecks(val value: Int, val message: String)   //0: 처음 연동, 가입하는 경우 1: 연동은 하였지만 가입을 하지 않은 경우 2: 이미 연동, 가입한 경우
+
     //BoardItem
     @FormUrlEncoded
     @POST("board.php")
@@ -74,6 +81,6 @@ interface ApiService {
                              @Field("content") content: String,
                              @Field("date") date: String) : Observable<writeMarketComment>
 
-    data class writeMarketComment(val value: Int, val message: String)
+    data class writeMarketComment(val value: Int, val message: String)  //0: 성공, 1: 실패
 
 }
