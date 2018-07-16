@@ -34,6 +34,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
         mPresenter.setView(this, this)
 
+        mPresenter.validateUserInfo()
+
         mPresenter.setUpGoogleLogin()
 
         onClickEvent()
@@ -54,9 +56,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     //Google Login 관련
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        //Facebook Login 관련
-        //mCallbackManager.onActivityResult(requestCode, resultCode, data);
-
         super.onActivityResult(requestCode, resultCode, data)
 
 
@@ -69,6 +68,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
             }
         } else {
+            //Facebook Login 관련
             mCallbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -77,6 +77,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val intent = Intent(this, activityClass)
         startActivity(intent)
 
+        finish()
     }
 
     override fun facebookButton(): LoginButton {
@@ -91,8 +92,6 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         super.onStop()
 
         mPresenter.disposableClear()
-
-        finish()
     }
 
     override fun onBackPressed() {

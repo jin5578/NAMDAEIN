@@ -38,12 +38,6 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-
-        finish()
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
 

@@ -5,9 +5,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.jeongs0222.namdaein.api.ApiClient
+import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,6 +21,8 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
 
     private var disposable: Disposable? = null
 
+    private lateinit var dbHelper: DBHelper
+
     private var validate: Boolean = false
 
     private val apiClient by lazy { ApiClient.create() }
@@ -28,6 +30,8 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
     override fun setView(view: RegisterContract.View, context: Context) {
         this.view = view
         this.context = context
+
+        dbHelper = DBHelper(context, "USERINFO.db", null, 1)
     }
 
     override fun setUpValidate() {
@@ -64,11 +68,17 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
         if(validate) {
             val google_uId = FirebaseAuth.getInstance().uid
             val google_token = FirebaseInstanceId.getInstance().token
+            val nickname = view.register_nickname().text.toString()
 
             Log.e("google_uId", google_uId)
             Log.e("google_token", google_token)
-            disposable = apiClient.register(google_uId!!, view.register_nickname().text.toString(), 0, "", "", google_token!!)
+            disposable = apiClient.register(google_uId!!, nickname, 0, "", "", google_token!!)
                     .subscribeOn(Schedulers.io())
+                    .doOnNext {
+                        if(it.value == 0) {
+                            dbHelper.insert(google_uId, nickname, "on")
+                        }
+                    }
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnComplete {
 

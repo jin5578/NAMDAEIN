@@ -18,6 +18,8 @@ interface LoginContract {
     interface Presenter {
         fun setView(view: View, context: Context)
 
+        fun validateUserInfo()
+
         fun setUpGoogleLogin()
 
         fun firebaseAuthWithGoogle(acct: GoogleSignInAccount)

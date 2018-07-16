@@ -101,4 +101,11 @@ interface ApiService {
                  @Field("usertoken") usertoken: String): Observable<registers>
 
     data class registers(val value: Int, val message: String)   //0: 성공, 1: 실패
+
+    //UserInfo
+    @FormUrlEncoded
+    @POST("bringNickname.php")
+    fun userInfo(@Field("userkey") userkey: String): Observable<userInfos>
+
+    data class userInfos(val value: Int, val nickname: String)
 }

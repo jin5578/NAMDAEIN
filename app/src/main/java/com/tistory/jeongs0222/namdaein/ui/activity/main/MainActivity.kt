@@ -4,15 +4,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
+import android.util.Log
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.model.DBHelper
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener, MainContract.View {
 
-
     private lateinit var mPresenter: MainContract.Presenter
     private lateinit var mPagerAdapter : MainViewPagerAdapter
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
