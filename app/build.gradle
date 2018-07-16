@@ -10,6 +10,7 @@ android {
         applicationId "com.tistory.jeongs0222.namdaein"
         minSdkVersion 19
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,6 +33,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -50,7 +52,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:11.6.2'
     implementation 'com.google.android.gms:play-services-auth:11.6.2'
     implementation 'com.google.firebase:firebase-messaging:11.6.2'
-
+    implementation 'com.google.firebase:firebase-database:11.6.2'
+    implementation 'com.google.firebase:firebase-core:11.6.2'
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
@@ -61,8 +64,6 @@ dependencies {
 
     //facebook
     implementation 'com.facebook.android:facebook-login:4.34.0'
-
-    //implementation 'com.google.firebase:firebase-core:16.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

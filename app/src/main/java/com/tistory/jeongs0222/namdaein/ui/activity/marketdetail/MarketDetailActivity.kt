@@ -7,12 +7,12 @@ import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.PictureViewPagerAdapter
 import com.tistory.jeongs0222.namdaein.ui.activity.chatroom.ChatRoomActivity
 import kotlinx.android.synthetic.main.activity_market_detail.*
@@ -21,7 +21,12 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
     private lateinit var mPresenter: MarketDetailPresenter
 
+    private lateinit var dbHelper: DBHelper
+
     private var order = 0
+
+    private lateinit var writtenUserGoogle_uId: String
+    private lateinit var writtenUserNickname: String
 
     private var images: MutableList<String> = ArrayList()
 
@@ -40,10 +45,14 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
         mPresenter.setView(this, this)
 
+        dbHelper = DBHelper(applicationContext, "USERINFO.db", null, 1)
+
         getValue()
 
         mPresenter.setUpInitData(order) { msg, it ->
             if(msg.equals("complete")) {
+                writtenUserGoogle_uId = it.writtenUserkey
+                writtenUserNickname = it.nickname
                 detail_title_textView.text = it.title
                 detail_price_textView.text = "₩ " + it.price
                 detail_content_textView.text = it.content
@@ -92,8 +101,6 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         val intent = intent
 
         order = intent.extras.getInt("order")
-
-        Log.e("orderorder", order.toString())
     }
 
     private fun pictureViewPager() {
@@ -145,13 +152,22 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         detail_message_constraint.setOnClickListener {
             val intent = Intent(this, ChatRoomActivity::class.java)
 
+            val intentExtra = ArrayList<String>()
+
+            intentExtra.add(0, writtenUserGoogle_uId)
+            intentExtra.add(1, writtenUserNickname)
+
+            intent.putStringArrayListExtra("intentExtra", intentExtra)
+
             startActivity(intent)
         }
 
         detail_send_textView.setOnClickListener {
-            sendClickable(1)
+            if(writtenUserGoogle_uId != dbHelper.getGoogle_uId()) {
+                sendClickable(1)
 
-            mPresenter.setUpSendFunc()
+                mPresenter.setUpSendFunc()
+            }
         }
     }
 

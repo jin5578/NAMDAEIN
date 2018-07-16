@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import com.tistory.jeongs0222.namdaein.api.ApiClient
+import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.activity.CommentAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,11 +29,15 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
 
     private lateinit var mAdapter: CommentAdapter
 
+    private lateinit var dbHelper: DBHelper
+
     private val apiClient by lazy { ApiClient.create() }
 
     override fun setView(view: MarketDetailContract.View, context: Context) {
         this.view = view
         this.context = context
+
+        dbHelper = DBHelper(context, "USERINFO.db", null, 1)
     }
 
     override fun setUpInitData(order: Int, callback: (String, Model.marketItem) -> Unit) {
@@ -74,7 +78,6 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
     }
 
     override fun setUpCommentData() {
-        Log.e("order", order.toString())
         disposable = apiClient.bringMarketComment(order)
                 .subscribeOn(Schedulers.io())
                 .doOnNext {
@@ -100,7 +103,7 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
         bringDate()
 
         if(view.sendEditText().text.isNotEmpty()) {
-            disposable = apiClient.writingMarketComment(order, "jHtFtSfO2lMG3NLADGojZ1oG9Da2", view.sendEditText().text.toString(), currentDate)
+            disposable = apiClient.writingMarketComment(order, dbHelper.getGoogle_uId()!!, view.sendEditText().text.toString(), currentDate)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnComplete {
