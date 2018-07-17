@@ -33,4 +33,9 @@ object Model {
     data class commentItem(val nickname: String,
                            val date: String,
                            val content: String)
+
+    data class writtenMarketItem(val order: Int,
+                                 val category: Int,
+                                 val date: String,
+                                 val title: String)
 }

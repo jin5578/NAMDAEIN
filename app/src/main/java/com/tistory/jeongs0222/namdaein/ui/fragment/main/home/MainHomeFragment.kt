@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.main
+package com.tistory.jeongs0222.namdaein.ui.fragment.main.home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

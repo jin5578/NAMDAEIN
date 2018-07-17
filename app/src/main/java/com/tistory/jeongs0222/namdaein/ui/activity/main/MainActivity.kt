@@ -76,21 +76,13 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
     //ViewPager ChangeListener
     override fun onPageSelected(position: Int) {
         when(position) {
-            0 -> {
-                runOnUiThread { main_toolbar_title.text = "홈" }
-            }
+            0 -> main_toolbar_title.text = "홈"
 
-            1 -> {
-                runOnUiThread { main_toolbar_title.text = "장터" }
-            }
+            1 -> main_toolbar_title.text = "장터"
 
-            2 -> {
-                runOnUiThread { main_toolbar_title.text = "게시판" }
-            }
-
-            3 -> {
-                runOnUiThread { main_toolbar_title.text = "더보기" }
-            }
+            2 -> main_toolbar_title.text = "게시판"
+            
+            3 -> main_toolbar_title.text = "더보기"
         }
     }
     override fun onPageScrollStateChanged(state: Int) {

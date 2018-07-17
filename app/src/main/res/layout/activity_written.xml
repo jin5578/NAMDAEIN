@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ui.activity.written.WrittenActivity">
+
+    <TextView
+        android:id="@+id/written_null1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:fontFamily="@font/goyang"
+        android:text="내가 쓴 글"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/written_null2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/written_null1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/written_tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:tabTextColor="@color/colorBlack"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabSelectedTextColor="@color/colorTabSelected"
+        app:layout_constraintTop_toBottomOf="@id/written_null2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="장터"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="게시판"/>
+
+    </android.support.design.widget.TabLayout>
+    
+    <View
+        android:id="@+id/written_null3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/written_tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    
+    <com.tistory.jeongs0222.namdaein.utils.NonSwipeViewPager
+        android:id="@+id/written_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/written_null3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="scroll|enterAlways"/>
+
+</android.support.constraint.ConstraintLayout>

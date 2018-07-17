@@ -108,4 +108,11 @@ interface ApiService {
     fun userInfo(@Field("userkey") userkey: String): Observable<userInfos>
 
     data class userInfos(val value: Int, val nickname: String)
+
+    //WrittenMarketItem
+    @FormUrlEncoded
+    @POST("writtenMarket.php")
+    fun bringWrittenMarket(@Field("userkey") userkey: String): Observable<bringWrittenMarkets>
+
+    data class bringWrittenMarkets(val writtenMarket: MutableList<Model.writtenMarketItem>)
 }

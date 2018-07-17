@@ -64,6 +64,10 @@ dependencies {
 
     //facebook
     implementation 'com.facebook.android:facebook-login:4.34.0'
+
+    //swipeActionView Library
+    implementation 'com.github.Tunous:SwipeActionView:1.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

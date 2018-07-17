@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.thanel.swipeactionview.SwipeActionView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/written_market_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3dp"
+    app:sav_alwaysDrawBackground="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="수정하기"
+        android:textColor="@color/colorBlack"
+        android:textSize="9sp"
+        android:fontFamily="@font/goyang"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="삭제하기"
+        android:textColor="@color/colorBlack"
+        android:textSize="9sp"
+        android:fontFamily="@font/goyang"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/written_market_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/written_market_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorRed"
+            android:textSize="7sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="자유게시판"/>
+
+        <TextView
+            android:id="@+id/written_market_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="7sp"
+            app:layout_constraintStart_toEndOf="@id/written_market_category"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="18.07.17 20:00" />
+
+        <TextView
+            android:id="@+id/written_market_title"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="8sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/written_market_date"
+            tools:text="아이폰X 256G 판매합니다." />
+
+    </android.support.constraint.ConstraintLayout>
+
+</me.thanel.swipeactionview.SwipeActionView>
