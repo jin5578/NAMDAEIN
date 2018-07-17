@@ -8,7 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 interface LoginContract {
 
     interface View {
-        fun startActivity(activityClass: Class<*>)
+        fun startActivity(activityClass: Class<*>, connectModel: String)
 
         fun facebookButton(): com.facebook.login.widget.LoginButton
 

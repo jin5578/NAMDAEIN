@@ -1,23 +1,23 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.register
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
-import com.tistory.jeongs0222.namdaein.R.font.fonts
 import kotlinx.android.synthetic.main.activity_register.*
+
 
 class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
     private lateinit var mPresenter: RegisterPresenter
+
+    private lateinit var connectModel: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +32,23 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
 
         mPresenter.setView(this, this)
 
+        getValue()
+
         onClickEvent()
     }
 
+    private fun getValue() {
+        val intent = intent
 
+        connectModel = intent.getStringExtra("connectModel")
+    }
     private fun onClickEvent() {
         register_validate_textView.setOnClickListener {
             mPresenter.setUpValidate()
         }
 
         register_confirm_ImageView.setOnClickListener {
-            mPresenter.setUpSignIn()
+            mPresenter.setUpSignIn(connectModel)
         }
     }
 

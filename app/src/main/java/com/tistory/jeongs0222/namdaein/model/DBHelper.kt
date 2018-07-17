@@ -9,17 +9,17 @@ import android.database.sqlite.SQLiteOpenHelper
 class DBHelper(context: Context, name: String, factory: SQLiteDatabase.CursorFactory?, version: Int): SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE USERINFO (google_uId TEXT, nickname TEXT, push TEXT);")
+        sqLiteDatabase.execSQL("CREATE TABLE USERINFO (google_uId TEXT, nickname TEXT, push TEXT, connect_model TEXT);")
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
 
     }
 
-    fun insert(google_uId: String, nickname: String, push: String) {
+    fun insert(google_uId: String, nickname: String, push: String, connect_model: String) {
         val db: SQLiteDatabase = writableDatabase
 
-        db.execSQL("INSERT INTO USERINFO VALUES('" + google_uId + "', '" + nickname + "', '" + push + "');")
+        db.execSQL("INSERT INTO USERINFO VALUES('" + google_uId + "', '" + nickname + "', '" + push + "', '" + connect_model + "');")
 
         db.close()
     }
@@ -92,6 +92,24 @@ class DBHelper(context: Context, name: String, factory: SQLiteDatabase.CursorFac
         db.close()
 
         return push
+    }
+
+    fun getConnectModel(): String? {
+        var connectModel: String? = null
+
+        val db: SQLiteDatabase = readableDatabase
+
+        val cursor: Cursor = db.rawQuery("SELECT connect_model FROM USERINFO", null)
+
+        while(cursor.moveToNext()) {
+            connectModel = cursor.getString(0)
+        }
+
+        cursor.close()
+
+        db.close()
+
+        return connectModel
     }
 
 }

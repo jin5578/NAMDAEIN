@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.termsofuse
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.ui.activity.register.RegisterActivity
 import kotlinx.android.synthetic.main.activity_terms_of_use.*
@@ -11,6 +10,8 @@ import kotlinx.android.synthetic.main.activity_terms_of_use.*
 class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
 
     private lateinit var mPresenter: TermsOfUsePresenter
+
+    private lateinit var connectModel: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,12 +26,20 @@ class TermsOfUseActivity : AppCompatActivity(), TermsOfUseContract.View {
 
         mPresenter.setView(this, this)
 
+        getValue()
+
         onClickEvent()
+    }
+
+    private fun getValue() {
+        val intent = intent
+        connectModel = intent.getStringExtra("connectModel")
     }
 
     private fun onClickEvent() {
         terms_checkBox.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
+            intent.putExtra("connectModel", connectModel)
 
             startActivity(intent)
 

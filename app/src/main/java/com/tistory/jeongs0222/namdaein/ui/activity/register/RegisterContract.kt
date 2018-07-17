@@ -2,7 +2,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.register
 
 import android.content.Context
 import android.widget.EditText
-import android.widget.TextView
 
 
 interface RegisterContract {
@@ -20,7 +19,7 @@ interface RegisterContract {
 
         fun setUpValidate()
 
-        fun setUpSignIn()
+        fun setUpSignIn(connectModel: String)
 
         fun disposableClear()
     }

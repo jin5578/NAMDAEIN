@@ -2,7 +2,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,6 @@ class CommentAdapter(internal val context: Context): RecyclerView.Adapter<Commen
     }
 
     override fun getItemCount(): Int {
-        Log.e("item.size", item.size.toString())
         return if(item.isEmpty()) {
             0
         } else {

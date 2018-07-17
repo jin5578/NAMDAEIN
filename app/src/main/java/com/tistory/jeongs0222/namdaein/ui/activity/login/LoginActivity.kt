@@ -73,9 +73,15 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
-    override fun startActivity(activityClass: Class<*>) {
+    override fun startActivity(activityClass: Class<*>, connectModel: String) {
         val intent = Intent(this, activityClass)
-        startActivity(intent)
+
+        if(connectModel != "") {
+            intent.putExtra("connectModel", connectModel)
+            startActivity(intent)
+        } else {
+            startActivity(intent)
+        }
 
         finish()
     }

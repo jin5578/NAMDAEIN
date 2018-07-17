@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.board.MainBoardFragment
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainHomeFragment
 import com.tistory.jeongs0222.namdaein.ui.fragment.main.market.MainMarketFragment
-import com.tistory.jeongs0222.namdaein.ui.fragment.main.MainMoreFragment
+import com.tistory.jeongs0222.namdaein.ui.fragment.main.more.MainMoreFragment
 
 
 class MainViewPagerAdapter(fm: FragmentManager, internal var numOfTabs: Int) : FragmentStatePagerAdapter(fm) {

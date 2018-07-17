@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
     private lateinit var mPresenter: MainContract.Presenter
     private lateinit var mPagerAdapter : MainViewPagerAdapter
 
+    private lateinit var dbHelper: DBHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +25,13 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
     }
 
     private fun init() {
+        dbHelper = DBHelper(applicationContext, "USERINFO.db", null, 1)
+
+        Log.e("nickname", dbHelper.getNickname())
+        Log.e("google_uid", dbHelper.getGoogle_uId())
+        Log.e("push", dbHelper.getPush())
+        Log.e("connectModel", dbHelper.getConnectModel())
+
         mPresenter = MainPresenter()
 
         mPresenter.setView(this, this)

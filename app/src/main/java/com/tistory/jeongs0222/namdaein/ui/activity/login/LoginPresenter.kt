@@ -9,9 +9,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.tistory.jeongs0222.namdaein.R
 import android.app.Activity
-import android.database.Cursor
 import android.text.TextUtils
-import android.util.Log
 import com.facebook.AccessToken
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -39,6 +37,8 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
 
     private lateinit var dbHelper: DBHelper
 
+    private lateinit var connectModel: String
+
     //Google Login 관련
     lateinit var mGoogleApiClient: GoogleApiClient
     private lateinit var mAuth: FirebaseAuth
@@ -57,16 +57,9 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
     override fun validateUserInfo() {
         val google_uId = dbHelper.getGoogle_uId()
 
-        /*if(!(google_uId!!.isNotEmpty())) {
-            Log.e("gogogogogo", google_uId)
-            view.startActivity(MainActivity::class.java)
-        }*/
-
         if(!(TextUtils.isEmpty(google_uId))) {
-            Log.e("gogogogogo", google_uId)
-            view.startActivity(MainActivity::class.java)
+            view.startActivity(MainActivity::class.java, "")
         }
-
 
     }
 
@@ -98,6 +91,8 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                     if (task.isSuccessful) {
                         val user = FirebaseAuth.getInstance().currentUser
                         val google_uId = user!!.uid
+
+                        connectModel = "Google"
 
                         keyCheck(google_uId)
                     }
@@ -138,6 +133,8 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                             val user = FirebaseAuth.getInstance().currentUser
                             val google_uId = user!!.uid
 
+                            connectModel = "Facebook"
+
                             keyCheck(google_uId)
                         }
                     }
@@ -154,15 +151,15 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete { }
                 .doOnError { it.printStackTrace() }
-                .subscribe( {
+                .subscribe {
                     if(it.value == 0) {
-                        view.startActivity(TermsOfUseActivity::class.java)
+                        view.startActivity(TermsOfUseActivity::class.java, connectModel)
                     } else if(it.value == 1) {
-                        view.startActivity(TermsOfUseActivity::class.java)
+                        view.startActivity(TermsOfUseActivity::class.java, connectModel)
                     } else {
                         insertRealm(google_uId)
                     }
-                })
+                }
     }
 
     private fun insertRealm(google_uId: String) {
@@ -170,15 +167,15 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                 .subscribeOn(Schedulers.io())
                 .doOnNext {
                     if(it.value == 0) {
-                        dbHelper.insert(google_uId, it.nickname, "on")
+                        dbHelper.insert(google_uId, it.nickname, "on", connectModel)
                     }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete {  }
                 .doOnError { it.printStackTrace() }
-                .subscribe( {
-                    view.startActivity(MainActivity::class.java)
-                })
+                .subscribe {
+                    view.startActivity(MainActivity::class.java, "")
+                }
     }
 
     override fun disposableClear() = disposable!!.dispose()
