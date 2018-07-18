@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.marketwrite
 
 import android.content.Context
+import com.tistory.jeongs0222.namdaein.model.Model
 
 
 interface MarketWriteContract {
@@ -13,5 +14,7 @@ interface MarketWriteContract {
         fun setView(view: View, context: Context)
 
         fun setUpSpinnerFunc()
+
+        fun setUpBringMarket(order: Int, callback: (String, Model.marketItem) -> Unit)
     }
 }

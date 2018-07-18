@@ -122,4 +122,9 @@ interface ApiService {
     fun deleteWrittenMarket(@Field("order") order: Int): Observable<deleteWrieenMarkets>
 
     data class deleteWrieenMarkets(val value: Int, val message: String)     //0: 성공 1: 실패
+
+    //bring WrittenBeforeMarketItem
+    @FormUrlEncoded
+    @POST("beforeMarketData.php")
+    fun beforMarketData(@Field("order") order: Int): Observable<Model.marketItem>
 }
