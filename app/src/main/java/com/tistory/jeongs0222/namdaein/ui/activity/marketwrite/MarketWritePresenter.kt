@@ -7,6 +7,8 @@ import com.tistory.jeongs0222.namdaein.model.Model
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MarketWritePresenter: MarketWriteContract.Presenter {
@@ -17,6 +19,8 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
     private val spinnerList = arrayOf("여성의류", "남성의류", "패션잡화", "뷰티", "도서", "티켓", "가전제품", "생활", "원룸", "기타")
 
     private var disposable: Disposable? = null
+
+    private var currentDate: String = ""
 
     private val apiClient by lazy { ApiClient.create() }
 
@@ -47,4 +51,44 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
                     view.spinner().setText(spinnerList.get(it.category))
                 }
     }
+
+    override fun setUpEditConfirmFunc(order: Int) {
+        view.progressBar(0)
+
+        bringDate()
+
+        if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty() && view.price().text.isNotEmpty()) {
+            disposable = apiClient.afterMarketData(order, view.title().text.toString(), view.content().text.toString(), view.price().text.toString(), currentDate)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete {
+                        view.viewFinish()
+                    }
+                    .doOnError {
+                        it.printStackTrace()
+
+                        view.progressBar(1)
+                    }
+                    .subscribe()
+        } else {
+            view.snackBar("빈 칸은 작성할 수 없습니다.")
+        }
+
+    }
+
+    override fun setUpConfirmFunc() {
+
+    }
+
+    private fun bringDate() {
+        val now = System.currentTimeMillis()
+
+        val date = Date(now)
+
+        val sdf = SimpleDateFormat("yy.MM.dd HH:mm")
+
+        currentDate = sdf.format(date)
+    }
+
+    override fun disposableClear() = disposable!!.dispose()
 }

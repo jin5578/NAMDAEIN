@@ -123,8 +123,19 @@ interface ApiService {
 
     data class deleteWrieenMarkets(val value: Int, val message: String)     //0: 성공 1: 실패
 
-    //bring WrittenBeforeMarketItem
+    //WrittenBeforeMarketItem
     @FormUrlEncoded
     @POST("beforeMarketData.php")
     fun beforMarketData(@Field("order") order: Int): Observable<Model.marketItem>
+
+    //WrittenAfterMarketItem
+    @FormUrlEncoded
+    @POST("afterMarketData.php")
+    fun afterMarketData(@Field("order") order: Int,
+                        @Field("title") title: String,
+                        @Field("content") content: String,
+                        @Field("price") price: String,
+                        @Field("date") date: String): Observable<afterMarketDatas>
+
+    data class afterMarketDatas(val value: Int, val message: String)    //0: 성공, 1: 실패
 }

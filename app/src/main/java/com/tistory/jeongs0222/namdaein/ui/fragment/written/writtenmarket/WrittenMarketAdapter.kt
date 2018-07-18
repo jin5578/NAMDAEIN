@@ -152,6 +152,8 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
 
     fun addAllItems(e: MutableList<Model.writtenMarketItem>) = item.addAll(e)
 
+    fun clearAllItems() = item.clear()
+
     fun notifyChanged() = notifyDataSetChanged()
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

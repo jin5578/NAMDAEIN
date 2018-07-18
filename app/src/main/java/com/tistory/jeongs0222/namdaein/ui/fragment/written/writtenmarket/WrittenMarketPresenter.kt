@@ -45,9 +45,12 @@ class WrittenMarketPresenter : WrittenMarketContract.Presenter {
     }
 
     override fun setUpData() {
-        disposable = apiClient.bringWrittenMarket("jHtFtSfO2lMG3NLADGojZ1oG9Da2")
+        disposable = apiClient.bringWrittenMarket(dbHelper.getGoogle_uId()!!)
                 .subscribeOn(Schedulers.io())
-                .doOnNext { if (it.writtenMarket.isNotEmpty()) mAdapter.addAllItems(it.writtenMarket) }
+                .doOnNext { if (it.writtenMarket.isNotEmpty()) {
+                    mAdapter.clearAllItems()
+                    mAdapter.addAllItems(it.writtenMarket)
+                } }
                 .doOnError { it.printStackTrace() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete {
