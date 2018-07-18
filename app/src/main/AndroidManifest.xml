@@ -53,7 +53,8 @@
         </activity>
         <activity android:name=".ui.activity.written.WrittenActivity" />
         <activity android:name=".ui.fragment.written.writtenmarket.WrittenMarketFragment" />
-        <activity android:name=".ui.fragment.written.writtenboard.WrittenBoardFragment"></activity>
+        <activity android:name=".ui.fragment.written.writtenboard.WrittenBoardFragment" />
+        <activity android:name=".ui.activity.marketwrite.MarketWriteActivity"></activity>
     </application>
 
 </manifest>

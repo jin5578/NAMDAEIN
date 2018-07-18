@@ -115,4 +115,11 @@ interface ApiService {
     fun bringWrittenMarket(@Field("userkey") userkey: String): Observable<bringWrittenMarkets>
 
     data class bringWrittenMarkets(val writtenMarket: MutableList<Model.writtenMarketItem>)
+
+    //writtenMarketItemDelete
+    @FormUrlEncoded
+    @POST("deleteMarketItem.php")
+    fun deleteWrittenMarket(@Field("order") order: Int): Observable<deleteWrieenMarkets>
+
+    data class deleteWrieenMarkets(val value: Int, val message: String)     //0: 성공 1: 실패
 }
