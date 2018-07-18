@@ -1,9 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:scrollbars="none"
     tools:context=".ui.activity.marketwrite.MarketWriteActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/market_null"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="장터 글쓰기"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/market_null2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="10dp"
+            android:text="상품사진"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null2"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:text="(작성 후 변경할 수 없으니 신중히 선택해주세요.)"
+            android:textSize="7sp"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/market_null3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/market_imageView"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_image_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null4"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <HorizontalScrollView
+            android:id="@+id/market_null5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fillViewport="false"
+            android:foregroundGravity="left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_imageView"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/market_selectedLinear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:animateLayoutChanges="true"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <View
+            android:id="@+id/market_null9"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/market_null5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="카테고리"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null9"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/market_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="카테고리를 선택해주세요."
+            android:textColor="@color/colorBlack"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null6"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/market_null10"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/market_spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="제목"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null10"/>
+
+        <EditText
+            android:id="@+id/market_title_editText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="제목을 입력하세요."
+            android:textSize="9sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            android:background="@drawable/rectangle1_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null7"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/market_null11"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/market_title_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="내용"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null11"/>
+
+        <EditText
+            android:id="@+id/market_content_editText"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="내용을 입력하세요."
+            android:textSize="9sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            android:background="@drawable/rectangle1_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null8"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_title_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="7sp"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/market_content_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="(23 / 250)"/>
+
+        <View
+            android:id="@+id/market_null12"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/market_title_count"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/market_null13"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="가격"
+            android:textColor="@color/colorBlack"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/goyang"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null12"/>
+
+        <EditText
+            android:id="@+id/market_price_editText"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:hint="내용을 입력하세요."
+            android:textSize="9sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            android:background="@drawable/rectangle1_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/market_null13"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/market_null14"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/market_price_editText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

@@ -68,6 +68,10 @@ dependencies {
     //swipeActionView Library
     implementation 'com.github.Tunous:SwipeActionView:1.1.0'
 
+    //Spinner
+    implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
