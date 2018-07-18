@@ -3,10 +3,8 @@ package com.tistory.jeongs0222.namdaein.ui.activity.marketwrite
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.util.Log
 import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
 import kotlinx.android.synthetic.main.activity_market_write.*

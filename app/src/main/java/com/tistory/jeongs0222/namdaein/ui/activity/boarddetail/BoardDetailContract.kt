@@ -24,7 +24,7 @@ interface BoardDetailContract {
 
         fun sendClickable(value: Int)
 
-        fun snackBar(message: String)
+        fun toastMessage(message: String)
     }
 
     interface Presenter {

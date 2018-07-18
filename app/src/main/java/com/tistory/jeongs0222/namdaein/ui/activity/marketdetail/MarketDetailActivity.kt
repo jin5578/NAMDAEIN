@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.marketdetail
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.RecyclerView
@@ -11,10 +10,12 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.PictureViewPagerAdapter
 import com.tistory.jeongs0222.namdaein.ui.activity.chatroom.ChatRoomActivity
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import kotlinx.android.synthetic.main.activity_market_detail.*
 
 class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
@@ -217,10 +218,10 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         }
     }
 
-    override fun snackBar(message: String) {
-        val snackbar = Snackbar.make(detail_entire_layout, message, Snackbar.LENGTH_SHORT)
+    override fun toastMessage(message: String) {
+        val toastMessage = CustomToast(this)
 
-        snackbar.show()
+        toastMessage.makeText(message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {

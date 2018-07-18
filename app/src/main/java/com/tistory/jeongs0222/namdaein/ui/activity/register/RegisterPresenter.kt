@@ -5,13 +5,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserInfo
 import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -48,15 +45,15 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
                     }
                     .subscribe {
                         if(it.value == 0) {
-                            view.snackBar(it.message)
+                            view.toastMessage(it.message)
 
                             validate = true
                         } else if(it.value == 1) {
-                            view.snackBar(it.message)
+                            view.toastMessage(it.message)
 
                             validate = false
                         } else {
-                            view.snackBar(it.message)
+                            view.toastMessage(it.message)
 
                             validate = false
                         }
@@ -90,11 +87,11 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
                         if(it.value == 0) {
                             view.startActivity(MainActivity::class.java)
                         } else {
-                            view.snackBar(it.message)
+                            view.toastMessage(it.message)
                         }
                     }
         } else {
-            view.snackBar("중복체크를 먼저 해주세요.")
+            view.toastMessage("중복체크를 먼저 해주세요.")
         }
     }
 

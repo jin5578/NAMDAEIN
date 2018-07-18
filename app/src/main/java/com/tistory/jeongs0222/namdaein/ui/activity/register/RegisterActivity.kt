@@ -4,12 +4,13 @@ import android.content.Intent
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -56,20 +57,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         return register_nickname_editText
     }
 
-    override fun snackBar(message: String) {
-        val snackbar = Snackbar.make(register_entire_layout, message, Snackbar.LENGTH_SHORT)
+    override fun toastMessage(message: String) {
+        val toastMessage = CustomToast(this)
 
-        val textView = (snackbar.view).findViewById<TextView>(android.support.design.R.id.snackbar_text)
-
-        textView.setTextSize(12F)
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
-        } else {
-            textView.gravity = Gravity.CENTER_HORIZONTAL
-        }
-
-        snackbar.show()
+        toastMessage.makeText(message, Toast.LENGTH_SHORT).show()
     }
 
     override fun startActivity(activityClass: Class<*>) {

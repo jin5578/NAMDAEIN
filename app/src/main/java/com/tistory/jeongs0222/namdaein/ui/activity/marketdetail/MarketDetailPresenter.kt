@@ -114,7 +114,7 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
                     }
                     .subscribe {
                         if(it.value == 1) {
-                            view.snackBar(it.message)
+                            view.toastMessage(it.message)
                         }
 
                         view.sendEditText().text = null

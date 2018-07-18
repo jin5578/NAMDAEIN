@@ -9,7 +9,7 @@ interface RegisterContract {
     interface View {
         fun register_nickname(): EditText
 
-        fun snackBar(message: String)
+        fun toastMessage(message: String)
 
         fun startActivity(activityClass: Class<*>)
     }

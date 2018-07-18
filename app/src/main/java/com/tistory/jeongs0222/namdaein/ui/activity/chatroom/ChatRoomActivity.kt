@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.EditText
 import com.tistory.jeongs0222.namdaein.R
-import kotlinx.android.synthetic.main.activity_board_detail.*
 import kotlinx.android.synthetic.main.activity_chat_room.*
 
 class ChatRoomActivity : AppCompatActivity(), ChatRoomContract.View {

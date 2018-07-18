@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.written
 import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewPager
 
 
 class WrittenPresenter: WrittenContract.Presenter, TabLayout.OnTabSelectedListener {

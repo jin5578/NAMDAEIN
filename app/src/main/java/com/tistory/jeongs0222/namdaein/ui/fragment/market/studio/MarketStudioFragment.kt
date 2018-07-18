@@ -1,6 +1,5 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.market.studio
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -9,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_market_studio_fragment.*
+
 
 class MarketStudioFragment : Fragment(), MarketStudioContract.View {
 

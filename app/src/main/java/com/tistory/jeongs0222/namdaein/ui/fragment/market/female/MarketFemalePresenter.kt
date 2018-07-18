@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.market.female
 import android.content.Context
 import android.support.v7.widget.*
 import com.tistory.jeongs0222.namdaein.api.ApiClient
-import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.fragment.market.MarketItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

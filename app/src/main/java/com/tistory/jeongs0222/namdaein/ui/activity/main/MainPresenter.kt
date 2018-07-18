@@ -1,8 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.main
 
 import android.content.Context
-import android.util.Log
-import android.view.View
 
 
 class MainPresenter: MainContract.Presenter {
@@ -15,6 +13,4 @@ class MainPresenter: MainContract.Presenter {
         this.view = view
         this.context = context
     }
-
-
 }
