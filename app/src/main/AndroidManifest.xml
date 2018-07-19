@@ -55,7 +55,8 @@
         <activity android:name=".ui.fragment.written.writtenmarket.WrittenMarketFragment" />
         <activity android:name=".ui.fragment.written.writtenboard.WrittenBoardFragment" />
         <activity android:name=".ui.activity.marketwrite.MarketWriteActivity" />
-        <activity android:name=".ui.activity.boardwrite.BoardWriteActivity"></activity>
+        <activity android:name=".ui.activity.boardwrite.BoardWriteActivity" />
+        <activity android:name=".ui.activity.inquire.InquireActivity"></activity>
     </application>
 
 </manifest>

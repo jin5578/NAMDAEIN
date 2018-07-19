@@ -46,8 +46,8 @@ class WrittenBoardPresenter: WrittenBoardContract.Presenter {
     }
 
     override fun setUpData() {
-        //disposable = apiClient.bringWrittenBoard(dbHelper.getGoogle_uId()!!)
-        disposable = apiClient.bringWrittenBoard("jHtFtSfO2lMG3NLADGojZ1oG9Da2")
+        disposable = apiClient.bringWrittenBoard(dbHelper.getGoogle_uId()!!)
+        //disposable = apiClient.bringWrittenBoard("jHtFtSfO2lMG3NLADGojZ1oG9Da2")
                 .subscribeOn(Schedulers.io())
                 .doOnNext { if(it.writtenBoard.isNotEmpty()) {
                     mAdapter.clearAllItems()

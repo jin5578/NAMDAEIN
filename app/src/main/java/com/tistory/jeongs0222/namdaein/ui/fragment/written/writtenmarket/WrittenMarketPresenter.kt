@@ -46,6 +46,7 @@ class WrittenMarketPresenter : WrittenMarketContract.Presenter {
     }
 
     override fun setUpData() {
+        //disposable = apiClient.bringWrittenBoard("jHtFtSfO2lMG3NLADGojZ1oG9Da2")
         disposable = apiClient.bringWrittenMarket(dbHelper.getGoogle_uId()!!)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { if (it.writtenMarket.isNotEmpty()) {

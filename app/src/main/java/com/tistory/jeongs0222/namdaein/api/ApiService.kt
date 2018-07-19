@@ -168,4 +168,12 @@ interface ApiService {
 
     data class afterBoardDatas(val value: Int, val message: String)
 
+    //Post Inquire
+    @FormUrlEncoded
+    @POST("inquire.php")
+    fun inquire(@Field("userkey") userkey: String,
+                @Field("content") content: String): Observable<inquires>
+
+    data class inquires(val value: Int, val message: String)
+
 }

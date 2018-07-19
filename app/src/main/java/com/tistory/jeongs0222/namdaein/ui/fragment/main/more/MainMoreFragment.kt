@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
+import com.tistory.jeongs0222.namdaein.ui.activity.inquire.InquireActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.written.WrittenActivity
 import kotlinx.android.synthetic.main.activity_main_more_fragment.*
 
@@ -37,6 +38,12 @@ class MainMoreFragment : Fragment() {
     private fun onClickEvent() {
         more_written_textView.setOnClickListener {
             val intent = Intent(activity, WrittenActivity::class.java)
+
+            startActivity(intent)
+        }
+
+        more_inquire_textView.setOnClickListener {
+            val intent = Intent(activity, InquireActivity::class.java)
 
             startActivity(intent)
         }
