@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/market_entire_layout"
+    android:id="@+id/write_entire_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="1dp"
@@ -11,7 +11,7 @@
     android:background="@color/colorWhite">
 
     <ImageView
-        android:id="@+id/market_imageView"
+        android:id="@+id/write_imageView"
         android:layout_width="0dp"
         android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:fontFamily="@font/goyang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/market_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/write_imageView"
         tools:text="아이폰X 256G 판매합니다." />
 
     <TextView

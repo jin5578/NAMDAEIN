@@ -2,14 +2,13 @@ package com.tistory.jeongs0222.namdaein.ui.activity.marketwrite
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-import kotlinx.android.synthetic.main.activity_market_write.*
+import kotlinx.android.synthetic.main.activity_write.*
 
 class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
 
@@ -20,7 +19,7 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_market_write)
+        setContentView(R.layout.activity_write)
 
         init()
     }
@@ -44,21 +43,22 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
         order = intent.extras.getInt("order")
 
         if(sort == 1) {
-            market_image_constraint.visibility = View.GONE
+            write_image_constraint.visibility = View.GONE
 
             mPresenter.setUpBringMarket(order) { msg, it ->
                 if(msg.equals("complete")) {
-                    market_spinner.isEnabled = false
-                    market_title_editText.setText(it.title)
-                    market_content_editText.setText(it.content)
-                    market_price_editText.setText(it.price)
+                    write_spinner.isEnabled = false
+
+                    write_title_editText.setText(it.title)
+                    write_content_editText.setText(it.content)
+                    write_price_editText.setText(it.price)
                 }
             }
         }
     }
 
     fun onClickEvent() {
-        market_confirm_imageView.setOnClickListener {
+        write_confirm_imageView.setOnClickListener {
             confirmClickable(1)
             if(sort == 0) {
 
@@ -70,35 +70,35 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
     }
 
     override fun spinner(): MaterialBetterSpinner {
-        return market_spinner
+        return write_spinner
     }
 
     override fun confirmClickable(value: Int) {
         when(value) {
-            0 -> market_confirm_imageView.isClickable = true
+            0 -> write_confirm_imageView.isClickable = true
 
-            1 -> market_confirm_imageView.isClickable = false
+            1 -> write_confirm_imageView.isClickable = false
         }
     }
 
     override fun progressBar(value: Int) {
         when(value) {
-            0 -> market_progressBar.visibility = View.VISIBLE
+            0 -> write_progressBar.visibility = View.VISIBLE
 
-            1 -> market_progressBar.visibility = View.GONE
+            1 -> write_progressBar.visibility = View.GONE
         }
     }
 
     override fun title(): EditText {
-        return market_title_editText
+        return write_title_editText
     }
 
     override fun content(): EditText {
-        return market_content_editText
+        return write_content_editText
     }
 
     override fun price(): EditText {
-        return market_price_editText
+        return write_price_editText
     }
 
     override fun viewFinish() {

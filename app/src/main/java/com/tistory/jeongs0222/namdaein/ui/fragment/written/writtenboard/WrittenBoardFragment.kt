@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_written_board_fragment.*
-import kotlinx.android.synthetic.main.activity_written_market_fragment.*
 
 
 class WrittenBoardFragment : Fragment(), WrittenBoardContract.View {

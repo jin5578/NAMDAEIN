@@ -9,7 +9,6 @@
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
     android:layout_marginTop="3dp"
-    android:background="@color/colorWhite"
     app:sav_alwaysDrawBackground="true">
 
     <TextView
@@ -49,10 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:textSize="7sp"
             android:fontFamily="@font/goyang"
             android:background="@drawable/rectangle3_background"

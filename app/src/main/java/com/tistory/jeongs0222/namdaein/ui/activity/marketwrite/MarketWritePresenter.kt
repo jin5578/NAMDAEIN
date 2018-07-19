@@ -37,12 +37,9 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
     }
 
     override fun setUpBringMarket(order: Int, callback: (String, Model.marketItem) -> Unit) {
-        disposable = apiClient.beforMarketData(order)
+        disposable = apiClient.beforeMarketData(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-
-                }
                 .doOnError {
                     it.printStackTrace()
                 }

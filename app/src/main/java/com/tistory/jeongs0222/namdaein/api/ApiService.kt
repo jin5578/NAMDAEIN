@@ -116,17 +116,17 @@ interface ApiService {
 
     data class bringWrittenMarkets(val writtenMarket: MutableList<Model.writtenMarketItem>)
 
-    //writtenMarketItemDelete
+    //WrittenMarketItemDelete
     @FormUrlEncoded
     @POST("deleteMarketItem.php")
-    fun deleteWrittenMarket(@Field("order") order: Int): Observable<deleteWrieenMarkets>
+    fun deleteWrittenMarket(@Field("order") order: Int): Observable<deleteWrittenMarkets>
 
-    data class deleteWrieenMarkets(val value: Int, val message: String)     //0: 성공 1: 실패
+    data class deleteWrittenMarkets(val value: Int, val message: String)     //0: 성공, 1: 실패
 
     //WrittenBeforeMarketItem
     @FormUrlEncoded
     @POST("beforeMarketData.php")
-    fun beforMarketData(@Field("order") order: Int): Observable<Model.marketItem>
+    fun beforeMarketData(@Field("order") order: Int): Observable<Model.marketItem>
 
     //WrittenAfterMarketItem
     @FormUrlEncoded
@@ -145,4 +145,17 @@ interface ApiService {
     fun bringWrittenBoard(@Field("userkey") userkey: String): Observable<bringWrittenBoards>
 
     data class bringWrittenBoards(val writtenBoard: MutableList<Model.writtenBoardItem>)
+
+    //WrittenBoardItemDelete
+    @FormUrlEncoded
+    @POST("deleteBoardItem.php")
+    fun deleteWrittenBoard(@Field("order") order: Int): Observable<deleteWrittenBoards>
+
+    data class deleteWrittenBoards(val value: Int, val message: String)     //0: 성공, 1: 실패
+
+    //WrittenBeforeBoardItem
+    @FormUrlEncoded
+    @POST("beforeBoardData.php")
+    fun beforeBoardData(@Field("order") order: Int): Observable<Model.boardItem>
+
 }

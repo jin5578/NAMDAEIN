@@ -77,8 +77,8 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
         val market_price_textView: TextView
 
         init {
-            market_entire_layout = itemView.findViewById(R.id.market_entire_layout)
-            market_imageView = itemView.findViewById(R.id.market_imageView)
+            market_entire_layout = itemView.findViewById(R.id.write_entire_layout)
+            market_imageView = itemView.findViewById(R.id.write_imageView)
             market_title_textView = itemView.findViewById(R.id.market_title_textView)
             market_price_textView = itemView.findViewById(R.id.market_price_textView)
         }
