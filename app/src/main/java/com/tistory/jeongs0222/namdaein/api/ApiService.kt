@@ -158,4 +158,14 @@ interface ApiService {
     @POST("beforeBoardData.php")
     fun beforeBoardData(@Field("order") order: Int): Observable<Model.boardItem>
 
+    //WrittenAfterBoardItem
+    @FormUrlEncoded
+    @POST("afterBoardData.php")
+    fun afterBoardData(@Field("order") order: Int,
+                       @Field("title") title: String,
+                       @Field("content") content: String,
+                       @Field("date") date: String): Observable<afterBoardDatas>
+
+    data class afterBoardDatas(val value: Int, val message: String)
+
 }

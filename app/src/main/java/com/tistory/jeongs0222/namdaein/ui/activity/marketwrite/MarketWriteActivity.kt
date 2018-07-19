@@ -60,6 +60,7 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
     fun onClickEvent() {
         write_confirm_imageView.setOnClickListener {
             confirmClickable(1)
+
             if(sort == 0) {
 
             } else {

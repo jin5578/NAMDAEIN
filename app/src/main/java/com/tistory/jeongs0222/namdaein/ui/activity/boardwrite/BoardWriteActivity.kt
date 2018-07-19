@@ -4,7 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
 import kotlinx.android.synthetic.main.activity_write.*
 
@@ -34,7 +37,7 @@ class BoardWriteActivity : AppCompatActivity(), BoardWriteContract.View {
 
         write_price_constraint.visibility = View.GONE
 
-
+        onClickEvent()
     }
 
     private fun getValue() {
@@ -57,12 +60,54 @@ class BoardWriteActivity : AppCompatActivity(), BoardWriteContract.View {
         }
     }
 
-    override fun viewFinish() {
-        finish()
+    private fun onClickEvent() {
+        write_confirm_imageView.setOnClickListener {
+            confirmClickable(1)
+
+            if(sort == 0) {
+
+            } else {
+                mPresenter.setUpEditConfirmFunc(order)
+            }
+        }
     }
 
     override fun spinner(): MaterialBetterSpinner {
         return write_spinner
+    }
+
+    override fun confirmClickable(value: Int) {
+        when(value) {
+            0 -> write_progressBar.visibility = View.VISIBLE
+
+            1 -> write_progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun progressBar(value: Int) {
+        when(value) {
+            0 -> write_progressBar.visibility = View.VISIBLE
+
+            1 -> write_progressBar.visibility = View.GONE
+        }
+    }
+
+    override fun title(): EditText {
+        return write_title_editText
+    }
+
+    override fun content(): EditText {
+        return write_content_editText
+    }
+
+    override fun viewFinish() {
+        finish()
+    }
+
+    override fun toastMessage(message: String) {
+        val toastMessage = CustomToast(this)
+
+        toastMessage.makeText(message, Toast.LENGTH_SHORT)
     }
 
     override fun onDestroy() {
