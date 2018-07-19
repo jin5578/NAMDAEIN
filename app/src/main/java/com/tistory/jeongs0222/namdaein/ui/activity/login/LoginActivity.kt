@@ -3,11 +3,13 @@ package com.tistory.jeongs0222.namdaein.ui.activity.login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.facebook.*
 import com.google.android.gms.auth.api.Auth
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_login.*
 import com.facebook.login.widget.LoginButton
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
@@ -92,6 +94,12 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun mCallbackManager(): CallbackManager {
         return mCallbackManager
+    }
+
+    override fun toastMessage(message: String) {
+        val toastMessage = CustomToast(this)
+
+        toastMessage.makeText(message, Toast.LENGTH_SHORT)
     }
 
     override fun onStop() {

@@ -47,8 +47,6 @@ class WrittenMarketFragment : Fragment(), WrittenMarketContract.View {
     override fun onResume() {
         super.onResume()
 
-        Log.e("456456456456", "456456456456")
-
         mPresenter.setUpData()
     }
 

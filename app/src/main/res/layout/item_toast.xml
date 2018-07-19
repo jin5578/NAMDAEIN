@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toast_linearLayout"
     android:orientation="vertical"
@@ -7,7 +8,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="8dp"
-    android:background="#DAAA">
+    android:background="@drawable/rectangle2_background">
 
     <TextView
         android:id="@+id/toast_textView"
@@ -15,6 +16,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:textSize="10dp"
+        android:fontFamily="@font/goyang"
         tools:text="빈 칸은 작성할 수 없습니다."/>
 
 </LinearLayout>

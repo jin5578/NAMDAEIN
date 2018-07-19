@@ -1,5 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.written.writtenmarket
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -7,14 +8,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.activity.marketwrite.MarketWriteActivity
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -122,7 +126,7 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
                                     notifyChanged()
                                 }
                                 .doOnError { it.printStackTrace() }
-                                .subscribe()
+                                .subscribe ()
                     } else {
                         val intent = Intent(swipeActionView.context, MarketWriteActivity::class.java)
 

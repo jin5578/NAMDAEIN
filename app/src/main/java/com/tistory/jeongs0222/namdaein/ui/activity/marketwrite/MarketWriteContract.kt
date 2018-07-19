@@ -22,7 +22,7 @@ interface MarketWriteContract {
 
         fun viewFinish()
 
-        fun snackBar(message: String)
+        fun toastMessage(message: String)
     }
 
     interface Presenter {

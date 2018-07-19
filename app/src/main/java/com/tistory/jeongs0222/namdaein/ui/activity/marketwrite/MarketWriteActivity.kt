@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
 import kotlinx.android.synthetic.main.activity_market_write.*
 
@@ -103,10 +105,10 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
         finish()
     }
 
-    override fun snackBar(message: String) {
-        val snackbar = Snackbar.make(market_entire_layout, message, Snackbar.LENGTH_SHORT)
+    override fun toastMessage(message: String) {
+        val toastMessage = CustomToast(this)
 
-        snackbar.show()
+        toastMessage.makeText(message, Toast.LENGTH_SHORT)
     }
 
     override fun onDestroy() {

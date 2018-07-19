@@ -10,6 +10,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.tistory.jeongs0222.namdaein.R
 import android.app.Activity
 import android.text.TextUtils
+import android.util.Log
 import com.facebook.AccessToken
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -145,11 +146,7 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
     private fun keyCheck(google_uId: String) {
         disposable = apiClient.keyCheck(google_uId)
                 .subscribeOn(Schedulers.io())
-                .doOnNext {
-
-                }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete { }
                 .doOnError { it.printStackTrace() }
                 .subscribe {
                     if(it.value == 0) {
@@ -158,6 +155,7 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                         view.startActivity(TermsOfUseActivity::class.java, connectModel)
                     } else {
                         insertRealm(google_uId)
+                        view.toastMessage(it.message)
                     }
                 }
     }

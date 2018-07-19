@@ -13,6 +13,8 @@ interface LoginContract {
         fun facebookButton(): com.facebook.login.widget.LoginButton
 
         fun mCallbackManager(): CallbackManager
+
+        fun toastMessage(message: String)
     }
 
     interface Presenter {

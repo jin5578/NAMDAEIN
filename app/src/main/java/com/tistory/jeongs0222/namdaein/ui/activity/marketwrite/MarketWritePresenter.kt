@@ -71,7 +71,7 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
                     }
                     .subscribe()
         } else {
-            view.snackBar("빈 칸은 작성할 수 없습니다.")
+            view.toastMessage("빈 칸은 작성할 수 없습니다.")
         }
 
     }

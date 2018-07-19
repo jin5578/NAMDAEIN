@@ -14,9 +14,10 @@ class CustomToast(val activity: Activity) {
 
         val inflater = activity.getLayoutInflater()
 
-        val layout = inflater.inflate(R.layout.item_toast, activity.findViewById(R.id.toast_linearLayout) as ViewGroup)
+        val layout = inflater.inflate(R.layout.item_toast, activity?.findViewById(R.id.toast_linearLayout) as?
+                ViewGroup)
 
-        val textView = layout.findViewById(R.id.toast_textView) as TextView
+        val textView = layout.findViewById<TextView>(R.id.toast_textView)
         textView.text = text
 
         val toast = Toast(activity)
