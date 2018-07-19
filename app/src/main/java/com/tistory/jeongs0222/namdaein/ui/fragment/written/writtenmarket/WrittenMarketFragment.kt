@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.fragment.written.writtenmarket
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ class WrittenMarketFragment : Fragment(), WrittenMarketContract.View {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.e("123123123123", "123123123123")
         return inflater.inflate(R.layout.activity_written_market_fragment, container, false)
     }
 

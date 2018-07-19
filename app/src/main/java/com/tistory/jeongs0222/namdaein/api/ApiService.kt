@@ -138,4 +138,11 @@ interface ApiService {
                         @Field("date") date: String): Observable<afterMarketDatas>
 
     data class afterMarketDatas(val value: Int, val message: String)    //0: 성공, 1: 실패
+
+    //WrittenBoardItem
+    @FormUrlEncoded
+    @POST("writtenBoard.php")
+    fun bringWrittenBoard(@Field("userkey") userkey: String): Observable<bringWrittenBoards>
+
+    data class bringWrittenBoards(val writtenBoard: MutableList<Model.writtenBoardItem>)
 }

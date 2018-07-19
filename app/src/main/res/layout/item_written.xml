@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/written_market_layout"
+    android:id="@+id/written_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
     android:layout_marginTop="3dp"
+    android:background="@color/colorWhite"
     app:sav_alwaysDrawBackground="true">
 
     <TextView
@@ -35,7 +36,7 @@
         android:fontFamily="@font/goyang"/>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/written_market_constraintLayout"
+        android:id="@+id/written_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
@@ -44,35 +45,62 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:id="@+id/written_market_category"
+            android:id="@+id/written_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorRed"
+            android:textColor="@color/colorWhite"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
             android:textSize="7sp"
+            android:fontFamily="@font/goyang"
+            android:background="@drawable/rectangle3_background"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/written_title"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0"
             tools:text="자유게시판"/>
 
         <TextView
-            android:id="@+id/written_market_date"
+            android:id="@+id/written_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            android:maxLines="1"
+            android:visibility="gone"
+            tools:text="안녕하세요. 처음 가입합니다 ^^"
+            app:layout_constraintStart_toEndOf="@id/written_category"
+            app:layout_constraintTop_toTopOf="@id/written_category"
+            app:layout_constraintBottom_toBottomOf="@id/written_category"
+            tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/written_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textSize="7sp"
-            app:layout_constraintStart_toEndOf="@id/written_market_category"
-            app:layout_constraintTop_toTopOf="parent"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintTop_toTopOf="@id/written_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/written_title"
             tools:text="18.07.17 20:00" />
 
         <TextView
-            android:id="@+id/written_market_title"
+            android:id="@+id/written_content"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:gravity="center_vertical"
             android:textColor="@color/colorBlack"
             android:textSize="8sp"
+            android:fontFamily="@font/goyang"
+            android:maxLines="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/written_market_date"
+            app:layout_constraintTop_toBottomOf="@id/written_date"
             tools:text="아이폰X 256G 판매합니다." />
 
     </android.support.constraint.ConstraintLayout>

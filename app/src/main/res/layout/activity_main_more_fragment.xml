@@ -105,7 +105,6 @@
         app:layout_constraintStart_toEndOf="@id/more_message_textView"
         app:layout_constraintTop_toTopOf="@id/more_message_textView" />
 
-
     <View
         android:layout_width="0dp"
         android:layout_height="1dp"

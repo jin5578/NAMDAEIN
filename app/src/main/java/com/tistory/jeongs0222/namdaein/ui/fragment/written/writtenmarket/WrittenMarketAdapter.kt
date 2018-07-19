@@ -1,6 +1,5 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.written.writtenmarket
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -8,17 +7,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.activity.marketwrite.MarketWriteActivity
-import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -29,14 +25,14 @@ import me.thanel.swipeactionview.SwipeGestureListener
 
 class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<WrittenMarketAdapter.ViewHolder>() {
 
-    var item: MutableList<Model.writtenMarketItem> = ArrayList()
+    private var item: MutableList<Model.writtenMarketItem> = ArrayList()
 
     private var disposable: Disposable? = null
 
     private val apiClient by lazy { ApiClient.create() }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_written_market, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_written, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -48,7 +44,7 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
 
         holder.written_market_category.text = classify_category(items.category)     //일단은 Int값으로 넘어온거
         holder.written_market_date.text = items.date
-        holder.written_market_title.text = items.title
+        holder.written_market_content.text = items.title
 
         holder.written_market_layout.apply {
             setRippleColor(SwipeDirection.Left, Color.GRAY)
@@ -81,25 +77,25 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
 
     private fun classify_category(category: Int): String {
         when(category) {
-            0 -> return "[여성의류]"
+            0 -> return "여성의류"
 
-            1 -> return "[남성의류]"
+            1 -> return "남성의류"
 
-            2 -> return "[패션잡화]"
+            2 -> return "패션잡화"
 
-            3 -> return "[뷰티]"
+            3 -> return "뷰티"
 
-            4 -> return "[도서]"
+            4 -> return "도서"
 
-            5 -> return "[티켓]"
+            5 -> return "티켓"
 
-            6 -> return "[가전제품]"
+            6 -> return "가전제품"
 
-            7 -> return "[생활]"
+            7 -> return "생활"
 
-            8 -> return "[원룸]"
+            8 -> return "원룸"
 
-            9 -> return "[기]"
+            9 -> return "기타"
 
             else -> return null!!
         }
@@ -163,14 +159,14 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
         val written_market_constraintLayout: ConstraintLayout
         val written_market_category: TextView
         val written_market_date: TextView
-        val written_market_title: TextView
+        val written_market_content: TextView
 
         init {
-            written_market_layout = itemView.findViewById(R.id.written_market_layout)
-            written_market_constraintLayout = itemView.findViewById(R.id.written_market_constraintLayout)
-            written_market_category = itemView.findViewById(R.id.written_market_category)
-            written_market_date = itemView.findViewById(R.id.written_market_date)
-            written_market_title = itemView.findViewById(R.id.written_market_title)
+            written_market_layout = itemView.findViewById(R.id.written_layout)
+            written_market_constraintLayout = itemView.findViewById(R.id.written_constraintLayout)
+            written_market_category = itemView.findViewById(R.id.written_category)
+            written_market_date = itemView.findViewById(R.id.written_date)
+            written_market_content = itemView.findViewById(R.id.written_content)
         }
     }
 }

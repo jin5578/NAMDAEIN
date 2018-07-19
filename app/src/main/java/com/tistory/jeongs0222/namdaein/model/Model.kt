@@ -38,4 +38,10 @@ object Model {
                                  val category: Int,
                                  val date: String,
                                  val title: String)
+
+    data class writtenBoardItem(val order: Int,
+                                val category: Int,
+                                val title: String,
+                                val date: String,
+                                val content: String)
 }
