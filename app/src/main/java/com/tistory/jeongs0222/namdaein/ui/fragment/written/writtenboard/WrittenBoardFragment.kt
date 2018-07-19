@@ -40,7 +40,7 @@ class WrittenBoardFragment : Fragment(), WrittenBoardContract.View {
     }
 
     override fun emptyTextVisible() {
-        written_market_textView.visibility = View.VISIBLE
+        written_board_textView.visibility = View.VISIBLE
     }
 
     override fun onResume() {
