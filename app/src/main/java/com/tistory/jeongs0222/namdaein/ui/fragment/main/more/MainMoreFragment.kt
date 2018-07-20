@@ -68,4 +68,10 @@ class MainMoreFragment : Fragment() {
         startActivity(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        more_nickname_textView.text = dbHelper.getNickname()
+    }
+
 }

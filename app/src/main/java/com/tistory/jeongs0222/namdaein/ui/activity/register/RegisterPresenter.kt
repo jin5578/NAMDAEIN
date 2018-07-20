@@ -39,7 +39,6 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
             disposable = apiClient.nicknameCheck(view.register_nickname().text.toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete { }
                     .doOnError {
                         it.printStackTrace()
                     }

@@ -176,4 +176,12 @@ interface ApiService {
 
     data class inquires(val value: Int, val message: String)
 
+    //Nickname Update
+    @FormUrlEncoded
+    @POST("editInformation.php")
+    fun editNickname(@Field("userkey") userkey: String,
+                     @Field("usernickname") usernickname: String): Observable<editNicknames>
+
+    data class editNicknames(val value: Int, val message: String)
+
 }
