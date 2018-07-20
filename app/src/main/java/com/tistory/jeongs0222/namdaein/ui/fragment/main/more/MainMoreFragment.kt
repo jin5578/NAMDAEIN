@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.chatlist.ChatListActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.editnickname.EditNicknameActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.inquire.InquireActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.written.WrittenActivity
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
@@ -40,6 +41,10 @@ class MainMoreFragment : Fragment() {
     }
 
     private fun onClickEvent() {
+        more_edit_textView.setOnClickListener {
+            startActivity(EditNicknameActivity::class.java)
+        }
+
         more_written_textView.setOnClickListener {
             startActivity(WrittenActivity::class.java)
         }

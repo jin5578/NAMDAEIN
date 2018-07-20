@@ -31,6 +31,15 @@
         app:layout_constraintTop_toBottomOf="@+id/more_imageView"
         tools:text="관리자" />
 
+    <ImageView
+        android:id="@+id/more_edit_textView"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_mode_edit_gray_24dp"
+        app:layout_constraintStart_toEndOf="@id/more_nickname_textView"
+        app:layout_constraintTop_toTopOf="@id/more_nickname_textView"
+        app:layout_constraintBottom_toBottomOf="@id/more_nickname_textView"/>
+
     <TextView
         android:id="@+id/more_connect_textView"
         android:layout_width="wrap_content"
