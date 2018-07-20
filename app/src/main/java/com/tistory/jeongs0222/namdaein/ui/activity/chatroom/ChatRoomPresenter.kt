@@ -6,15 +6,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.tistory.jeongs0222.namdaein.model.firebase.Chat
 import com.tistory.jeongs0222.namdaein.model.DBHelper
+import java.util.HashMap
 
 
-class ChatRoomPresenter: ChatRoomContract.Presenter, TextWatcher {
+class ChatRoomPresenter : ChatRoomContract.Presenter, TextWatcher {
 
     private lateinit var view: ChatRoomContract.View
     private lateinit var context: Context
@@ -48,76 +50,80 @@ class ChatRoomPresenter: ChatRoomContract.Presenter, TextWatcher {
 
         this.writtenUserGoogle_uId = chatInfo.get(0)
 
-
         FirebaseDatabase.getInstance()
-                .getReference()
+                .reference
                 .child("chatrooms")
                 .orderByChild("users/" + google_uId)
+                .equalTo(true)
                 .addListenerForSingleValueEvent(object : ValueEventListener {
+
                     override fun onDataChange(p0: DataSnapshot?) {
-                        if(p0!!.hasChildren().not()) {
-
+                        if(p0!!.hasChildren()) {
+                            bringChatRoomId(p0)
+                        } else {
+                            newChat()
                         }
-
-                        for(snapshot: DataSnapshot in p0.children) {
-                            val findChat: Chat = snapshot.getValue(Chat::class.java)!!
-
-                            if(findChat.users.containsKey(writtenUserGoogle_uId)) {
-                                chatRoomId = snapshot.key
-
-                                setRecyclerView()
-
-                                return
-                            }
-                        }
-
-                        val newChat = Chat()
-                        (newChat.users as HashMap<String, Boolean>).put(google_uId, false)
-                        (newChat.users as HashMap<String, Boolean>).put(writtenUserGoogle_uId, false)
-
-                        FirebaseDatabase.getInstance()
-                                .getReference()
-                                .child("chatrooms")
-                                .push()
-                                .setValue(newChat)
-                                .addOnCompleteListener { task ->
-                                    if (task.isComplete) {
-                                        FirebaseDatabase.getInstance()
-                                                .reference
-                                                .child("chatrooms")
-                                                .orderByChild("users/" + google_uId)
-                                                .equalTo(true)
-                                                .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                                                    override fun onDataChange(p0: DataSnapshot?) {
-                                                        for (snapShot: DataSnapshot in p0!!.children) {
-                                                            val newFindChat: Chat = snapShot.getValue(Chat::class.java)!!
-
-                                                            if (newFindChat.users.containsKey(writtenUserGoogle_uId)) {
-                                                                chatRoomId = snapShot.key
-
-                                                                setRecyclerView()
-                                                            }
-                                                        }
-                                                    }
-
-                                                    override fun onCancelled(p0: DatabaseError?) {
-
-                                                    }
-                                                })
-                                    }
-                                }
-
                     }
-
 
                     override fun onCancelled(p0: DatabaseError?) {
 
                     }
+
                 })
+
+    }
+
+    private fun newChat() {
+        val newChat = Chat()
+
+        (newChat.users as HashMap<String, Boolean>).put(google_uId, false)
+        (newChat.users as HashMap<String, Boolean>).put(writtenUserGoogle_uId, false)
+
+        FirebaseDatabase.getInstance()
+                .getReference()
+                .child("chatrooms")
+                .push()
+                .setValue(newChat)
+                .addOnCompleteListener { task ->
+                    if(task.isComplete) {
+                        FirebaseDatabase.getInstance()
+                                .reference
+                                .child("chatrooms")
+                                .orderByChild("users/" + google_uId)
+                                .equalTo(true)
+                                .addListenerForSingleValueEvent(object: ValueEventListener {
+
+                                    override fun onDataChange(p0: DataSnapshot?) {
+                                        bringChatRoomId(p0!!)
+                                    }
+
+                                    override fun onCancelled(p0: DatabaseError?) {
+
+                                    }
+
+
+                                })
+                    }
+                }
+    }
+
+    private fun bringChatRoomId(p0: DataSnapshot) {
+        for(snapshot: DataSnapshot in p0.children) {
+            val findChat = snapshot.getValue(Chat::class.java)
+
+            if(findChat!!.users.containsKey(writtenUserGoogle_uId)) {
+                chatRoomId = snapshot.key
+
+                setRecyclerView()
+
+                return
+            }
+        }
     }
 
     private fun setRecyclerView() {
+        Log.e("chatRoomId", chatRoomId)
+
         mAdapter = ChatRoomAdapter(context, chatRoomId, chatInfo)
 
         view.recyclerView().apply {
@@ -144,7 +150,7 @@ class ChatRoomPresenter: ChatRoomContract.Presenter, TextWatcher {
                 .push()
                 .setValue(comment)
                 .addOnCompleteListener({ task ->
-                    if(task.isSuccessful) {
+                    if (task.isSuccessful) {
                         view.sendEditText().text = null
 
                         view.sendClickable(0)
@@ -153,7 +159,7 @@ class ChatRoomPresenter: ChatRoomContract.Presenter, TextWatcher {
     }
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-        if(p0.toString().length == 0) {
+        if (p0.toString().length == 0) {
             view.sendVisible(1)
         } else {
             view.sendVisible(0)
@@ -167,7 +173,6 @@ class ChatRoomPresenter: ChatRoomContract.Presenter, TextWatcher {
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
     }
-
 
 
 }

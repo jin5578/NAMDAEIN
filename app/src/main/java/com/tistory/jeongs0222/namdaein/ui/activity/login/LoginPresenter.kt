@@ -155,7 +155,6 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                         view.startActivity(TermsOfUseActivity::class.java, connectModel)
                     } else {
                         insertRealm(google_uId)
-                        view.toastMessage(it.message)
                     }
                 }
     }
@@ -169,7 +168,6 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
                     }
                 }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {  }
                 .doOnError { it.printStackTrace() }
                 .subscribe {
                     view.startActivity(MainActivity::class.java, "")

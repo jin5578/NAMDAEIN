@@ -151,7 +151,8 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
     private fun onClickEvent() {
         detail_message_constraint.setOnClickListener {
-            val intent = Intent(this, ChatRoomActivity::class.java)
+            toastMessage("준비중입니다.")
+            /*val intent = Intent(this, ChatRoomActivity::class.java)
 
             val intentExtra = ArrayList<String>()
 
@@ -160,7 +161,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
             intent.putStringArrayListExtra("intentExtra", intentExtra)
 
-            startActivity(intent)
+            startActivity(intent)*/
         }
 
         detail_send_textView.setOnClickListener {

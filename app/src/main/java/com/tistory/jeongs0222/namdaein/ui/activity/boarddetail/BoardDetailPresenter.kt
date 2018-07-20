@@ -106,7 +106,6 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
         disposable = apiClient.writingFavorite(order)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {  }
                 .doOnError {
                     it.printStackTrace()
                 }

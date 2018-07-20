@@ -44,6 +44,8 @@ class ChatRoomAdapter(val context: Context, val chatRoomId: String, val chatInfo
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.setIsRecyclable(false)
+
         if(item.get(position).userId.equals(google_uId)) {
             holder.itemView.chatting_opponent_linearLayout.visibility = View.GONE
             holder.itemView.chatting_my_linearLayout.visibility = View.VISIBLE
