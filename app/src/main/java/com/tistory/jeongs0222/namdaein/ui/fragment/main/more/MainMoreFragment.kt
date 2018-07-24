@@ -13,6 +13,8 @@ import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.chatlist.ChatListActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.editnickname.EditNicknameActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.inquire.InquireActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.notice.NoticeActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.termsofuse.TermsOfUseActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.written.WrittenActivity
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import kotlinx.android.synthetic.main.activity_main_more_fragment.*
@@ -59,6 +61,17 @@ class MainMoreFragment : Fragment() {
 
         more_inquire_textView.setOnClickListener {
             startActivity(InquireActivity::class.java)
+        }
+
+        more_notice_textView.setOnClickListener {
+            startActivity(NoticeActivity::class.java)
+        }
+
+        more_termofuse_textView.setOnClickListener {
+            val intent = Intent(activity!!, TermsOfUseActivity::class.java)
+            intent.putExtra("connectModel", "null")
+
+            startActivity(intent)
         }
     }
 

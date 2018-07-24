@@ -115,11 +115,60 @@
         app:layout_constraintTop_toTopOf="@id/more_message_textView" />
 
     <View
+        android:id="@+id/null2"
         android:layout_width="0dp"
-        android:layout_height="1dp"
+        android:layout_height="10dp"
         android:background="@color/colorLightLightGray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/more_written_textView" />
+
+    <TextView
+        android:id="@+id/more_notice_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="공지사항"
+        android:textSize="12sp"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/goyang"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/null3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/more_notice_textView" />
+
+    <TextView
+        android:id="@+id/more_termofuse_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="이용약관"
+        android:textSize="12sp"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/goyang"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/null3"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/null4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/more_termofuse_textView"/>
 
 </android.support.constraint.ConstraintLayout>
