@@ -35,4 +35,10 @@ class WrittenActivity : AppCompatActivity(), WrittenContract.View {
     override fun viewPager(): NonSwipeViewPager {
         return written_viewPager
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        finish()
+    }
 }

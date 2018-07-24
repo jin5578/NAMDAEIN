@@ -60,5 +60,5 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
 
     }
 
-
+    override fun disposableClear() = disposable!!.dispose()
 }

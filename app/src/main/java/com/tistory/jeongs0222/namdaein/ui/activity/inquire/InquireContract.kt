@@ -23,5 +23,7 @@ interface InquireContract {
         fun setUpEditFunc()
 
         fun setUpConfirmFunc()
+
+        fun disposableClear()
     }
 }

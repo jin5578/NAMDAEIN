@@ -53,6 +53,12 @@ class InquireActivity : AppCompatActivity(), InquireContract.View {
         toastMessage.makeText(message, Toast.LENGTH_SHORT)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mPresenter.disposableClear()
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
 

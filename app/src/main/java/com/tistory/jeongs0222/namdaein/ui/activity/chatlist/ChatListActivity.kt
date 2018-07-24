@@ -28,4 +28,10 @@ class ChatListActivity : AppCompatActivity(), ChatListContract.View {
     override fun recyclerView(): RecyclerView {
         return chatList_recyclerView
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        finish()
+    }
 }

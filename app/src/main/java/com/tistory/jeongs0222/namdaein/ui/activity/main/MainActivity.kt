@@ -91,5 +91,10 @@ class MainActivity : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewP
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        finish()
+    }
 
 }
