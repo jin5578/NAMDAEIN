@@ -4,6 +4,8 @@ import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.ViewPager
+import com.tistory.jeongs0222.namdaein.ui.activity.boardwrite.BoardWriteActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.marketwrite.MarketWriteActivity
 
 
 class MainPresenter: MainContract.Presenter, TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
@@ -60,11 +62,17 @@ class MainPresenter: MainContract.Presenter, TabLayout.OnTabSelectedListener, Vi
             1 -> {
                 view.toolbarTitle("장터")
                 view.floatingButtonVisible(0)
+                view.floatingButton().setOnClickListener {
+                    view.startActivity(MarketWriteActivity::class.java)
+                }
             }
 
             2 -> {
                 view.toolbarTitle("게시판")
                 view.floatingButtonVisible(0)
+                view.floatingButton().setOnClickListener {
+                    view.startActivity(BoardWriteActivity::class.java)
+                }
             }
 
             3 -> {

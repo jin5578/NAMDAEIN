@@ -1,7 +1,9 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.main
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.util.Log
@@ -48,12 +50,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         main_toolbar_title.text = title
     }
 
+    override fun floatingButton(): FloatingActionButton {
+        return main_floating
+    }
+
     override fun floatingButtonVisible(value: Int) {
         when(value) {
             0 -> main_floating.visibility = View.VISIBLE
 
             1 -> main_floating.visibility = View.GONE
         }
+    }
+
+    override fun startActivity(activityClass: Class<*>) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

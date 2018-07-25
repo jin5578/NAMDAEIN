@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
@@ -58,6 +59,10 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
     }
 
     fun onClickEvent() {
+        write_imageView.setOnClickListener {
+            mPresenter.setUpMultiShow(supportFragmentManager)
+        }
+
         write_confirm_imageView.setOnClickListener {
             confirmClickable(1)
 
@@ -72,6 +77,10 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
 
     override fun spinner(): MaterialBetterSpinner {
         return write_spinner
+    }
+
+    override fun selectedLinear(): LinearLayout {
+        return write_selectedLinear
     }
 
     override fun confirmClickable(value: Int) {

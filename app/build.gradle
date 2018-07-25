@@ -71,6 +71,9 @@ dependencies {
     //Spinner
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
 
+    //TedBottomPicker
+    implementation 'gun0912.ted:tedbottompicker:1.1.0'
+    implementation 'gun0912.ted:tedpermission:1.0.3'
 
 }
 

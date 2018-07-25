@@ -43,6 +43,7 @@ class PictureViewPagerAdapter(val context: Context, val images: MutableList<Stri
                 )
                 .into(imageView)
 
+
         //이 부분에 이미지 전체화면으로 보여주는 부분 넣어줘야한다.
         imageView.setOnClickListener {
             val intent = Intent(it.context, ImageViewPager::class.java)
