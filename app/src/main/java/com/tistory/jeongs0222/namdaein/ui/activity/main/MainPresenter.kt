@@ -52,13 +52,25 @@ class MainPresenter: MainContract.Presenter, TabLayout.OnTabSelectedListener, Vi
     //ViewPager ChangeListener
     override fun onPageSelected(position: Int) {
         when(position) {
-            0 -> view.toolbarTitle("홈")
+            0 -> {
+                view.toolbarTitle("홈")
+                view.floatingButtonVisible(1)
+            }
 
-            1 -> view.toolbarTitle("장터")
+            1 -> {
+                view.toolbarTitle("장터")
+                view.floatingButtonVisible(0)
+            }
 
-            2 -> view.toolbarTitle("게시판")
+            2 -> {
+                view.toolbarTitle("게시판")
+                view.floatingButtonVisible(0)
+            }
 
-            3 -> view.toolbarTitle("더보기")
+            3 -> {
+                view.toolbarTitle("더보기")
+                view.floatingButtonVisible(1)
+            }
         }
     }
 

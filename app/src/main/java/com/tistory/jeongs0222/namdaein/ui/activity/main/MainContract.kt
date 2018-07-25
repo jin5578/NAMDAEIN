@@ -14,6 +14,8 @@ interface MainContract {
         fun viewPager(): ViewPager
 
         fun toolbarTitle(title: String)
+
+        fun floatingButtonVisible(value: Int)
     }
 
     interface Presenter {

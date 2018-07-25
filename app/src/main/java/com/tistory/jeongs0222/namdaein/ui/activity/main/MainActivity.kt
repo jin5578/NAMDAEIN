@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.util.Log
+import android.view.View
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -45,6 +46,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun toolbarTitle(title: String) {
         main_toolbar_title.text = title
+    }
+
+    override fun floatingButtonVisible(value: Int) {
+        when(value) {
+            0 -> main_floating.visibility = View.VISIBLE
+
+            1 -> main_floating.visibility = View.GONE
+        }
     }
 
     override fun onBackPressed() {
