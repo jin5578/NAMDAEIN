@@ -54,8 +54,8 @@ class MarketEtcFragment : Fragment(), MarketEtcContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

@@ -49,8 +49,9 @@ class WrittenBoardFragment : Fragment(), WrittenBoardContract.View {
     }
 
     override fun onDestroyView() {
+        mPresenter.disposableClear()
+
         super.onDestroyView()
 
-        mPresenter.disposableClear()
     }
 }

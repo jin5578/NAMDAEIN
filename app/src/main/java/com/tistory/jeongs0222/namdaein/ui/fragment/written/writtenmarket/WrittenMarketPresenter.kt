@@ -7,6 +7,7 @@ import android.support.v7.widget.OrientationHelper
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -16,7 +17,7 @@ class WrittenMarketPresenter : WrittenMarketContract.Presenter {
     private lateinit var view: WrittenMarketContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var mAdapter: WrittenMarketAdapter
 
@@ -47,20 +48,22 @@ class WrittenMarketPresenter : WrittenMarketContract.Presenter {
 
     override fun setUpData() {
         //disposable = apiClient.bringWrittenBoard("jHtFtSfO2lMG3NLADGojZ1oG9Da2")
-        disposable = apiClient.bringWrittenMarket(dbHelper.getGoogle_uId()!!)
-                .subscribeOn(Schedulers.io())
-                .doOnNext { if (it.writtenMarket.isNotEmpty()) {
-                    mAdapter.clearAllItems()
-                    mAdapter.addAllItems(it.writtenMarket)
-                } }
-                .doOnError { it.printStackTrace() }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    if (mAdapter.itemCount == 0) view.emptyTextVisible()
-                    else mAdapter.notifyChanged()
-                }
-                .subscribe()
+        compositeDisposable
+                .add(apiClient.bringWrittenMarket(dbHelper.getGoogle_uId()!!)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext { if (it.writtenMarket.isNotEmpty()) {
+                            mAdapter.clearAllItems()
+                            mAdapter.addAllItems(it.writtenMarket)
+                        } }
+                        .doOnError { it.printStackTrace() }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
+                            if (mAdapter.itemCount == 0) view.emptyTextVisible()
+                            else mAdapter.notifyChanged()
+                        }
+                        .subscribe()
+                )
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

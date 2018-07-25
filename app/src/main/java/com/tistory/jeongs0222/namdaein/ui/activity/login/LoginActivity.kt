@@ -103,9 +103,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     }
 
     override fun onStop() {
-        super.onStop()
-
         mPresenter.disposableClear()
+
+        super.onStop()
     }
 
     override fun onBackPressed() {

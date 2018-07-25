@@ -11,6 +11,7 @@ import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.activity.CommentAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -21,7 +22,7 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
     private lateinit var view: MarketDetailContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var order: Int = 0
 
@@ -45,23 +46,25 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
 
         view.progressBar(0)
 
-        disposable = apiClient.bringMarketDetail(order)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {  }
-                .doOnError {
-                    it.printStackTrace()
-                    view.progressBar(1)
-                }
-                .subscribe ({
-                    if(it.image0.isEmpty()) {
-                        view.imageViewPagerVisible(1)
-                    } else {
-                        view.imageViewPagerVisible(0)
+        compositeDisposable
+                .add(apiClient.bringMarketDetail(order)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete {  }
+                    .doOnError {
+                        it.printStackTrace()
+                        view.progressBar(1)
                     }
+                    .subscribe ({
+                        if(it.image0.isEmpty()) {
+                            view.imageViewPagerVisible(1)
+                        } else {
+                            view.imageViewPagerVisible(0)
+                        }
 
-                    callback("complete", it)
-                })
+                        callback("complete", it)
+                    })
+                )
 
     }
 
@@ -78,21 +81,23 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
     }
 
     override fun setUpCommentData() {
-        disposable = apiClient.bringMarketComment(order)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    if(it.comment.isNotEmpty()) {
-                        mAdapter.addAllItems(it.comment)
-                    }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    mAdapter.notifyChanged()
-                }
-                .doOnError {
-                    it.printStackTrace()
-                }
-                .subscribe()
+        compositeDisposable
+                .add(apiClient.bringMarketComment(order)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.comment.isNotEmpty()) {
+                                mAdapter.addAllItems(it.comment)
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
+                            mAdapter.notifyChanged()
+                        }
+                        .doOnError {
+                            it.printStackTrace()
+                        }
+                        .subscribe()
+                )
     }
 
     override fun setUpCommentFunc() {
@@ -103,27 +108,29 @@ class MarketDetailPresenter: MarketDetailContract.Presenter, TextWatcher {
         bringDate()
 
         if(view.sendEditText().text.isNotEmpty()) {
-            disposable = apiClient.writingMarketComment(order, dbHelper.getGoogle_uId()!!, view.sendEditText().text.toString(), currentDate)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-                        setUpCommentData()
-                    }
-                    .doOnError {
-                        it.printStackTrace()
-                    }
-                    .subscribe {
-                        if(it.value == 1) {
-                            view.toastMessage(it.message)
-                        }
+            compositeDisposable
+                    .add(apiClient.writingMarketComment(order, dbHelper.getGoogle_uId()!!, view.sendEditText().text.toString(), currentDate)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete {
+                                setUpCommentData()
+                            }
+                            .doOnError {
+                                it.printStackTrace()
+                            }
+                            .subscribe {
+                                if(it.value == 1) {
+                                    view.toastMessage(it.message)
+                                }
 
-                        view.sendEditText().text = null
-                        view.sendClickable(0)
-                    }
+                                view.sendEditText().text = null
+                                view.sendClickable(0)
+                            }
+                    )
         }
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         if(p0.toString().length == 0) {

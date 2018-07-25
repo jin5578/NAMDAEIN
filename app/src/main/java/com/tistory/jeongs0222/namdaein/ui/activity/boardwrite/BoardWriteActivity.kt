@@ -111,9 +111,9 @@ class BoardWriteActivity : AppCompatActivity(), BoardWriteContract.View {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         mPresenter.disposableClear()
+
+        super.onDestroy()
     }
 
     override fun onBackPressed() {

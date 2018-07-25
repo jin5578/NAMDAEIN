@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -19,7 +20,7 @@ class BoardWritePresenter: BoardWriteContract.Presenter {
 
     private val spinnerList = arrayOf("자유", "분실물", "홍보", "동아리")
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var currentDate: String = ""
 
@@ -38,16 +39,18 @@ class BoardWritePresenter: BoardWriteContract.Presenter {
     }
 
     override fun setUpBringBoard(order: Int, callback: (String, Model.boardItem) -> Unit) {
-        disposable = apiClient.beforeBoardData(order)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError {
-                    it.printStackTrace()
-                }
-                .subscribe {
-                    callback("complete", it)
-                    view.spinner().setText(spinnerList.get(it.category))
-                }
+        compositeDisposable
+                .add(apiClient.beforeBoardData(order)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError {
+                            it.printStackTrace()
+                        }
+                        .subscribe {
+                            callback("complete", it)
+                            view.spinner().setText(spinnerList.get(it.category))
+                        }
+                )
     }
 
     override fun setUpEditConfirmFunc(order: Int) {
@@ -56,18 +59,20 @@ class BoardWritePresenter: BoardWriteContract.Presenter {
         bringDate()
 
         if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty()) {
-            disposable = apiClient.afterBoardData(order, view.title().text.toString(), view.content().text.toString(), currentDate)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-                        view.viewFinish()
-                    }
-                    .doOnError {
-                        it.printStackTrace()
+            compositeDisposable.add(
+                    apiClient.afterBoardData(order, view.title().text.toString(), view.content().text.toString(), currentDate)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete {
+                                view.viewFinish()
+                            }
+                            .doOnError {
+                                it.printStackTrace()
 
-                        view.progressBar(1)
-                    }
-                    .subscribe()
+                                view.progressBar(1)
+                            }
+                            .subscribe()
+            )
         } else {
             view.toastMessage("빈 칸은 작성할 수 없습니다.")
         }
@@ -87,5 +92,5 @@ class BoardWritePresenter: BoardWriteContract.Presenter {
         currentDate = sdf.format(date)
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

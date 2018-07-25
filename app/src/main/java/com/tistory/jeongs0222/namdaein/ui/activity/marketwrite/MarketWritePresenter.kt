@@ -5,6 +5,7 @@ import android.widget.ArrayAdapter
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.text.SimpleDateFormat
@@ -18,7 +19,7 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
 
     private val spinnerList = arrayOf("여성의류", "남성의류", "패션잡화", "뷰티", "도서", "티켓", "가전제품", "생활", "원룸", "기타")
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var currentDate: String = ""
 
@@ -37,16 +38,18 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
     }
 
     override fun setUpBringMarket(order: Int, callback: (String, Model.marketItem) -> Unit) {
-        disposable = apiClient.beforeMarketData(order)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError {
-                    it.printStackTrace()
-                }
-                .subscribe {
-                    callback("complete", it)
-                    view.spinner().setText(spinnerList.get(it.category))
-                }
+        compositeDisposable
+                .add(apiClient.beforeMarketData(order)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError {
+                            it.printStackTrace()
+                        }
+                        .subscribe {
+                            callback("complete", it)
+                            view.spinner().setText(spinnerList.get(it.category))
+                        }
+                )
     }
 
     override fun setUpEditConfirmFunc(order: Int) {
@@ -55,18 +58,20 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
         bringDate()
 
         if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty() && view.price().text.isNotEmpty()) {
-            disposable = apiClient.afterMarketData(order, view.title().text.toString(), view.content().text.toString(), view.price().text.toString(), currentDate)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-                        view.viewFinish()
-                    }
-                    .doOnError {
-                        it.printStackTrace()
+            compositeDisposable
+                    .add(apiClient.afterMarketData(order, view.title().text.toString(), view.content().text.toString(), view.price().text.toString(), currentDate)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete {
+                                view.viewFinish()
+                            }
+                            .doOnError {
+                                it.printStackTrace()
 
-                        view.progressBar(1)
-                    }
-                    .subscribe()
+                                view.progressBar(1)
+                            }
+                            .subscribe()
+                    )
         } else {
             view.toastMessage("빈 칸은 작성할 수 없습니다.")
         }
@@ -87,5 +92,5 @@ class MarketWritePresenter: MarketWriteContract.Presenter {
         currentDate = sdf.format(date)
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

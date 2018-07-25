@@ -210,9 +210,9 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         mPresenter.disposableClear()
+
+        super.onDestroy()
     }
 
     override fun onBackPressed() {

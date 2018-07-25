@@ -4,6 +4,7 @@ import com.tistory.jeongs0222.namdaein.model.Model
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 
@@ -183,5 +184,17 @@ interface ApiService {
                      @Field("usernickname") usernickname: String): Observable<editNicknames>
 
     data class editNicknames(val value: Int, val message: String)
+
+    //Best Market
+    @GET("bestMarket.php")
+    fun bestMarket(): Observable<bestMarkets>
+
+    data class bestMarkets(val bestmarket: MutableList<Model.marketItem>)
+
+    //Best Board
+    @GET("bestBoard.php")
+    fun bestBoard(): Observable<bestBoards>
+
+    data class bestBoards(val bestboard: MutableList<Model.boardItem>)
 
 }

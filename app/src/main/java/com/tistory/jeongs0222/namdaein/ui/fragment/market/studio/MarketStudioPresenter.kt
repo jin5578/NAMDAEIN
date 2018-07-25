@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.fragment.market.MarketItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -17,7 +18,7 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
     private lateinit var view: MarketStudioContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var pageNumber: Int = 0
 
@@ -50,33 +51,35 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
         view.progressBar(0)
         isLoading = true
 
-        disposable = apiClient.bringMarket(8, pageNumber)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    if(it.market.isNotEmpty()) {
-                        mAdapter.addAllItems(it.market)
-                        pageNumber += it.market.size
-                    }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    if(isFirstLoad) {
-                        isFirstLoad = true
-                    }
-                    mAdapter.notifyChanged()
-                    isLoading = false
-                }
-                .doOnError {
-                    it.printStackTrace()
-                    isLoading = false
-                }
-                .subscribe {
-                    view.progressBar(1)
+        compositeDisposable
+                .add(apiClient.bringMarket(8, pageNumber)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.market.isNotEmpty()) {
+                                mAdapter.addAllItems(it.market)
+                                pageNumber += it.market.size
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
+                            if(isFirstLoad) {
+                                isFirstLoad = true
+                            }
+                            mAdapter.notifyChanged()
+                            isLoading = false
+                        }
+                        .doOnError {
+                            it.printStackTrace()
+                            isLoading = false
+                        }
+                        .subscribe {
+                            view.progressBar(1)
 
-                    if(mAdapter.itemCount == 0) {
-                        view.emptyTextVisible()
-                    }
-                }
+                            if(mAdapter.itemCount == 0) {
+                                view.emptyTextVisible()
+                            }
+                        }
+                )
     }
 
     override fun loadMore() {
@@ -92,5 +95,5 @@ class MarketStudioPresenter: MarketStudioContract.Presenter {
         })
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

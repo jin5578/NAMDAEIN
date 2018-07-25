@@ -226,9 +226,9 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         mPresenter.disposableClear()
+
+        super.onDestroy()
     }
 
 

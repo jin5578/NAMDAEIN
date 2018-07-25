@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -15,7 +16,7 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
     private lateinit var view: InquireContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var dbHelper: DBHelper
 
@@ -35,14 +36,17 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
 
     override fun setUpConfirmFunc() {
         if(view.content().length() != 0) {
-            disposable = apiClient.inquire(dbHelper.getGoogle_uId()!!, view.content().text.toString())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-                        view.viewFinish()
-                    }
-                    .doOnError { it.printStackTrace() }
-                    .subscribe()
+            compositeDisposable
+                    .add(apiClient.inquire(dbHelper.getGoogle_uId()!!, view.content().text.toString())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete {
+                                view.viewFinish()
+                            }
+                            .doOnError { it.printStackTrace()}
+                            .subscribe()
+            )
+
         } else {
             view.toastMessage("빈 칸을 작성할 수 없습니다.")
         }
@@ -60,5 +64,5 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
 
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

@@ -5,10 +5,11 @@
     android:id="@+id/write_entire_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="1dp"
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorWhite">
+    android:background="@drawable/rectangle_background">
 
     <ImageView
         android:id="@+id/write_imageView"

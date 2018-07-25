@@ -49,8 +49,8 @@ class WrittenMarketFragment : Fragment(), WrittenMarketContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

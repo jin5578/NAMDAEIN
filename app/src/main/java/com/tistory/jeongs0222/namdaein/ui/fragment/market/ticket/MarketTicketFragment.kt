@@ -54,8 +54,8 @@ class MarketTicketFragment : Fragment(), MarketTicketContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

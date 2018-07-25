@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -17,7 +18,7 @@ class BoardPromotePresenter: BoardPromoteContract.Presenter {
     private lateinit var view: BoardPromoteContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var pageNumber: Int = 0
 
@@ -50,33 +51,35 @@ class BoardPromotePresenter: BoardPromoteContract.Presenter {
         view.progressBar(0)
         isLoading = true
 
-        disposable = apiClient.bringBoard(2, pageNumber)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    if(it.board.isNotEmpty()) {
-                        mAdapter.addAllItems(it.board)
-                        pageNumber += it.board.size
-                    }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    if(isFirstLoad) {
-                        isFirstLoad = false
-                    }
-                    mAdapter.notifyChanged()
-                    isLoading = false
-                }
-                .doOnError {
-                    it.printStackTrace()
-                    isLoading = false
-                }
-                .subscribe {
-                    view.progressBar(1)
+        compositeDisposable
+                .add(apiClient.bringBoard(2, pageNumber)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.board.isNotEmpty()) {
+                                mAdapter.addAllItems(it.board)
+                                pageNumber += it.board.size
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
+                            if(isFirstLoad) {
+                                isFirstLoad = false
+                            }
+                            mAdapter.notifyChanged()
+                            isLoading = false
+                        }
+                        .doOnError {
+                            it.printStackTrace()
+                            isLoading = false
+                        }
+                        .subscribe {
+                            view.progressBar(1)
 
-                    if(mAdapter.itemCount == 0) {
-                        view.emptyTextVisible()
-                    }
-                }
+                            if(mAdapter.itemCount == 0) {
+                                view.emptyTextVisible()
+                            }
+                        }
+                )
     }
 
     override fun loadMore() {
@@ -92,5 +95,5 @@ class BoardPromotePresenter: BoardPromoteContract.Presenter {
         })
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

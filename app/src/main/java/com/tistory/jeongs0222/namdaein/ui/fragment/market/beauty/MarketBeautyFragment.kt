@@ -53,8 +53,8 @@ class MarketBeautyFragment : Fragment(), MarketBeautyContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

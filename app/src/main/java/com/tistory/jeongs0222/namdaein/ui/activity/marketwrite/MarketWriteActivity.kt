@@ -113,9 +113,9 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
-
         mPresenter.disposableClear()
+
+        super.onDestroy()
     }
 
     override fun onBackPressed() {

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.fragment.market.MarketItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -17,7 +18,7 @@ class MarketAppliancePresenter: MarketApplianceContract.Presenter {
     private lateinit var view: MarketApplianceContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private var pageNumber: Int = 0
 
@@ -51,33 +52,35 @@ class MarketAppliancePresenter: MarketApplianceContract.Presenter {
         view.progressBar(0)
         isLoading = true
 
-        disposable = apiClient.bringMarket(6, pageNumber)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    if(it.market.isNotEmpty()) {
-                        mAdapter.addAllItems(it.market)
-                        pageNumber += it.market.size
-                    }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    if (isFirstLoad) {
-                        isFirstLoad = false
-                    }
-                    mAdapter.notifyChanged()
-                    isLoading = false
-                }
-                .doOnError {
-                    it.printStackTrace()
-                    isLoading = false
-                }
-                .subscribe {
-                    view.progressBar(1)
+        compositeDisposable
+                .add(apiClient.bringMarket(6, pageNumber)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.market.isNotEmpty()) {
+                                mAdapter.addAllItems(it.market)
+                                pageNumber += it.market.size
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnComplete {
+                            if (isFirstLoad) {
+                                isFirstLoad = false
+                            }
+                            mAdapter.notifyChanged()
+                            isLoading = false
+                        }
+                        .doOnError {
+                            it.printStackTrace()
+                            isLoading = false
+                        }
+                        .subscribe {
+                            view.progressBar(1)
 
-                    if(mAdapter.itemCount == 0) {
-                        view.emptyTextVisible()
-                    }
-                }
+                            if(mAdapter.itemCount == 0) {
+                                view.emptyTextVisible()
+                            }
+                        }
+                )
     }
 
     override fun loadMore() {
@@ -93,5 +96,5 @@ class MarketAppliancePresenter: MarketApplianceContract.Presenter {
             }
         })    }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

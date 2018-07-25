@@ -10,6 +10,7 @@ import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -19,7 +20,7 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
     private lateinit var view: RegisterContract.View
     private lateinit var context: Context
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var dbHelper: DBHelper
 
@@ -36,27 +37,29 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
 
     override fun setUpValidate() {
         if(view.register_nickname().text.isNotEmpty()) {
-            disposable = apiClient.nicknameCheck(view.register_nickname().text.toString())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnError {
-                        it.printStackTrace()
-                    }
-                    .subscribe {
-                        if(it.value == 0) {
-                            view.toastMessage(it.message)
+            compositeDisposable
+                    .add(apiClient.nicknameCheck(view.register_nickname().text.toString())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnError {
+                                it.printStackTrace()
+                            }
+                            .subscribe {
+                                if(it.value == 0) {
+                                    view.toastMessage(it.message)
 
-                            validate = true
-                        } else if(it.value == 1) {
-                            view.toastMessage(it.message)
+                                    validate = true
+                                } else if(it.value == 1) {
+                                    view.toastMessage(it.message)
 
-                            validate = false
-                        } else {
-                            view.toastMessage(it.message)
+                                    validate = false
+                                } else {
+                                    view.toastMessage(it.message)
 
-                            validate = false
-                        }
-                    }
+                                    validate = false
+                                }
+                            }
+                    )
 
         }
     }
@@ -68,27 +71,27 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
             val google_token = FirebaseInstanceId.getInstance().token
             val nickname = view.register_nickname().text.toString()
 
-            Log.e("google_uId", google_uId)
-            Log.e("google_token", google_token)
-            disposable = apiClient.register(google_uId!!, nickname, 0, "", "", google_token!!)
-                    .subscribeOn(Schedulers.io())
-                    .doOnNext {
-                        if(it.value == 0) {
-                            dbHelper.insert(google_uId, nickname, "on", connetModel)
-                        }
-                    }
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete { }
-                    .doOnError {
-                        it.printStackTrace()
-                    }
-                    .subscribe {
-                        if(it.value == 0) {
-                            view.startActivity(MainActivity::class.java)
-                        } else {
-                            view.toastMessage(it.message)
-                        }
-                    }
+            compositeDisposable
+                    .add(apiClient.register(google_uId!!, nickname, 0, "", "", google_token!!)
+                            .subscribeOn(Schedulers.io())
+                            .doOnNext {
+                                if(it.value == 0) {
+                                    dbHelper.insert(google_uId, nickname, "on", connetModel)
+                                }
+                            }
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete { }
+                            .doOnError {
+                                it.printStackTrace()
+                            }
+                            .subscribe {
+                                if(it.value == 0) {
+                                    view.startActivity(MainActivity::class.java)
+                                } else {
+                                    view.toastMessage(it.message)
+                                }
+                            }
+                    )
         } else {
             view.toastMessage("중복체크를 먼저 해주세요.")
         }
@@ -108,5 +111,5 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
 
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 }

@@ -53,8 +53,8 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

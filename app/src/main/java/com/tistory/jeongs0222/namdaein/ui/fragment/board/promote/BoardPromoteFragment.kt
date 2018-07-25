@@ -54,8 +54,8 @@ class BoardPromoteFragment : Fragment(), BoardPromoteContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

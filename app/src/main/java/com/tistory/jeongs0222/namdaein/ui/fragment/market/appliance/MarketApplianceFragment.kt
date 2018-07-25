@@ -55,8 +55,8 @@ class MarketApplianceFragment : Fragment(), MarketApplianceContract.View {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-
         mPresenter.disposableClear()
+
+        super.onDestroyView()
     }
 }

@@ -23,6 +23,7 @@ import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.termsofuse.TermsOfUseActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -34,7 +35,7 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
 
     private lateinit var activity: LoginActivity
 
-    private var disposable: Disposable? = null
+    private var compositeDisposable = CompositeDisposable()
 
     private lateinit var dbHelper: DBHelper
 
@@ -144,36 +145,40 @@ class LoginPresenter: LoginContract.Presenter, GoogleApiClient.OnConnectionFaile
     }
 
     private fun keyCheck(google_uId: String) {
-        disposable = apiClient.keyCheck(google_uId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { it.printStackTrace() }
-                .subscribe {
-                    if(it.value == 0) {
-                        view.startActivity(TermsOfUseActivity::class.java, connectModel)
-                    } else if(it.value == 1) {
-                        view.startActivity(TermsOfUseActivity::class.java, connectModel)
-                    } else {
-                        insertRealm(google_uId)
-                    }
-                }
+        compositeDisposable
+                .add(apiClient.keyCheck(google_uId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError { it.printStackTrace() }
+                        .subscribe {
+                            if(it.value == 0) {
+                                view.startActivity(TermsOfUseActivity::class.java, connectModel)
+                            } else if(it.value == 1) {
+                                view.startActivity(TermsOfUseActivity::class.java, connectModel)
+                            } else {
+                                insertRealm(google_uId)
+                            }
+                        }
+                )
     }
 
     private fun insertRealm(google_uId: String) {
-        disposable = apiClient.userInfo(google_uId)
-                .subscribeOn(Schedulers.io())
-                .doOnNext {
-                    if(it.value == 0) {
-                        dbHelper.insert(google_uId, it.nickname, "on", connectModel)
-                    }
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnError { it.printStackTrace() }
-                .subscribe {
-                    view.startActivity(MainActivity::class.java, "")
-                }
+        compositeDisposable
+                .add(apiClient.userInfo(google_uId)
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.value == 0) {
+                                dbHelper.insert(google_uId, it.nickname, "on", connectModel)
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError { it.printStackTrace() }
+                        .subscribe {
+                            view.startActivity(MainActivity::class.java, "")
+                        }
+                )
     }
 
-    override fun disposableClear() = disposable!!.dispose()
+    override fun disposableClear() = compositeDisposable.clear()
 
 }
