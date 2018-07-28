@@ -50,44 +50,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
 
         getValue()
 
-        mPresenter.setUpInitData(order) { msg, it ->
-            if(msg.equals("complete")) {
-                writtenUserGoogle_uId = it.writtenUserkey
-                writtenUserNickname = it.nickname
-                detail_title_textView.text = it.title
-                detail_price_textView.text = "₩ " + it.price
-                detail_content_textView.text = it.content
-                detail_nickname_textView.text = it.nickname
-                detail_date_textView.text = it.date
-
-                if(it.image0.isNotEmpty()) {
-                    images.add(it.image0)
-
-                    if(it.image1.isNotEmpty()) {
-                        images.add(it.image1)
-
-                        if(it.image2.isNotEmpty()) {
-                            images.add(it.image2)
-
-                            if(it.image3.isNotEmpty()) {
-                                images.add(it.image3)
-
-                                if(it.image4.isNotEmpty()) {
-                                    images.add(it.image4)
-                                }
-                            }
-                        }
-                    }
-                }
-
-                pictureViewPager()
-
-                addDots()
-
-                progressBar(1)
-
-            }
-        }
+        initView()
 
         mPresenter.setUpRecyclerView()
 
@@ -104,48 +67,41 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         order = intent.extras.getInt("order")
     }
 
-    private fun pictureViewPager() {
-        mAdapter = PictureViewPagerAdapter(this, images)
-        detail_viewPager.adapter = mAdapter
-    }
+    private fun initView() {
+        mPresenter.setUpInitData(order) {
+            writtenUserGoogle_uId = it.writtenUserkey
+            writtenUserNickname = it.nickname
+            detail_title_textView.text = it.title
+            detail_price_textView.text = "₩ " + it.price
+            detail_content_textView.text = it.content
+            detail_nickname_textView.text = it.nickname
+            detail_date_textView.text = it.date
 
-    private fun addDots() {
-        var dotsCount = images.size
+            if (it.image0.isNotEmpty()) {
+                images.add(it.image0)
 
-        if(dotsCount > 0) {
-            var dots = ArrayList<ImageView>()
+                if (it.image1.isNotEmpty()) {
+                    images.add(it.image1)
 
-            for(i in 0.. dotsCount - 1) {
-                var imageView = ImageView(applicationContext)
-                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_off))
+                    if (it.image2.isNotEmpty()) {
+                        images.add(it.image2)
 
-                dots.add(imageView)
+                        if (it.image3.isNotEmpty()) {
+                            images.add(it.image3)
 
-                var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                params.setMargins(5, 0, 5, 0)
-
-                detail_dots_linearLayout.addView(dots.get(i), params)
+                            if (it.image4.isNotEmpty()) {
+                                images.add(it.image4)
+                            }
+                        }
+                    }
+                }
             }
 
-            dots.get(0).setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_on))
+            mPresenter.pictureViewPager(images)
 
-            detail_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            mPresenter.addDots()
 
-                override fun onPageSelected(position: Int) {
-                    for(j in 0.. dotsCount - 1) {
-                        dots[j].setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_off))
-                    }
-                    dots[position].setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_on))
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {
-
-                }
-
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-                }
-            })
+            progressBar(1)
         }
     }
 
@@ -165,7 +121,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
         }
 
         detail_send_textView.setOnClickListener {
-            if(writtenUserGoogle_uId != dbHelper.getGoogle_uId()) {
+            if (writtenUserGoogle_uId != dbHelper.getGoogle_uId()) {
                 sendClickable(1)
 
                 mPresenter.setUpSendFunc()
@@ -174,15 +130,19 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
     }
 
     override fun progressBar(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_progressBar.visibility = View.VISIBLE
 
             1 -> detail_progressBar.visibility = View.GONE
         }
     }
 
+    override fun imageViewPager(): ViewPager = detail_viewPager
+
+    override fun dotsLinearLayout(): LinearLayout = detail_dots_linearLayout
+
     override fun imageViewPagerVisible(value: Int) {
-        when(value) {
+        when (value) {
             0 -> {
                 detail_viewPager.visibility = View.VISIBLE
                 detail_dots_linearLayout.visibility = View.VISIBLE
@@ -204,7 +164,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
     }
 
     override fun sendVisible(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_send_textView.visibility = View.VISIBLE
 
             1 -> detail_send_textView.visibility = View.GONE
@@ -212,7 +172,7 @@ class MarketDetailActivity : AppCompatActivity(), MarketDetailContract.View {
     }
 
     override fun sendClickable(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_send_textView.isClickable = true
 
             1 -> detail_send_textView.isClickable = false
