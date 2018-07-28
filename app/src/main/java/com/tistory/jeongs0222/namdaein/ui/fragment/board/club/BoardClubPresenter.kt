@@ -9,7 +9,6 @@ import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.ui.fragment.board.BoardItemAdapter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
@@ -65,7 +64,6 @@ class BoardClubPresenter: BoardClubContract.Presenter {
                             if(isFirstLoad) {
                                 isFirstLoad = false
                             }
-
                             mAdapter.notifyChanged()
                             isLoading = false
                         }

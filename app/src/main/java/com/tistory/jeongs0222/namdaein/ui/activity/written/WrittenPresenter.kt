@@ -32,6 +32,7 @@ class WrittenPresenter: WrittenContract.Presenter, TabLayout.OnTabSelectedListen
         }
     }
 
+    //TabSelected Listener
     override fun onTabSelected(tab: TabLayout.Tab?) {
         view.viewPager().currentItem = tab!!.position
     }

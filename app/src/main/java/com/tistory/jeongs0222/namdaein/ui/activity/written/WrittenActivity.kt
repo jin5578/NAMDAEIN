@@ -28,13 +28,9 @@ class WrittenActivity : AppCompatActivity(), WrittenContract.View {
         mPresenter.setUpViewPager(supportFragmentManager)
     }
 
-    override fun tabLayout(): TabLayout {
-        return written_tabLayout
-    }
+    override fun tabLayout(): TabLayout = written_tabLayout
 
-    override fun viewPager(): NonSwipeViewPager {
-        return written_viewPager
-    }
+    override fun viewPager(): NonSwipeViewPager = written_viewPager
 
     override fun onBackPressed() {
         super.onBackPressed()

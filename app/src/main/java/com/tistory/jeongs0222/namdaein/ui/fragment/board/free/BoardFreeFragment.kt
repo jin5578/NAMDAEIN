@@ -37,11 +37,7 @@ class BoardFreeFragment : Fragment(), BoardFreeContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-
-        return board_free_recyclerView
-
-    }
+    override fun recyclerView(): RecyclerView = board_free_recyclerView
 
     override fun progressBar(value: Int) {
         when (value) {

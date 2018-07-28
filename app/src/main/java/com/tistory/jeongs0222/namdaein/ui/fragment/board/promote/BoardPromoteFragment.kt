@@ -37,9 +37,7 @@ class BoardPromoteFragment : Fragment(), BoardPromoteContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return board_promote_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = board_promote_recyclerView
 
     override fun progressBar(value: Int) {
         when(value) {

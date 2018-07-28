@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.utils
 import android.content.Context
 import android.net.Uri
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View

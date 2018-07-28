@@ -36,9 +36,7 @@ class BoardClubFragment : Fragment(), BoardClubContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return board_club_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = board_club_recyclerView
 
     override fun progressBar(value: Int) {
         when(value) {
