@@ -19,33 +19,30 @@ class MainMarketViewPagerAdapter(fm: FragmentManager, internal val numOfTabs: In
 
 
     override fun getItem(position: Int): Fragment? {
-        when(position) {
-            0 -> return MarketFemaleFragment()
+        return when(position) {
+            0 -> MarketFemaleFragment()
 
-            1 -> return MarketMaleFragment()
+            1 -> MarketMaleFragment()
 
-            2 -> return MarketMerchandiseFragment()
+            2 -> MarketMerchandiseFragment()
 
-            3 -> return MarketBeautyFragment()
+            3 -> MarketBeautyFragment()
 
-            4 -> return MarketBookFragment()
+            4 -> MarketBookFragment()
 
-            5 -> return MarketTicketFragment()
+            5 -> MarketTicketFragment()
 
-            6 -> return MarketApplianceFragment()
+            6 -> MarketApplianceFragment()
 
-            7 -> return MarketLifeFragment()
+            7 -> MarketLifeFragment()
 
-            8 -> return MarketStudioFragment()
+            8 -> MarketStudioFragment()
 
-            9 -> return MarketEtcFragment()
+            9 -> MarketEtcFragment()
 
-            else -> return null
+            else -> null
         }
     }
 
-    override fun getCount(): Int {
-        return numOfTabs
-    }
-
+    override fun getCount(): Int = numOfTabs
 }

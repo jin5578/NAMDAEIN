@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView
 interface MainHomeContract {
 
     interface View {
+
     }
 
     interface Presenter {

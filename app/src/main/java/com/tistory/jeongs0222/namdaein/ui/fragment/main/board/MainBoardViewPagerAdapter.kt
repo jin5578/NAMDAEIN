@@ -11,23 +11,19 @@ import com.tistory.jeongs0222.namdaein.ui.fragment.board.promote.BoardPromoteFra
 
 class MainBoardViewPagerAdapter(fm: FragmentManager, internal val numOfTabs: Int): FragmentStatePagerAdapter(fm) {
 
-
     override fun getItem(position: Int): Fragment? {
-        when (position) {
-            0 -> return BoardFreeFragment()
+        return when (position) {
+            0 -> BoardFreeFragment()
 
-            1 -> return BoardLostFragment()
+            1 -> BoardLostFragment()
 
-            2 -> return BoardPromoteFragment()
+            2 -> BoardPromoteFragment()
 
-            3 -> return BoardClubFragment()
+            3 -> BoardClubFragment()
 
-            else -> return null
+            else -> null
         }
     }
 
-    override fun getCount(): Int {
-        return numOfTabs
-    }
-
+    override fun getCount(): Int = numOfTabs
 }

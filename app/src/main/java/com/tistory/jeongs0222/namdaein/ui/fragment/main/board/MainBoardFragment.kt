@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import kotlinx.android.synthetic.main.activity_main_board_fragment.*
 
-class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
 
+class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
 
     private lateinit var mPagerAdapter: MainBoardViewPagerAdapter
 
@@ -45,7 +45,6 @@ class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager
             currentItem = 0
             offscreenPageLimit = main_board_tabLayout.tabCount
             adapter = mPagerAdapter
-            //offscreenPageLimit = main_board_tabLayout.tabCount
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_board_tabLayout))
         }
 

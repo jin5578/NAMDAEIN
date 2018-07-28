@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_main_market_fragment.*
 
 class MainMarketFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
-
     private lateinit var mPagerAdapter: MainMarketViewPagerAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
