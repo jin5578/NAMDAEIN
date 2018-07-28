@@ -153,15 +153,32 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPage
                 .add(apiClient.writingFavorite(order)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnError {
-                            it.printStackTrace()
-                        }
-                        .subscribe {
+                        .doOnNext {
                             if(it.value == 0) {
                                 view.favoriteClickable(0)
                             }
                         }
+                        .doOnError {
+                            it.printStackTrace()
+                        }
+                        .subscribe()
                 )
+    }
+
+    override fun setUpReportFunc() {
+        compositeDisposable
+                .add(apiClient.writingReport(order)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnNext {
+                            if(it.value == 0) {
+                                view.reportClickable(0)
+                            }
+                        }
+                        .doOnError {
+                            it.printStackTrace()
+                        }
+                        .subscribe())
     }
 
     override fun setUpSendFunc() {

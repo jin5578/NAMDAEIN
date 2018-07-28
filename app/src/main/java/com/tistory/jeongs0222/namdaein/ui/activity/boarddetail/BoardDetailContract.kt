@@ -26,6 +26,8 @@ interface BoardDetailContract {
 
         fun sendVisible(value: Int)
 
+        fun reportClickable(value: Int)
+
         fun favoriteClickable(value: Int)
 
         fun sendClickable(value: Int)
@@ -49,6 +51,8 @@ interface BoardDetailContract {
         fun setUpCommentFunc()
 
         fun setUpFavoriteFunc()
+
+        fun setUpReportFunc()
 
         fun setUpSendFunc()
 

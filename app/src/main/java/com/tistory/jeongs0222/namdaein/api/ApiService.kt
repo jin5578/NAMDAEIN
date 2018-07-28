@@ -49,9 +49,16 @@ interface ApiService {
     //BoardFavorite
     @FormUrlEncoded
     @POST("nice.php")
-    fun writingFavorite(@Field("order") order: Int): Observable<writeFavorites>
+    fun writingFavorite(@Field("order") order: Int): Observable<writingFavorites>
 
-    data class writeFavorites(val value: Int, val message: String)   //0: 성공, 1: 실패
+    data class writingFavorites(val value: Int, val message: String)   //0: 성공, 1: 실패
+
+    //BoardReport
+    @FormUrlEncoded
+    @POST("dislike.php")
+    fun writingReport(@Field("order") order: Int): Observable<writingReports>
+
+    data class writingReports(val value: Int, val message: String)  //0: 성공, 1: 실패
 
     //MarketItem
     @FormUrlEncoded

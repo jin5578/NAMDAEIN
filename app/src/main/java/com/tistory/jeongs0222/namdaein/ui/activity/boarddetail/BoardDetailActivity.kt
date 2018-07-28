@@ -1,5 +1,6 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.boarddetail
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
@@ -91,6 +92,12 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
             mPresenter.setUpFavoriteFunc()
         }
 
+        detail_report_imageView.setOnClickListener {
+            reportClickable(1)
+
+            mPresenter.setUpReportFunc()
+        }
+
         detail_send_textView.setOnClickListener {
             sendClickable(1)
 
@@ -140,6 +147,14 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
             0 -> detail_send_textView.visibility = View.VISIBLE
 
             1 -> detail_send_textView.visibility = View.GONE
+        }
+    }
+
+    override fun reportClickable(value: Int) {
+        when (value) {
+            0 -> detail_report_imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_sms_failed_pink_24dp))
+
+            1 -> detail_report_imageView.isClickable = false
         }
     }
 
