@@ -11,7 +11,6 @@ import com.tistory.jeongs0222.namdaein.ui.fragment.main.more.MainMoreFragment
 
 class MainViewPagerAdapter(fm: FragmentManager, internal var numOfTabs: Int) : FragmentStatePagerAdapter(fm) {
 
-
     override fun getItem(position: Int): Fragment? {
         when (position) {
             0 -> return MainHomeFragment()

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
-import android.util.Log
 import android.view.View
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
@@ -38,21 +37,15 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         mPresenter.setUpViewPager(supportFragmentManager)
     }
 
-    override fun tabLayout(): TabLayout {
-        return main_tabLayout
-    }
+    override fun tabLayout(): TabLayout = main_tabLayout
 
-    override fun viewPager(): ViewPager {
-        return main_viewPager
-    }
+    override fun viewPager(): ViewPager = main_viewPager
 
     override fun toolbarTitle(title: String) {
         main_toolbar_title.text = title
     }
 
-    override fun floatingButton(): FloatingActionButton {
-        return main_floating
-    }
+    override fun floatingButton(): FloatingActionButton = main_floating
 
     override fun floatingButtonVisible(value: Int) {
         when(value) {

@@ -14,7 +14,6 @@ import com.tistory.jeongs0222.namdaein.utils.CustomToast
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
 
-
     private lateinit var mPresenter: LoginPresenter
 
     //Facebook Login 관련
@@ -88,13 +87,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         finish()
     }
 
-    override fun facebookButton(): LoginButton {
-        return login_facebook_button
-    }
+    override fun facebookButton(): LoginButton = login_facebook_button
 
-    override fun mCallbackManager(): CallbackManager {
-        return mCallbackManager
-    }
+    override fun mCallbackManager(): CallbackManager = mCallbackManager
 
     override fun toastMessage(message: String) {
         val toastMessage = CustomToast(this)
