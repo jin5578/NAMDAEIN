@@ -31,16 +31,25 @@ class InquireActivity : AppCompatActivity(), InquireContract.View {
 
     private fun onClickEvent() {
         inquire_confirm_imageView.setOnClickListener {
+            confirmClickable(0)
+
             mPresenter.setUpConfirmFunc()
         }
     }
 
-    override fun content(): EditText {
-        return inquire_content_editText
-    }
+    override fun content(): EditText = inquire_content_editText
+
 
     override fun count(length: Int) {
         inquire_count_textView.text = "(" + length + " / 250)"
+    }
+
+    override fun confirmClickable(value: Int) {
+        when(value) {
+            0 -> inquire_confirm_imageView.isClickable = false
+
+            1 -> inquire_confirm_imageView.isClickable = true
+        }
     }
 
     override fun viewFinish() {

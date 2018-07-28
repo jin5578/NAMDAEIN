@@ -3,11 +3,11 @@ package com.tistory.jeongs0222.namdaein.ui.activity.editnickname
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import kotlinx.android.synthetic.main.activity_edit_nickname.*
+
 
 class EditNicknameActivity : AppCompatActivity(), EditNicknameContract.View {
 

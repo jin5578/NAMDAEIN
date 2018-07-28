@@ -2,7 +2,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.editnickname
 
 import android.content.Context
 import android.widget.EditText
-import android.widget.ImageView
 
 
 interface EditNicknameContract {

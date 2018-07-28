@@ -41,6 +41,8 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .doOnComplete {
+                                view.confirmClickable(1)
+
                                 view.viewFinish()
                             }
                             .doOnError { it.printStackTrace()}
@@ -48,10 +50,13 @@ class InquirePresenter: InquireContract.Presenter, TextWatcher {
             )
 
         } else {
+            view.confirmClickable(1)
+
             view.toastMessage("빈 칸을 작성할 수 없습니다.")
         }
     }
 
+    //TextChange Listener
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         view.count(p0!!.length)
     }

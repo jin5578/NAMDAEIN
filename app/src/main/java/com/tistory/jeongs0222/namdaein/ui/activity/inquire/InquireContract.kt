@@ -12,6 +12,8 @@ interface InquireContract {
 
         fun count(length: Int)
 
+        fun confirmClickable(value: Int)
+
         fun viewFinish()
 
         fun toastMessage(message: String)
