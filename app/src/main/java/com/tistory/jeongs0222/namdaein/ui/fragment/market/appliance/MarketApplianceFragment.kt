@@ -38,9 +38,7 @@ class MarketApplianceFragment : Fragment(), MarketApplianceContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return market_appliance_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = market_appliance_recyclerView
 
     override fun progressBar(value: Int) {
         when (value) {

@@ -37,9 +37,7 @@ class MarketTicketFragment : Fragment(), MarketTicketContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return market_ticket_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = market_ticket_recyclerView
 
     override fun progressBar(value: Int) {
         when(value) {

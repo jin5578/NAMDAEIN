@@ -68,8 +68,7 @@ class MarketItemAdapter(internal val context: Context): RecyclerView.Adapter<Mar
     fun addAllItems(e: MutableList<Model.marketItem>) = item.addAll(e)
 
     fun notifyChanged() = notifyDataSetChanged()
-
-
+    
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val market_entire_layout: ConstraintLayout
         val market_imageView: ImageView

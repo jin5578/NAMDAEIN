@@ -37,9 +37,7 @@ class MarketEtcFragment : Fragment(), MarketEtcContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return market_etc_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = market_etc_recyclerView
 
     override fun progressBar(value: Int) {
         when(value) {

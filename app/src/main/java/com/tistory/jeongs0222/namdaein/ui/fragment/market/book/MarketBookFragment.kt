@@ -37,9 +37,7 @@ class MarketBookFragment : Fragment(), MarketBookContract.View {
         mPresenter.loadMore()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return market_book_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = market_book_recyclerView
 
     override fun progressBar(value: Int) {
         when(value) {
