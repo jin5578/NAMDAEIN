@@ -24,8 +24,6 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
 
     private var images: MutableList<String> = ArrayList()
 
-    private lateinit var mAdapter: PictureViewPagerAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,32 +39,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
 
         getValue()
 
-        mPresenter.setUpInitData(order) { msg, it ->
-            if(msg.equals("complete")) {
-                detail_title_textView.text = it.title
-                detail_content_textView.text = it.content
-                detail_nickname_textView.text = it.nickname
-                detail_date_textView.text = it.date
-
-                if(it.image0.isNotEmpty()) {
-                    images.add(it.image0)
-
-                    if(it.image1.isNotEmpty()) {
-                        images.add(it.image1)
-
-                        if(it.image2.isNotEmpty()) {
-                            images.add(it.image2)
-                        }
-                    }
-                }
-
-                pictureViewPager()
-
-                addDots()
-
-                progressBar(1)
-            }
-        }
+        initView()
 
         mPresenter.setUpRecyclerView()
 
@@ -83,48 +56,31 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
         order = intent.extras.getInt("order")
     }
 
-    private fun pictureViewPager() {
-        mAdapter = PictureViewPagerAdapter(this, images)
-        detail_viewPager.adapter = mAdapter
-    }
+    private fun initView() {
+        mPresenter.setUpInitData(order) {
+            detail_title_textView.text = it.title
+            detail_content_textView.text = it.content
+            detail_nickname_textView.text = it.nickname
+            detail_date_textView.text = it.date
 
-    private fun addDots() {
-        var dotsCount = images.size
+            if (it.image0.isNotEmpty()) {
+                images.add(it.image0)
 
-        if(dotsCount > 0) {
-            var dots = ArrayList<ImageView>()
+                if (it.image1.isNotEmpty()) {
+                    images.add(it.image1)
 
-            for(i in 0.. dotsCount - 1) {
-                var imageView = ImageView(applicationContext)
-                imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_off))
-
-                dots.add(imageView)
-
-                var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-                params.setMargins(5, 0, 5, 0)
-
-                detail_dots_linearLayout.addView(dots.get(i), params)
+                    if (it.image2.isNotEmpty()) {
+                        images.add(it.image2)
+                    }
+                }
             }
 
-            dots.get(0).setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_on))
+            mPresenter.pictureViewPager(images)
 
-            detail_viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            mPresenter.addDots()
 
-                override fun onPageSelected(position: Int) {
-                    for(j in 0.. dotsCount - 1) {
-                        dots[j].setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_off))
-                    }
-                    dots[position].setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.dot_on))
-                }
+            progressBar(1)
 
-                override fun onPageScrollStateChanged(state: Int) {
-
-                }
-
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-                }
-            })
         }
     }
 
@@ -150,15 +106,19 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
     }
 
     override fun progressBar(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_progressBar.visibility = View.VISIBLE
 
             1 -> detail_progressBar.visibility = View.GONE
         }
     }
 
+    override fun imageViewPager(): ViewPager = detail_viewPager
+
+    override fun dotsLinearLayout(): LinearLayout = detail_dots_linearLayout
+
     override fun imageViewPagerVisible(value: Int) {
-        when(value) {
+        when (value) {
             0 -> {
                 detail_viewPager.visibility = View.VISIBLE
                 detail_dots_linearLayout.visibility = View.VISIBLE
@@ -171,16 +131,12 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
         }
     }
 
-    override fun recyclerView(): RecyclerView {
-        return detail_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = detail_recyclerView
 
-    override fun sendEditText(): EditText {
-        return detail_send_editText
-    }
+    override fun sendEditText(): EditText = detail_send_editText
 
     override fun sendVisible(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_send_textView.visibility = View.VISIBLE
 
             1 -> detail_send_textView.visibility = View.GONE
@@ -188,7 +144,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
     }
 
     override fun favoriteClickable(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_favorite_imageView.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_favorite_pink_24dp))
 
             1 -> detail_favorite_imageView.isClickable = false
@@ -196,7 +152,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailContract.View {
     }
 
     override fun sendClickable(value: Int) {
-        when(value) {
+        when (value) {
             0 -> detail_send_textView.isClickable = true
 
             1 -> detail_send_textView.isClickable = false

@@ -1,24 +1,29 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.boarddetail
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ImageView
+import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.model.Model
 import com.tistory.jeongs0222.namdaein.ui.activity.CommentAdapter
+import com.tistory.jeongs0222.namdaein.ui.activity.PictureViewPagerAdapter
+import com.tistory.jeongs0222.namdaein.utils.DateUtil
+import com.tistory.jeongs0222.namdaein.utils.DynamicViewUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
 import java.util.*
 
 
-class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
+class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPager.OnPageChangeListener {
 
     private lateinit var view: BoardDetailContract.View
     private lateinit var context: Context
@@ -27,13 +32,18 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
 
     private var order: Int = 0
 
-    private var currentDate: String = ""
-
     private lateinit var mAdapter: CommentAdapter
+
+    private lateinit var pAdapter: PictureViewPagerAdapter
+
+    private var images: MutableList<String> = ArrayList()
+
+    private lateinit var dots: ArrayList<ImageView>
 
     private lateinit var dbHelper: DBHelper
 
     private val apiClient by lazy { ApiClient.create() }
+
 
     override fun setView(view: BoardDetailContract.View, context: Context) {
         this.view = view
@@ -42,7 +52,7 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
         dbHelper = DBHelper(context, "USERINFO.db", null, 1)
     }
 
-    override fun setUpInitData(order: Int, callback: (String, Model.boardItem) -> Unit) {
+    override fun setUpInitData(order: Int, callback: (Model.boardItem) -> Unit) {
         this.order = order
 
         view.progressBar(0)
@@ -51,9 +61,6 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
                 .add(apiClient.bringBoardDetail(order)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete {
-
-                    }
                     .doOnError {
                         it.printStackTrace()
 
@@ -66,9 +73,42 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
                             view.imageViewPagerVisible(0)
                         }
 
-                        callback("complete", it)
+                        callback(it)
                     }
                 )
+    }
+
+    override fun pictureViewPager(images: MutableList<String>) {
+        this.images = images
+
+        pAdapter = PictureViewPagerAdapter(context, images)
+
+        view.imageViewPager().adapter = pAdapter
+    }
+
+    override fun addDots() {
+        DynamicViewUtil.showDots(images.size, context, view.dotsLinearLayout()) {
+            dots = it
+
+            view.imageViewPager().addOnPageChangeListener(this@BoardDetailPresenter)
+        }
+    }
+
+    //PageChangeListener
+    override fun onPageSelected(position: Int) {
+        for(j in 0..images.size - 1) {
+            dots[j].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_off))
+        }
+
+        dots[position].setImageDrawable(ContextCompat.getDrawable(context, R.drawable.dot_on))
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
     }
 
     override fun setUpRecyclerView() {
@@ -125,11 +165,9 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
     }
 
     override fun setUpSendFunc() {
-        bringDate()
-
         if(view.sendEditText().text.isNotEmpty()) {
             compositeDisposable
-                    .add(apiClient.writingBoardComment(order, dbHelper.getGoogle_uId()!!, view.sendEditText().text.toString(), currentDate)
+                    .add(apiClient.writingBoardComment(order, dbHelper.getGoogle_uId()!!, view.sendEditText().text.toString(), DateUtil.bringDate())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnComplete {
@@ -138,19 +176,20 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
                         .doOnError {
                             it.printStackTrace()
                         }
-                        .subscribe( {
+                        .subscribe {
                             if(it.value == 1) {
                                 view.toastMessage(it.message)
                             }
                             view.sendEditText().text = null
                             view.sendClickable(0)
-                        })
-            )
+                        }
+                    )
         }
     }
 
     override fun disposableClear() = compositeDisposable.clear()
 
+    //TextChangeListener
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         if(p0.toString().length == 0) {
             view.sendVisible(1)
@@ -165,15 +204,5 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher {
 
     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-    }
-
-    private fun bringDate() {
-        val now = System.currentTimeMillis()
-
-        val date = Date(now)
-
-        val sdf = SimpleDateFormat("yy.MM.dd HH:mm")
-
-        currentDate = sdf.format(date)
     }
 }

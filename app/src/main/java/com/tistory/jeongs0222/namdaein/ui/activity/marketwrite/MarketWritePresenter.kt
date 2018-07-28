@@ -122,7 +122,7 @@ class MarketWritePresenter : MarketWriteContract.Presenter, PermissionCallbackLi
         Observable.fromIterable(uriList)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    DynamicImageViewUtil.showUri(it, context, requestManager) { view.selectedLinear().addView(it) }
+                    DynamicViewUtil.showUri(it, context, requestManager) { view.selectedLinear().addView(it) }
                 }
                 .subscribe()
     }
@@ -158,7 +158,7 @@ class MarketWritePresenter : MarketWriteContract.Presenter, PermissionCallbackLi
         view.progressBar(0)
         if (view.title().text.isNotEmpty() && view.content().text.isNotEmpty() && view.price().text.isNotEmpty()) {
             compositeDisposable
-                    .add(apiClient.afterMarketData(order, view.title().text.toString(), view.content().text.toString(), view.price().text.toString(), StringUtil.bringDate())
+                    .add(apiClient.afterMarketData(order, view.title().text.toString(), view.content().text.toString(), view.price().text.toString(), DateUtil.bringDate())
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .doOnComplete {
@@ -180,7 +180,7 @@ class MarketWritePresenter : MarketWriteContract.Presenter, PermissionCallbackLi
 
     override fun setUpConfirmFunc() {
 
-        category = StringUtil.separateMarketCategory(view.spinner().text.toString())
+        category = CategorySeparator.separateMarketCategory(view.spinner().text.toString())
 
         if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty() &&
                 view.price().text.isNotEmpty() && category != 10 && selectedUriList.size != 0) {
@@ -217,7 +217,7 @@ class MarketWritePresenter : MarketWriteContract.Presenter, PermissionCallbackLi
             this["title"] = toRequestBody(view.title().text.toString())
             this["content"] = toRequestBody(view.content().text.toString())
             this["price"] = toRequestBody(view.price().text.toString())
-            this["date"] = toRequestBody(StringUtil.bringDate())
+            this["date"] = toRequestBody(DateUtil.bringDate())
         }
     }
 

@@ -1,20 +1,7 @@
 package com.tistory.jeongs0222.namdaein.utils
 
-import java.text.SimpleDateFormat
-import java.util.*
 
-
-object StringUtil {
-
-    fun bringDate(): String {
-        val now = System.currentTimeMillis()
-
-        val date = Date(now)
-
-        val sdf = SimpleDateFormat("yy.MM.dd HH:mm")
-
-        return sdf.format(date)
-    }
+object CategorySeparator {
 
     fun separateMarketCategory(category: String): Int = when (category) {
         "여성의류" -> 0

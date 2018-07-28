@@ -118,7 +118,7 @@ class BoardWritePresenter: BoardWriteContract.Presenter, PermissionCallbackListe
 
         if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty()) {
             compositeDisposable.add(
-                    apiClient.afterBoardData(order, view.title().text.toString(), view.content().text.toString(), StringUtil.bringDate())
+                    apiClient.afterBoardData(order, view.title().text.toString(), view.content().text.toString(), DateUtil.bringDate())
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .doOnComplete {
@@ -139,7 +139,7 @@ class BoardWritePresenter: BoardWriteContract.Presenter, PermissionCallbackListe
     }
 
     override fun setUpConfirmFunc() {
-        category = StringUtil.separateBoardCategory(view.spinner().text.toString())
+        category = CategorySeparator.separateBoardCategory(view.spinner().text.toString())
 
         if(view.title().text.isNotEmpty() && view.content().text.isNotEmpty() && category != 4) {
             view.progressBar(0)
@@ -197,7 +197,7 @@ class BoardWritePresenter: BoardWriteContract.Presenter, PermissionCallbackListe
         Observable.fromIterable(uriList)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    DynamicImageViewUtil.showUri(it, context, requestManager) { view.selectedLinear().addView(it) }
+                    DynamicViewUtil.showUri(it, context, requestManager) { view.selectedLinear().addView(it) }
                 }
                 .subscribe()
     }
@@ -219,7 +219,7 @@ class BoardWritePresenter: BoardWriteContract.Presenter, PermissionCallbackListe
         return HashMap<String, RequestBody>().apply {
             this["category"] = toRequestBody(category.toString())
             this["userkey"] = toRequestBody(dbHelper.getGoogle_uId()!!)
-            this["date"] = toRequestBody(StringUtil.bringDate())
+            this["date"] = toRequestBody(DateUtil.bringDate())
             this["title"] = toRequestBody(view.title().text.toString())
             this["content"] = toRequestBody(view.content().text.toString())
         }
