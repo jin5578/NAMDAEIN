@@ -73,6 +73,8 @@ class EditNicknamePresenter: EditNicknameContract.Presenter, TextWatcher {
                                         } else {
                                             view.toastMessage(it.message)
                                         }
+
+                                        view.confirmClickable(1)
                                     }
                                     .doOnError { it.printStackTrace() }
                                     .subscribe{
@@ -81,9 +83,12 @@ class EditNicknamePresenter: EditNicknameContract.Presenter, TextWatcher {
                     )
         } else {
             view.toastMessage("중복체크를 먼저 해주세요.")
+
+            view.confirmClickable(1)
         }
     }
 
+    //TextChangeListener
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         validate = false
     }
