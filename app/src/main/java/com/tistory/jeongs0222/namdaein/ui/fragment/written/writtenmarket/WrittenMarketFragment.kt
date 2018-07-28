@@ -34,9 +34,7 @@ class WrittenMarketFragment : Fragment(), WrittenMarketContract.View {
         mPresenter.setUpData()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return written_market_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = written_market_recyclerView
 
     override fun emptyTextVisible() {
         written_market_textView.visibility = View.VISIBLE

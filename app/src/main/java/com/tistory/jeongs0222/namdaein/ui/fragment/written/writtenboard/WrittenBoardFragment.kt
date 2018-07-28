@@ -34,9 +34,7 @@ class WrittenBoardFragment : Fragment(), WrittenBoardContract.View {
         mPresenter.setUpData()
     }
 
-    override fun recyclerView(): RecyclerView {
-        return written_board_recyclerView
-    }
+    override fun recyclerView(): RecyclerView = written_board_recyclerView
 
     override fun emptyTextVisible() {
         written_board_textView.visibility = View.VISIBLE

@@ -81,16 +81,16 @@ class WrittenBoardAdapter(internal var context: Context): RecyclerView.Adapter<W
     }
 
     private fun classify_category(category: Int): String {
-        when(category) {
-            0 -> return "자유"
+        return when(category) {
+            0 -> "자유"
 
-            1 -> return "분실물"
+            1 -> "분실물"
 
-            2 -> return "홍보"
+            2 -> "홍보"
 
-            3 -> return "동아리"
+            3 -> "동아리"
 
-            else -> return null!!
+            else -> null!!
         }
     }
 

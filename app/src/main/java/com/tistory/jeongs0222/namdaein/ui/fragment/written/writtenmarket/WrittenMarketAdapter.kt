@@ -76,28 +76,28 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
     }
 
     private fun classify_category(category: Int): String {
-        when(category) {
-            0 -> return "여성의류"
+        return when(category) {
+            0 -> "여성의류"
 
-            1 -> return "남성의류"
+            1 -> "남성의류"
 
-            2 -> return "패션잡화"
+            2 -> "패션잡화"
 
-            3 -> return "뷰티"
+            3 -> "뷰티"
 
-            4 -> return "도서"
+            4 -> "도서"
 
-            5 -> return "티켓"
+            5 -> "티켓"
 
-            6 -> return "가전제품"
+            6 -> "가전제품"
 
-            7 -> return "생활"
+            7 -> "생활"
 
-            8 -> return "원룸"
+            8 -> "원룸"
 
-            9 -> return "기타"
+            9 -> "기타"
 
-            else -> return null!!
+            else -> null!!
         }
     }
 
