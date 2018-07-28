@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.marketwrite
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.FragmentManager
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -27,6 +28,8 @@ interface MarketWriteContract {
         fun viewFinish()
 
         fun toastMessage(message: String)
+
+        fun writeImageConstraint(): ConstraintLayout
     }
 
     interface Presenter {
@@ -36,7 +39,7 @@ interface MarketWriteContract {
 
         fun setUpMultiShow(supportFragmentManager: FragmentManager)
 
-        fun setUpBringMarket(order: Int, callback: (String, Model.marketItem) -> Unit)
+        fun setUpBringMarket(sort: Int, order: Int, callback: (Model.marketItem) -> Unit)
 
         fun setUpConfirmFunc()
 

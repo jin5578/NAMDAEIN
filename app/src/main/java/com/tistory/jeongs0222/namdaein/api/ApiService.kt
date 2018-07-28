@@ -2,10 +2,9 @@ package com.tistory.jeongs0222.namdaein.api
 
 import com.tistory.jeongs0222.namdaein.model.Model
 import io.reactivex.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 
 interface ApiService {
@@ -196,5 +195,21 @@ interface ApiService {
     fun bestBoard(): Observable<bestBoards>
 
     data class bestBoards(val bestboard: MutableList<Model.boardItem>)
+
+    //Board Write
+    @Multipart
+    @POST("marketWriting.php")
+    fun marketWrite(@Part up_image: List<MultipartBody.Part>,
+                    @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Observable<marketWrites>
+
+    data class marketWrites(val value: Int, val message: String)
+
+    //Market Write
+    @Multipart
+    @POST("boardWriting.php")
+    fun boardWrite(@Part up_image: List<MultipartBody.Part>,
+                   @PartMap params: Map<String, @JvmSuppressWildcards RequestBody>): Observable<boardWrites>
+
+    data class boardWrites(val value: Int, val message: String)
 
 }

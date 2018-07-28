@@ -1,7 +1,10 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.boardwrite
 
 import android.content.Context
+import android.support.constraint.ConstraintLayout
+import android.support.v4.app.FragmentManager
 import android.widget.EditText
+import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.model.Model
 
 
@@ -9,6 +12,8 @@ interface BoardWriteContract {
 
     interface View {
         fun spinner(): com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+
+        fun selectedLinear(): LinearLayout
 
         fun confirmClickable(value: Int)
 
@@ -21,6 +26,8 @@ interface BoardWriteContract {
         fun viewFinish()
 
         fun toastMessage(message: String)
+
+        fun writeImageConstraint(): ConstraintLayout
     }
 
     interface Presenter {
@@ -28,7 +35,9 @@ interface BoardWriteContract {
 
         fun setUpSpinnerFunc()
 
-        fun setUpBringBoard(order: Int, callback: (String, Model.boardItem) -> Unit)
+        fun setUpMultiShow(supportFragmentManager: FragmentManager)
+
+        fun setUpBringBoard(sort: Int, order: Int, callback: (Model.boardItem) -> Unit)
 
         fun setUpConfirmFunc()
 

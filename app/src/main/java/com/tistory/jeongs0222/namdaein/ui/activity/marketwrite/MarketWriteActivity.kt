@@ -2,11 +2,14 @@ package com.tistory.jeongs0222.namdaein.ui.activity.marketwrite
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.ArrayUtil
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
 import kotlinx.android.synthetic.main.activity_write.*
@@ -37,37 +40,32 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
         onClickEvent()
     }
 
+    override fun writeImageConstraint(): ConstraintLayout = write_image_constraint
+
     private fun getValue() {
         val intent = intent
 
         sort = intent.extras.getInt("sort")
         order = intent.extras.getInt("order")
 
-        if(sort == 1) {
-            write_image_constraint.visibility = View.GONE
+        mPresenter.setUpBringMarket(sort, order) {
+            write_spinner.isEnabled = false
+            spinner().setText(ArrayUtil.marketSpinnerList[it.category])
 
-            mPresenter.setUpBringMarket(order) { msg, it ->
-                if(msg.equals("complete")) {
-                    write_spinner.isEnabled = false
-
-                    write_title_editText.setText(it.title)
-                    write_content_editText.setText(it.content)
-                    write_price_editText.setText(it.price)
-                }
-            }
+            write_title_editText.setText(it.title)
+            write_content_editText.setText(it.content)
+            write_price_editText.setText(it.price)
         }
     }
 
     fun onClickEvent() {
-        write_imageView.setOnClickListener {
-            mPresenter.setUpMultiShow(supportFragmentManager)
-        }
+        write_imageView.setOnClickListener { mPresenter.setUpMultiShow(supportFragmentManager) }
 
         write_confirm_imageView.setOnClickListener {
             confirmClickable(1)
 
-            if(sort == 0) {
-
+            if (sort == 0) {
+                mPresenter.setUpConfirmFunc()
             } else {
                 mPresenter.setUpEditConfirmFunc(order)
             }
@@ -75,16 +73,12 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
         }
     }
 
-    override fun spinner(): MaterialBetterSpinner {
-        return write_spinner
-    }
+    override fun spinner(): MaterialBetterSpinner = write_spinner
 
-    override fun selectedLinear(): LinearLayout {
-        return write_selectedLinear
-    }
+    override fun selectedLinear(): LinearLayout = write_selectedLinear
 
     override fun confirmClickable(value: Int) {
-        when(value) {
+        when (value) {
             0 -> write_confirm_imageView.isClickable = true
 
             1 -> write_confirm_imageView.isClickable = false
@@ -92,33 +86,26 @@ class MarketWriteActivity : AppCompatActivity(), MarketWriteContract.View {
     }
 
     override fun progressBar(value: Int) {
-        when(value) {
+        when (value) {
             0 -> write_progressBar.visibility = View.VISIBLE
 
             1 -> write_progressBar.visibility = View.GONE
         }
     }
 
-    override fun title(): EditText {
-        return write_title_editText
-    }
+    override fun title(): EditText = write_title_editText
 
-    override fun content(): EditText {
-        return write_content_editText
-    }
+    override fun content(): EditText = write_content_editText
 
-    override fun price(): EditText {
-        return write_price_editText
-    }
+    override fun price(): EditText = write_price_editText
 
     override fun viewFinish() {
         finish()
     }
 
     override fun toastMessage(message: String) {
-        val toastMessage = CustomToast(this)
-
-        toastMessage.makeText(message, Toast.LENGTH_SHORT)
+        Log.e("message", message)
+        CustomToast(this).makeText(message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
