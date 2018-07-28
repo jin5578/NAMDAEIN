@@ -9,6 +9,8 @@ interface RegisterContract {
     interface View {
         fun register_nickname(): EditText
 
+        fun confirmClickable(value: Int)
+
         fun toastMessage(message: String)
 
         fun startActivity(activityClass: Class<*>)

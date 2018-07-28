@@ -1,13 +1,9 @@
 package com.tistory.jeongs0222.namdaein.ui.activity.register
 
 import android.content.Intent
-import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.View
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
@@ -49,12 +45,20 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         }
 
         register_confirm_ImageView.setOnClickListener {
+            confirmClickable(0)
+
             mPresenter.setUpSignIn(connectModel)
         }
     }
 
-    override fun register_nickname(): EditText {
-        return register_nickname_editText
+    override fun register_nickname(): EditText = register_nickname_editText
+
+    override fun confirmClickable(value: Int) {
+        when(value) {
+            0 -> register_confirm_ImageView.isClickable = false
+
+            1 -> register_confirm_ImageView.isClickable = true
+        }
     }
 
     override fun toastMessage(message: String) {

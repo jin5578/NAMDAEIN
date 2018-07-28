@@ -3,7 +3,6 @@ package com.tistory.jeongs0222.namdaein.ui.activity.register
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.jeongs0222.namdaein.api.ApiClient
@@ -11,7 +10,6 @@ import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.main.MainActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
@@ -41,10 +39,7 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
                     .add(apiClient.nicknameCheck(view.register_nickname().text.toString())
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnError {
-                                it.printStackTrace()
-                            }
-                            .subscribe {
+                            .doOnNext {
                                 if(it.value == 0) {
                                     view.toastMessage(it.message)
 
@@ -59,6 +54,8 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
                                     validate = false
                                 }
                             }
+                            .doOnError { it.printStackTrace() }
+                            .subscribe()
                     )
 
         }
@@ -66,7 +63,6 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
 
     override fun setUpSignIn(connetModel: String) {
         if(validate) {
-
             val google_uId = FirebaseAuth.getInstance().uid
             val google_token = FirebaseInstanceId.getInstance().token
             val nickname = view.register_nickname().text.toString()
@@ -80,25 +76,26 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
                                 }
                             }
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnComplete { }
-                            .doOnError {
-                                it.printStackTrace()
-                            }
-                            .subscribe {
+                            .doOnNext {
                                 if(it.value == 0) {
                                     view.startActivity(MainActivity::class.java)
                                 } else {
                                     view.toastMessage(it.message)
+
+                                    view.confirmClickable(1)
                                 }
                             }
+                            .doOnError { it.printStackTrace() }
+                            .subscribe()
                     )
         } else {
             view.toastMessage("중복체크를 먼저 해주세요.")
+
+            view.confirmClickable(1)
         }
     }
 
-
-
+    //TextChange Listener
     override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         validate = false
     }
