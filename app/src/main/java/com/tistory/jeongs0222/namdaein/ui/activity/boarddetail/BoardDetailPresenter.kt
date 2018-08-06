@@ -215,7 +215,6 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPage
                     .add(apiClient.push(writtenUserKey, dbHelper.getNickname()!!, 1)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnComplete {  }
                             .doOnError { it.printStackTrace() }
                             .subscribe({Log.e("value", it.value.toString())})
                     )

@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.marketdetail.MarketDetailActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.marketwrite.MarketWriteActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -64,6 +65,14 @@ class WrittenMarketAdapter(internal var context: Context): RecyclerView.Adapter<
                 }
 
             }
+        }
+
+        holder.written_market_layout.setOnClickListener {
+            val intent = Intent(it.context, MarketDetailActivity::class.java)
+
+            intent.putExtra("order", items.order)
+
+            it.context.startActivity(intent)
         }
     }
 

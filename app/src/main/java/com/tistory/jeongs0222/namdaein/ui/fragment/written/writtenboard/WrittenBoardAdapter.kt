@@ -14,6 +14,7 @@ import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.boarddetail.BoardDetailActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.boardwrite.BoardWriteActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -68,6 +69,14 @@ class WrittenBoardAdapter(internal var context: Context): RecyclerView.Adapter<W
                 }
 
             }
+        }
+
+        holder.written_board_layout.setOnClickListener {
+            val intent = Intent(it.context, BoardDetailActivity::class.java)
+
+            intent.putExtra("order", order)
+
+            it.context.startActivity(intent)
         }
 
     }
