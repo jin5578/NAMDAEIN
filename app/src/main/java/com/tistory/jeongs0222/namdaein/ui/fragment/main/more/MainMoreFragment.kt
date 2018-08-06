@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.tistory.jeongs0222.namdaein.model.DBHelper
 import com.tistory.jeongs0222.namdaein.ui.activity.editnickname.EditNicknameActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.inquire.InquireActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.notice.NoticeActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.push.PushActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.termsofuse.TermsOfUseActivity
 import com.tistory.jeongs0222.namdaein.ui.activity.written.WrittenActivity
 import com.tistory.jeongs0222.namdaein.utils.CustomToast
@@ -60,6 +62,10 @@ class MainMoreFragment : Fragment() {
 
         more_inquire_textView.setOnClickListener {
             startActivity(InquireActivity::class.java)
+        }
+
+        more_push_textView.setOnClickListener {
+            startActivity(PushActivity::class.java)
         }
 
         more_notice_textView.setOnClickListener {

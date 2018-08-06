@@ -52,14 +52,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.written.WrittenActivity" />
-        <activity android:name=".ui.fragment.written.writtenmarket.WrittenMarketFragment" />
-        <activity android:name=".ui.fragment.written.writtenboard.WrittenBoardFragment" />
         <activity android:name=".ui.activity.marketwrite.MarketWriteActivity" />
         <activity android:name=".ui.activity.boardwrite.BoardWriteActivity" />
         <activity android:name=".ui.activity.inquire.InquireActivity" />
         <activity android:name=".ui.activity.chatlist.ChatListActivity" />
         <activity android:name=".ui.activity.editnickname.EditNicknameActivity" />
-        <activity android:name=".ui.activity.notice.NoticeActivity"></activity>
+        <activity android:name=".ui.activity.notice.NoticeActivity" />
+
+        <service android:name=".utils.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".utils.FirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".ui.activity.push.PushActivity"></activity>
     </application>
 
 </manifest>

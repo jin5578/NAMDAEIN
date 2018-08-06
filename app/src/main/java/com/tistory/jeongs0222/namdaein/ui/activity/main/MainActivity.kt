@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.View
+import com.google.firebase.iid.FirebaseInstanceId
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.DBHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +23,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.e("token", FirebaseInstanceId.getInstance().token)
 
         init()
     }

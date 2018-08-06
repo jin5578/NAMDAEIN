@@ -219,4 +219,12 @@ interface ApiService {
 
     data class boardWrites(val value: Int, val message: String)
 
+    //Push Message
+    @FormUrlEncoded
+    @POST("push.php")
+    fun push(@Field("userkey") userkey: String,
+             @Field("sendernickname") sendernickname: String,
+             @Field("sort") sort: Int): Observable<pushes>
+
+    data class pushes(val value: Int)
 }

@@ -124,6 +124,30 @@
         app:layout_constraintTop_toBottomOf="@id/more_written_textView" />
 
     <TextView
+        android:id="@+id/more_push_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="알림"
+        android:textSize="12sp"
+        android:textColor="@color/colorBlack"
+        android:fontFamily="@font/goyang"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/null5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/more_push_textView" />
+
+    <TextView
         android:id="@+id/more_notice_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -135,7 +159,7 @@
         android:paddingBottom="20dp"
         android:paddingLeft="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_constraintTop_toBottomOf="@id/null5"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <View

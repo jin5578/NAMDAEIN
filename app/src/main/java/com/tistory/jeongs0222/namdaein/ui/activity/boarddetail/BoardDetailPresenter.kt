@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.OrientationHelper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.ImageView
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.api.ApiClient
@@ -35,6 +36,8 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPage
     private lateinit var mAdapter: CommentAdapter
 
     private lateinit var pAdapter: PictureViewPagerAdapter
+
+    private lateinit var writtenUserKey: String
 
     private var images: MutableList<String> = ArrayList()
 
@@ -72,6 +75,8 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPage
                         } else {
                             view.imageViewPagerVisible(0)
                         }
+
+                        writtenUserKey = it.userkey
 
                         callback(it)
                     }
@@ -190,17 +195,31 @@ class BoardDetailPresenter: BoardDetailContract.Presenter, TextWatcher, ViewPage
                         .doOnComplete {
                             setUpCommentData()
                         }
-                        .doOnError {
-                            it.printStackTrace()
-                        }
+                        .doOnError { it.printStackTrace() }
                         .subscribe {
                             if(it.value == 1) {
                                 view.toastMessage(it.message)
+                            } else {
+                                commentPush()
                             }
                             view.sendEditText().text = null
                             view.sendClickable(0)
                         }
                     )
+        }
+    }
+
+    private fun commentPush() {
+        if(dbHelper.getGoogle_uId() != writtenUserKey) {
+            compositeDisposable
+                    .add(apiClient.push(writtenUserKey, dbHelper.getNickname()!!, 1)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnComplete {  }
+                            .doOnError { it.printStackTrace() }
+                            .subscribe({Log.e("value", it.value.toString())})
+                    )
+
         }
     }
 
