@@ -15,6 +15,8 @@ interface LoginContract {
         fun mCallbackManager(): CallbackManager
 
         fun toastMessage(message: String)
+
+        fun progressBar(value: Int)
     }
 
     interface Presenter {

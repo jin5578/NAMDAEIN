@@ -3,6 +3,7 @@ package com.tistory.jeongs0222.namdaein.ui.activity.login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.facebook.*
 import com.google.android.gms.auth.api.Auth
@@ -44,6 +45,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     private fun onClickEvent() {
         login_google_button.setOnClickListener {
+            progressBar(0)
+
             val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mPresenter.mGoogleApiClient)
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
@@ -54,12 +57,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
     }
 
-
-    //Google Login 관련
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
 
-
+        //Google Login 관련
         if (requestCode == RC_SIGN_IN) {
             val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
             if (result.isSuccess) {
@@ -68,6 +69,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             } else {
 
             }
+
+            progressBar(1)
+
         } else {
             //Facebook Login 관련
             mCallbackManager.onActivityResult(requestCode, resultCode, data)
@@ -95,6 +99,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         val toastMessage = CustomToast(this)
 
         toastMessage.makeText(message, Toast.LENGTH_SHORT)
+    }
+
+    override fun progressBar(value: Int) {
+        when(value) {
+            0 -> login_progressBar.visibility = View.VISIBLE
+
+            1 -> login_progressBar.visibility = View.GONE
+        }
     }
 
     override fun onStop() {
