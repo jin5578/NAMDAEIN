@@ -44,4 +44,8 @@ object Model {
                                 val title: String,
                                 val date: String,
                                 val content: String)
+
+    data class campusNewsItem(val address: String,
+                              val title: String,
+                              val image: String)
 }

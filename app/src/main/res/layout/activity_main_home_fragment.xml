@@ -32,27 +32,17 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recyclerView2"
+        <LinearLayout
+            android:id="@+id/main_dots_linearLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/null1"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/main_recyclerView3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none"
-            android:clipToPadding="false"
-            app:layout_constraintTop_toBottomOf="@id/main_recyclerView2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null1" />
 
     </android.support.constraint.ConstraintLayout>
 

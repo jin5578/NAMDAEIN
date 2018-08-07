@@ -10,6 +10,7 @@
 
 
     <color name="colorLightGray">#D5D5D5</color>
+    <color name="colorLGray">#E4E4E4</color>
     <color name="colorLightLightGray">#F6F6F6</color>
 
     <color name="colorDeepGray">#90A4AE</color>

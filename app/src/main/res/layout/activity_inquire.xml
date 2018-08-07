@@ -49,7 +49,6 @@
         android:padding="40dp"
         android:gravity="center"
         android:text="이용 중 불편한 점이나 건의사항이 있으면 말씀해주세요. \n신속한 대처로 문제점을 개선하겠습니다."
-        android:textColor="@color/colorRed"
         android:textSize="10sp"
         android:fontFamily="@font/goyang"
         app:layout_constraintStart_toStartOf="parent"

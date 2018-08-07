@@ -227,4 +227,10 @@ interface ApiService {
              @Field("sort") sort: Int): Observable<pushes>
 
     data class pushes(val value: Int)
+
+    //CampusNews
+    @GET("campusNews.php")
+    fun campusNews(): Observable<campusNewss>
+
+    data class campusNewss(val news: MutableList<Model.campusNewsItem>)
 }

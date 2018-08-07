@@ -29,7 +29,6 @@ object DynamicViewUtil{
         thumbnail.layoutParams = FrameLayout.LayoutParams(DynamicViewUtil.xdpx(context), DynamicViewUtil.hdpx(context))
 
         success(imageHolder)
-
     }
 
     fun showDots(dotsCount: Int, context: Context, dotsLinearLayout: LinearLayout, success: (ArrayList<ImageView>) -> Unit) {
