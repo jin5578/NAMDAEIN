@@ -32,17 +32,108 @@
 
         </android.support.v4.widget.NestedScrollView>
 
-        <LinearLayout
-            android:id="@+id/main_dots_linearLayout"
+        <View
+            android:id="@+id/null2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/null1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageView
+            android:id="@+id/main_bus_imageView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="center"
-            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_directions_bus_pink_24dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/main_subway_imageView"
+            app:layout_constraintTop_toBottomOf="@id/null2"
+            app:layout_constraintHorizontal_weight="1"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/null2"
+            app:layout_constraintStart_toEndOf="@id/main_bus_imageView"
+            app:layout_constraintBottom_toTopOf="@id/null3"/>
+
+        <ImageView
+            android:id="@+id/main_subway_imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_directions_subway_pink_24dp"
+            app:layout_constraintStart_toEndOf="@id/main_bus_imageView"
+            app:layout_constraintEnd_toStartOf="@id/main_railway_imageView"
+            app:layout_constraintTop_toTopOf="@id/main_bus_imageView"
+            app:layout_constraintHorizontal_weight="1"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/null2"
+            app:layout_constraintStart_toEndOf="@id/main_subway_imageView"
+            app:layout_constraintBottom_toTopOf="@id/null3"/>
+
+        <ImageView
+            android:id="@+id/main_railway_imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_directions_railway_pink_24dp"
+            app:layout_constraintStart_toEndOf="@id/main_subway_imageView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/null1" />
+            app:layout_constraintTop_toTopOf="@id/main_subway_imageView"
+            app:layout_constraintHorizontal_weight="1"/>
+
+        <TextView
+            android:id="@+id/null4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="버스 시간표"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="@id/main_bus_imageView"
+            app:layout_constraintTop_toBottomOf="@id/main_bus_imageView"
+            app:layout_constraintEnd_toEndOf="@id/main_bus_imageView"/>
+
+        <TextView
+            android:id="@+id/null5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="지하철 시간표"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="@id/main_subway_imageView"
+            app:layout_constraintTop_toBottomOf="@id/main_subway_imageView"
+            app:layout_constraintEnd_toEndOf="@id/main_subway_imageView"/>
+
+        <TextView
+            android:id="@+id/null6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="기차 시간표"
+            android:textSize="9sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="@id/main_railway_imageView"
+            app:layout_constraintTop_toBottomOf="@id/main_railway_imageView"
+            app:layout_constraintEnd_toEndOf="@id/main_railway_imageView"/>
+
+        <View
+            android:id="@+id/null3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintTop_toBottomOf="@id/null4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 

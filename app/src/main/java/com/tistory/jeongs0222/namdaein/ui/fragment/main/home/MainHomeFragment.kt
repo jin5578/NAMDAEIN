@@ -1,13 +1,14 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.ui.activity.bustimetable.BusTimeTableActivity
 import kotlinx.android.synthetic.main.activity_main_home_fragment.*
 
 
@@ -33,13 +34,23 @@ class MainHomeFragment : Fragment(), MainHomeContract.View {
         mPresenter.setUpInitNews()
 
         mPresenter.setUpNewsData()
+
+        onClickEvent()
+    }
+
+    private fun onClickEvent() {
+        main_bus_imageView.setOnClickListener {
+            startActivity(BusTimeTableActivity::class.java)
+        }
+    }
+
+    private fun startActivity(activityClass: Class<*>) {
+        val intent = Intent(activity, activityClass)
+
+        startActivity(intent)
     }
 
     override fun newsRecyclerView(): RecyclerView {
         return main_recyclerView
-    }
-
-    override fun dotsLinearLayout(): LinearLayout {
-        return main_dots_linearLayout
     }
 }

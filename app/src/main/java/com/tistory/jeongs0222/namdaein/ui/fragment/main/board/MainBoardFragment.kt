@@ -8,12 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.NonSwipeViewPager
 import kotlinx.android.synthetic.main.activity_main_board_fragment.*
 
 
-class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener {
+class MainBoardFragment : Fragment(), MainBoardContract.View {
 
-    private lateinit var mPagerAdapter: MainBoardViewPagerAdapter
+    private lateinit var mPresenter: MainBoardPresenter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -28,51 +29,21 @@ class MainBoardFragment : Fragment(), TabLayout.OnTabSelectedListener, ViewPager
 
     private fun init() {
 
-        setUpTabLayout()
+        mPresenter = MainBoardPresenter()
 
-        setUpViewPager()
+        mPresenter.setView(this, activity!!)
+
+        mPresenter.setUpTabLayout()
+
+        mPresenter.setUpViewPager(fragmentManager!!)
     }
 
-    private fun setUpTabLayout() {
-        main_board_tabLayout.addOnTabSelectedListener(this@MainBoardFragment)
-
+    override fun tabLayout(): TabLayout {
+        return main_board_tabLayout
     }
 
-    private fun setUpViewPager() {
-        mPagerAdapter = MainBoardViewPagerAdapter(fragmentManager!!, main_board_tabLayout.tabCount)
-
-        main_board_viewPager.apply {
-            currentItem = 0
-            offscreenPageLimit = main_board_tabLayout.tabCount
-            adapter = mPagerAdapter
-            addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_board_tabLayout))
-        }
-
-    }
-
-    //TabBar SelectedListener
-    override fun onTabSelected(tab: TabLayout.Tab?) {
-        main_board_viewPager.currentItem = tab!!.position
-    }
-    override fun onTabReselected(tab: TabLayout.Tab?) {
-
-    }
-
-    override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-    }
-
-    //ViewPager ChangeListener
-    override fun onPageScrollStateChanged(state: Int) {
-
-    }
-
-    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
-    }
-
-    override fun onPageSelected(position: Int) {
-
+    override fun viewPager(): NonSwipeViewPager {
+        return main_board_viewPager
     }
 
 }

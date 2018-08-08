@@ -7,10 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
+import com.tistory.jeongs0222.namdaein.utils.NonSwipeViewPager
 import kotlinx.android.synthetic.main.activity_main_market_fragment.*
 
 
-class MainMarketFragment : Fragment(), TabLayout.OnTabSelectedListener {
+class MainMarketFragment : Fragment(), MainMarketContract.View {
+
+    private lateinit var mPresenter: MainMarketPresenter
+
 
     private lateinit var mPagerAdapter: MainMarketViewPagerAdapter
 
@@ -26,38 +30,21 @@ class MainMarketFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private fun init() {
 
-        setUpTabLayout()
+        mPresenter = MainMarketPresenter()
 
-        setUpViewPager()
+        mPresenter.setView(this, activity!!)
+
+        mPresenter.setUpTabLayout()
+
+        mPresenter.setUpViewPager(fragmentManager!!)
     }
 
-    private fun setUpTabLayout() {
-        main_market_tabLayout.addOnTabSelectedListener(this@MainMarketFragment)
+    override fun tabLayout(): TabLayout {
+        return main_market_tabLayout
     }
 
-    private fun setUpViewPager() {
-        mPagerAdapter = MainMarketViewPagerAdapter(fragmentManager!!, main_market_tabLayout.tabCount)
-
-        main_market_viewPager.apply {
-            currentItem = 0
-            offscreenPageLimit = main_market_tabLayout.tabCount
-            adapter = mPagerAdapter
-            addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_market_tabLayout))
-        }
+    override fun viewPager(): NonSwipeViewPager {
+        return main_market_viewPager
     }
-
-    //TabBar SelectedListener
-    override fun onTabSelected(tab: TabLayout.Tab?) {
-        main_market_viewPager.currentItem = tab!!.position
-    }
-
-    override fun onTabReselected(tab: TabLayout.Tab?) {
-
-    }
-
-    override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-    }
-
 }
 
