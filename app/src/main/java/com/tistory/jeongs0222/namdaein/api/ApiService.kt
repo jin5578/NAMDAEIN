@@ -241,4 +241,9 @@ interface ApiService {
 
     data class bustimetables(val bustimetable: MutableList<Model.busTimeTable>)
 
+    //Capital Detail
+    @FormUrlEncoded
+    @POST("capitaldetail.php")
+    fun capitaldetail(@Field("order") order: Int): Observable<Model.busTimeTable>
+
 }

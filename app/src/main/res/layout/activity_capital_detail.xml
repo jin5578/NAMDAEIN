@@ -1,30 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:scrollbars="none"
     tools:context=".ui.activity.capitaldetail.CapitalDetailActivity">
 
-    <ImageView
-        android:id="@+id/capital_imageView"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/capital_location_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/goyang"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/capital_imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="강남역"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/capital_viewPager"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/capital_dots_linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_viewPager"
+            tools:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/capital_location_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_dots_linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="강남역"/>
+
+        <TextView
+            android:id="@+id/capital_boardingGate_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_location_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="강남역 삼성화재 \n강남역 #5번출구 \n양재방향"/>
+
+        <TextView
+            android:id="@+id/capital_price_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:textColor="@color/colorTabSelected"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_boardingGate_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="4200원"/>
+
+        <View
+            android:id="@+id/null2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_price_textView"/>
+
+        <TextView
+            android:id="@+id/null1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="등교시간"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null2"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/capital_school_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null1"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="07:20  08:10"/>
+
+        <TextView
+            android:id="@+id/null3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="하교시간"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_school_textView"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/capital_home_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null3"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="07:20  08:10"/>
+
+        <View
+            android:id="@+id/null5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorLightLightGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/capital_home_textView"/>
+
+
+        <TextView
+            android:id="@+id/null4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null5"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="참고"/>
+
+        <TextView
+            android:id="@+id/capital_etc_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null4"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="미금역
+#6번출구
+버스정류장
+07:15
+
+오리역
+#4번출구
+택시승강장
+07:20
+
+보정역(횡단보도)
+07:25
+
+면허시험장앞
+07:30
+
+신갈
+(경부고속도로 상행선
+굴다리 밑)
+07:35"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

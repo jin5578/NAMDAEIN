@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.bustimetable.capital
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.model.Model
+import com.tistory.jeongs0222.namdaein.ui.activity.capitaldetail.CapitalDetailActivity
 
 
 class CapitalItemAdapter(internal val context: Context): RecyclerView.Adapter<CapitalItemAdapter.ViewHolder>() {
@@ -30,6 +32,13 @@ class CapitalItemAdapter(internal val context: Context): RecyclerView.Adapter<Ca
         holder.capital_school_textView.text = items.school
         holder.capital_home_textView.text = items.home
         holder.capital_price_textView.text = items.price.toString()+"원"
+
+        holder.capital_entire_layout.setOnClickListener {
+            val intent = Intent(it.context, CapitalDetailActivity::class.java)
+            intent.putExtra("order", items.order)
+
+            it.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
