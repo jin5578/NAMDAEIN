@@ -75,7 +75,8 @@
         <activity android:name=".ui.fragment.bustimetable.seonghwan.SeonghwanFragment" />
         <activity android:name=".ui.fragment.bustimetable.pyeongtaek.PyeongtaekFragment" />
         <activity android:name=".ui.fragment.bustimetable.cheonan.CheonanFragment" />
-        <activity android:name=".ui.fragment.bustimetable.capital.CapitalFragment"></activity>
+        <activity android:name=".ui.fragment.bustimetable.capital.CapitalFragment" />
+        <activity android:name=".ui.activity.capitaldetail.CapitalDetailActivity"></activity>
     </application>
 
 </manifest>

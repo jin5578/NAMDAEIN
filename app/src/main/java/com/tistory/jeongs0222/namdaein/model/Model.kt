@@ -48,4 +48,12 @@ object Model {
     data class campusNewsItem(val address: String,
                               val title: String,
                               val image: String)
+
+    data class busTimeTable(val order: Int,
+                            val location: String,
+                            val boardingGate: String,
+                            val price: Int,
+                            val school: String,
+                            val home: String,
+                            val etc: String)
 }

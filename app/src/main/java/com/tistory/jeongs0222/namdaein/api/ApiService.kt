@@ -233,4 +233,12 @@ interface ApiService {
     fun campusNews(): Observable<campusNewss>
 
     data class campusNewss(val news: MutableList<Model.campusNewsItem>)
+
+    //Bus Timetable
+    @FormUrlEncoded
+    @POST("bustimetable.php")
+    fun bustimetable(@Field("category") category: Int): Observable<bustimetables>
+
+    data class bustimetables(val bustimetable: MutableList<Model.busTimeTable>)
+
 }

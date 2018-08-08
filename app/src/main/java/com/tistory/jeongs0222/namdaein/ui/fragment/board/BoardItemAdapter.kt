@@ -57,8 +57,6 @@ class BoardItemAdapter(internal var context: Context) : RecyclerView.Adapter<Boa
 
     fun addAllItems(e: MutableList<Model.boardItem>) = item.addAll(e)
 
-    fun addItems(e: Model.boardItem) = item.add(e)
-
     fun notifyChanged() = notifyDataSetChanged()
 
 
