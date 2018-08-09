@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.bustimetable.capital
+package com.tistory.jeongs0222.namdaein.ui.fragment.bustimetable.pyeongtaek
 
 import android.content.Context
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,25 +10,25 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 
-class CapitalPresenter: CapitalContract.Presenter {
+class PyeongtaekPresenter: PyeongtaekContract.Presenter {
 
-    private lateinit var view: CapitalContract.View
+    private lateinit var view: PyeongtaekContract.View
     private lateinit var context: Context
 
-    private lateinit var mAdapter: CapitalItemAdapter
+    private lateinit var mAdapter: PyeongtaekItemAdapter
 
     private var compositeDisposable = CompositeDisposable()
 
     private val apiClient by lazy { ApiClient.create() }
 
 
-    override fun setView(view: CapitalContract.View, context: Context) {
+    override fun setView(view: PyeongtaekContract.View, context: Context) {
         this.view = view
         this.context = context
     }
 
     override fun setUpRecyclerView() {
-        mAdapter = CapitalItemAdapter(context)
+        mAdapter = PyeongtaekItemAdapter(context)
 
         view.recyclerView().apply {
             adapter = mAdapter
@@ -41,7 +41,7 @@ class CapitalPresenter: CapitalContract.Presenter {
 
     override fun setUpData() {
         compositeDisposable
-                .add(apiClient.bustimetable(2)
+                .add(apiClient.bustimetable(3)
                         .subscribeOn(Schedulers.io())
                         .doOnNext { mAdapter.addAllItems(it.bustimetable) }
                         .observeOn(AndroidSchedulers.mainThread())
@@ -49,6 +49,7 @@ class CapitalPresenter: CapitalContract.Presenter {
                         .doOnError { it.printStackTrace() }
                         .subscribe()
                 )
+
     }
 
     override fun disposableClear() = compositeDisposable.clear()
