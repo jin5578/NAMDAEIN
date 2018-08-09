@@ -55,5 +55,10 @@ object Model {
                             val price: Int,
                             val school: String,
                             val home: String,
-                            val etc: String)
+                            val etc: String,
+                            val locationImage1: String,
+                            val locationImage2: String,
+                            val locationImage3: String,
+                            val locationImage4: String,
+                            val locationImage5: String)
 }
