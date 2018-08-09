@@ -17,9 +17,9 @@ class BusTimeTableViewPagerAdapter(fm: FragmentManager, internal val numOfTabs: 
 
             1 -> CheonanFragment()
 
-            2 -> CapitalFragment()
+            2 -> PyeongtaekFragment()
 
-            3 -> PyeongtaekFragment()
+            3 -> CapitalFragment()
 
             else -> null
         }

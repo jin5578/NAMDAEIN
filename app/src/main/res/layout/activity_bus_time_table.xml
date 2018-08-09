@@ -32,12 +32,12 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수도권지역" />
+            android:text="안성, 평택지역" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안성, 평택지역" />
+            android:text="수도권지역" />
 
     </android.support.design.widget.TabLayout>
 
