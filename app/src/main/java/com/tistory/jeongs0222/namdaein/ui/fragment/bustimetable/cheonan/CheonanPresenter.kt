@@ -1,4 +1,4 @@
-package com.tistory.jeongs0222.namdaein.ui.fragment.bustimetable.pyeongtaek
+package com.tistory.jeongs0222.namdaein.ui.fragment.bustimetable.cheonan
 
 import android.content.Context
 import android.support.v7.widget.DefaultItemAnimator
@@ -10,25 +10,24 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 
-class PyeongtaekPresenter: PyeongtaekContract.Presenter {
+class CheonanPresenter: CheonanContract.Presenter {
 
-    private lateinit var view: PyeongtaekContract.View
+    private lateinit var view: CheonanContract.View
     private lateinit var context: Context
 
-    private lateinit var mAdapter: PyeongtaekItemAdapter
+    private lateinit var mAdapter: CheonanItemAdapter
 
     private var compositeDisposable = CompositeDisposable()
 
     private val apiClient by lazy { ApiClient.create() }
 
-
-    override fun setView(view: PyeongtaekContract.View, context: Context) {
+    override fun setView(view: CheonanContract.View, context: Context) {
         this.view = view
         this.context = context
     }
 
     override fun setUpRecyclerView() {
-        mAdapter = PyeongtaekItemAdapter(context)
+        mAdapter = CheonanItemAdapter(context)
 
         view.recyclerView().apply {
             adapter = mAdapter
@@ -41,7 +40,7 @@ class PyeongtaekPresenter: PyeongtaekContract.Presenter {
 
     override fun setUpData() {
         compositeDisposable
-                .add(apiClient.bustimetable(3)
+                .add(apiClient.bustimetable(1)
                         .subscribeOn(Schedulers.io())
                         .doOnNext { mAdapter.addAllItems(it.bustimetable) }
                         .observeOn(AndroidSchedulers.mainThread())
