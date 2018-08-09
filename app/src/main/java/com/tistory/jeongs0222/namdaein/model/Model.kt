@@ -61,4 +61,8 @@ object Model {
                             val locationImage3: String,
                             val locationImage4: String,
                             val locationImage5: String)
+
+    data class subwayTimeTable(val order: Int,
+                               val destination: String,
+                               val time: String)
 }

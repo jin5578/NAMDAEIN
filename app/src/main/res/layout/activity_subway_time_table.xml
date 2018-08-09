@@ -80,6 +80,7 @@
         app:layout_constraintHorizontal_weight="1" />
 
     <View
+        android:id="@+id/null4"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/colorLightLightGray"
@@ -95,7 +96,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_constraintTop_toBottomOf="@id/null4"
         app:layout_scrollFlags="scroll|enterAlways" />
 
 </android.support.constraint.ConstraintLayout>

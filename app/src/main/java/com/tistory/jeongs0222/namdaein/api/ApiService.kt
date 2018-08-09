@@ -246,4 +246,11 @@ interface ApiService {
     @POST("capitaldetail.php")
     fun capitaldetail(@Field("order") order: Int): Observable<Model.busTimeTable>
 
+    //Subway Timetable
+    @FormUrlEncoded
+    @POST("subwaytimetable.php")
+    fun subwaytimetable(@Field("category") category: Int): Observable<subwaytimetables>
+
+    data class subwaytimetables(val subwaytimetable: MutableList<Model.subwayTimeTable>)
+
 }
