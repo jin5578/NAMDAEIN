@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ui.activity.subwaytimetable.SubwayTimeTableActivity">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/timeTable_tabLayout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/colorTabSelected"
+        app:tabTextAppearance="@style/InnerTabLayoutTextStyle"
+        app:tabTextColor="@color/colorBlack">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평일" />
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공휴일" />
+
+    </android.support.design.widget.TabLayout>
+
+    <View
+        android:id="@+id/null1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timeTable_tabLayout" />
+
+    <TextView
+        android:id="@+id/null2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="평택 방향"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/null1"
+        app:layout_constraintEnd_toStartOf="@id/null3"
+        app:layout_constraintHorizontal_weight="1"/>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintStart_toEndOf="@id/null2"
+        app:layout_constraintTop_toTopOf="@id/null2"
+        app:layout_constraintBottom_toBottomOf="@id/null2"/>
+
+    <TextView
+        android:id="@+id/null3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="직산 방향"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toEndOf="@id/null2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/null2"
+        app:layout_constraintHorizontal_weight="1" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"
+        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.tistory.jeongs0222.namdaein.utils.NonSwipeViewPager
+        android:id="@+id/timeTable_viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/null2"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
+</android.support.constraint.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tistory.jeongs0222.namdaein.R
 import com.tistory.jeongs0222.namdaein.ui.activity.bustimetable.BusTimeTableActivity
+import com.tistory.jeongs0222.namdaein.ui.activity.subwaytimetable.SubwayTimeTableActivity
 import kotlinx.android.synthetic.main.activity_main_home_fragment.*
 
 
@@ -41,6 +42,10 @@ class MainHomeFragment : Fragment(), MainHomeContract.View {
     private fun onClickEvent() {
         main_bus_imageView.setOnClickListener {
             startActivity(BusTimeTableActivity::class.java)
+        }
+
+        main_subway_imageView.setOnClickListener {
+            startActivity(SubwayTimeTableActivity::class.java)
         }
     }
 

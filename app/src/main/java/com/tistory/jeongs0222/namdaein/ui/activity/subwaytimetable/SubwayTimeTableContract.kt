@@ -1,11 +1,11 @@
-package com.tistory.jeongs0222.namdaein.ui.activity.bustimetable
+package com.tistory.jeongs0222.namdaein.ui.activity.subwaytimetable
 
 import android.content.Context
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentManager
 
 
-interface BusTimeTableContract {
+interface SubwayTimeTableContract {
 
     interface View {
         fun tabLayout(): TabLayout
