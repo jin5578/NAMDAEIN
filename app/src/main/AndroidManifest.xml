@@ -79,7 +79,8 @@
         <activity android:name=".ui.activity.capitaldetail.CapitalDetailActivity" />
         <activity android:name=".ui.activity.subwaytimetable.SubwayTimeTableActivity" />
         <activity android:name=".ui.fragment.subwaytimetable.weekday.WeekdayFragment" />
-        <activity android:name=".ui.fragment.subwaytimetable.holiday.HolidayFragment"></activity>
+        <activity android:name=".ui.fragment.subwaytimetable.holiday.HolidayFragment" />
+        <activity android:name=".ui.activity.calendar.CalendarActivity"></activity>
     </application>
 
 </manifest>
