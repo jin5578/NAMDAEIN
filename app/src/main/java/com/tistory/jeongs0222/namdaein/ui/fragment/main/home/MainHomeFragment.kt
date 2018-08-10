@@ -1,6 +1,7 @@
 package com.tistory.jeongs0222.namdaein.ui.fragment.main.home
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -50,6 +51,12 @@ class MainHomeFragment : Fragment(), MainHomeContract.View {
 
         main_subway_imageView.setOnClickListener {
             startActivity(SubwayTimeTableActivity::class.java)
+        }
+
+        main_calendar_imageView.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.nsu.ac.kr/?m1=page%25&menu_id=218%25"))
+
+            startActivity(intent)
         }
     }
 

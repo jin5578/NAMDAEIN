@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_directions_subway_pink_24dp"
             app:layout_constraintStart_toEndOf="@id/main_bus_imageView"
-            app:layout_constraintEnd_toStartOf="@id/main_railway_imageView"
+            app:layout_constraintEnd_toStartOf="@id/main_calendar_imageView"
             app:layout_constraintTop_toTopOf="@id/main_bus_imageView"
             app:layout_constraintHorizontal_weight="1"/>
 
@@ -80,7 +80,7 @@
             app:layout_constraintBottom_toTopOf="@id/null3"/>
 
         <ImageView
-            android:id="@+id/main_railway_imageView"
+            android:id="@+id/main_calendar_imageView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_event_note_pink_24dp"
@@ -121,9 +121,9 @@
             android:text="학사 일정"
             android:textSize="9sp"
             android:fontFamily="@font/goyang"
-            app:layout_constraintStart_toStartOf="@id/main_railway_imageView"
-            app:layout_constraintTop_toBottomOf="@id/main_railway_imageView"
-            app:layout_constraintEnd_toEndOf="@id/main_railway_imageView"/>
+            app:layout_constraintStart_toStartOf="@id/main_calendar_imageView"
+            app:layout_constraintTop_toBottomOf="@id/main_calendar_imageView"
+            app:layout_constraintEnd_toEndOf="@id/main_calendar_imageView"/>
 
         <View
             android:id="@+id/null3"
