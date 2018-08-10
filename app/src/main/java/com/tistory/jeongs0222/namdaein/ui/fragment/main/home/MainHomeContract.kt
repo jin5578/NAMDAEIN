@@ -8,6 +8,8 @@ interface MainHomeContract {
 
     interface View {
         fun newsRecyclerView(): RecyclerView
+
+        fun bestRecyclerView(): RecyclerView
     }
 
     interface Presenter {
@@ -16,5 +18,9 @@ interface MainHomeContract {
         fun setUpInitNews()
 
         fun setUpNewsData()
+
+        fun setUpInitBest()
+
+        fun setUpBestData()
     }
 }

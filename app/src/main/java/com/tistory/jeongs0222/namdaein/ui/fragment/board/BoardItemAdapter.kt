@@ -39,7 +39,7 @@ class BoardItemAdapter(internal var context: Context) : RecyclerView.Adapter<Boa
         holder.board_entire_layout.setOnClickListener {
             val order = items.order
 
-            var intent = Intent(it.context, BoardDetailActivity::class.java)
+            val intent = Intent(it.context, BoardDetailActivity::class.java)
             intent.putExtra("order", order)
 
             it.context.startActivity(intent)

@@ -36,6 +36,10 @@ class MainHomeFragment : Fragment(), MainHomeContract.View {
 
         mPresenter.setUpNewsData()
 
+        mPresenter.setUpInitBest()
+
+        mPresenter.setUpBestData()
+
         onClickEvent()
     }
 
@@ -57,5 +61,9 @@ class MainHomeFragment : Fragment(), MainHomeContract.View {
 
     override fun newsRecyclerView(): RecyclerView {
         return main_recyclerView
+    }
+
+    override fun bestRecyclerView(): RecyclerView {
+        return main_best_recyclerView
     }
 }

@@ -36,7 +36,7 @@
             android:id="@+id/null2"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorLightLightGray"
             app:layout_constraintTop_toBottomOf="@id/null1"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
             android:id="@+id/main_railway_imageView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_directions_railway_pink_24dp"
+            android:src="@drawable/ic_event_note_pink_24dp"
             app:layout_constraintStart_toEndOf="@id/main_subway_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/main_subway_imageView"
@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="기차 시간표"
+            android:text="학사 일정"
             android:textSize="9sp"
             android:fontFamily="@font/goyang"
             app:layout_constraintStart_toStartOf="@id/main_railway_imageView"
@@ -139,13 +139,34 @@
             android:id="@+id/null7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:padding="15dp"
+            android:text="실시간 인기 글"
             android:textColor="@color/colorBlack"
             android:textSize="12sp"
             android:fontFamily="@font/goyang"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/null3"
-            tools:text="실시간 인기 글"/>
+            app:layout_constraintTop_toBottomOf="@id/null3"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_best_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/null7"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/null8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:text="공모전 / 대외활동"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            android:fontFamily="@font/goyang"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_best_recyclerView"/>
 
     </android.support.constraint.ConstraintLayout>
 

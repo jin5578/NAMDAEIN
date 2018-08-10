@@ -16,6 +16,7 @@ class MainHomePresenter: MainHomeContract.Presenter {
     private var compositeDisposable = CompositeDisposable()
 
     private lateinit var mAdapter: NewsItemAdapter
+    private lateinit var mBAdapter: BestItemAdapter
 
     private val apiClient by lazy { ApiClient.create() }
 
@@ -48,6 +49,34 @@ class MainHomePresenter: MainHomeContract.Presenter {
                         .doOnNext {
                             if(it.news.isNotEmpty()) {
                                 mAdapter.addAllItems(it.news)
+                            }
+                        }
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError { it.printStackTrace() }
+                        .subscribe()
+                )
+    }
+
+    override fun setUpInitBest() {
+        mBAdapter = BestItemAdapter(context)
+
+        view.bestRecyclerView().apply {
+            adapter = mBAdapter
+
+            layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            scrollToPosition(0)
+        }
+    }
+
+    override fun setUpBestData() {
+        compositeDisposable
+                .add(apiClient.bestBoard()
+                        .subscribeOn(Schedulers.io())
+                        .doOnNext {
+                            if(it.bestboard.isNotEmpty()) {
+                                mBAdapter.addAllItems(it.bestboard)
                             }
                         }
                         .observeOn(AndroidSchedulers.mainThread())

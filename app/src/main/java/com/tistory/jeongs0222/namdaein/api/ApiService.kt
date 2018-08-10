@@ -252,5 +252,4 @@ interface ApiService {
     fun subwaytimetable(@Field("category") category: Int): Observable<subwaytimetables>
 
     data class subwaytimetables(val subwaytimetable: MutableList<Model.subwayTimeTable>)
-
 }

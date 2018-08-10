@@ -1,17 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/best_entire_constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginTop="1dp"
+    android:layout_marginBottom="1dp"
+    android:paddingBottom="3dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="3dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/rectangle_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rectangle1_background">
 
     <TextView
+        android:id="@+id/best_nickname_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorBlack"
+        android:textSize="11sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/best_date_textView"
+        app:layout_constraintHorizontal_weight="5"
+        tools:text="히키코모리"/>
+
+    <TextView
+        android:id="@+id/best_date_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
         android:textSize="9sp"
         android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toEndOf="@id/best_nickname_textView"
+        app:layout_constraintTop_toTopOf="@id/best_nickname_textView"
+        app:layout_constraintBottom_toBottomOf="@id/best_nickname_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        tools:text="18.03.09 20:00"/>
 
-        tools:text="히키코모리"
+    <TextView
+        android:id="@+id/best_title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:maxLines="1"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/best_nickname_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="게시글을 통해 소통해보세요."/>
+
+    <TextView
+        android:id="@+id/best_content_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="10dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="10sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/best_title_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="게시글을 올려 소통을 해보세요. 내 글과 상대방의 글에 댓글을 남길 수 있습니다."/>
+
+    <ImageView
+        android:id="@+id/null1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_thumb_up_black_15dp"
+        app:layout_constraintTop_toBottomOf="@id/best_content_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/best_thumbUp_textView"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="9sp"
+        android:fontFamily="@font/goyang"
+        app:layout_constraintStart_toEndOf="@id/null1"
+        app:layout_constraintTop_toTopOf="@id/null1"
+        app:layout_constraintBottom_toBottomOf="@id/null1"
+        tools:text="1123"/>
+
+    <ImageView
+        android:id="@+id/best_validate_imageView"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_camera_alt_gray_24dp"
+        app:layout_constraintStart_toEndOf="@id/best_thumbUp_textView"
+        app:layout_constraintTop_toTopOf="@id/best_thumbUp_textView"
+        app:layout_constraintBottom_toBottomOf="@id/best_thumbUp_textView"
+        tools:visibility="visible"/>
 
 </android.support.constraint.ConstraintLayout>
