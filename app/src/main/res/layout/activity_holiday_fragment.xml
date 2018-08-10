@@ -7,16 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.subwaytimetable.holiday.HolidayFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="공휴일 시간표"
-        android:textColor="@color/colorBlack"
-        android:textSize="20sp"
-        android:fontFamily="@font/goyang"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/holiday_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"/>
 
 </android.support.constraint.ConstraintLayout>
