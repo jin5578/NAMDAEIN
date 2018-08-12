@@ -72,15 +72,8 @@
 
         <activity android:name=".ui.activity.push.PushActivity" />
         <activity android:name=".ui.activity.bustimetable.BusTimeTableActivity" />
-        <activity android:name=".ui.fragment.bustimetable.seonghwan.SeonghwanFragment" />
-        <activity android:name=".ui.fragment.bustimetable.pyeongtaek.PyeongtaekFragment" />
-        <activity android:name=".ui.fragment.bustimetable.cheonan.CheonanFragment" />
-        <activity android:name=".ui.fragment.bustimetable.capital.CapitalFragment" />
         <activity android:name=".ui.activity.capitaldetail.CapitalDetailActivity" />
         <activity android:name=".ui.activity.subwaytimetable.SubwayTimeTableActivity" />
-        <activity android:name=".ui.fragment.subwaytimetable.weekday.WeekdayFragment" />
-        <activity android:name=".ui.fragment.subwaytimetable.holiday.HolidayFragment" />
-        <activity android:name=".ui.activity.calendar.CalendarActivity"></activity>
     </application>
 
 </manifest>

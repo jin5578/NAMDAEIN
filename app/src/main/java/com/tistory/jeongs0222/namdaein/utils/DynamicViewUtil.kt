@@ -13,6 +13,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.tistory.jeongs0222.namdaein.R
 
+
 object DynamicViewUtil{
 
     fun xdpx(context: Context): Int = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 70f, context.resources.displayMetrics).toInt()

@@ -252,4 +252,10 @@ interface ApiService {
     fun subwaytimetable(@Field("category") category: Int): Observable<subwaytimetables>
 
     data class subwaytimetables(val subwaytimetable: MutableList<Model.subwayTimeTable>)
+
+    //Notice Information
+    @GET("notice.php")
+    fun noticeInformation(): Observable<noticeInformations>
+
+    data class noticeInformations(val notice: MutableList<Model.noticeInformation>)
 }

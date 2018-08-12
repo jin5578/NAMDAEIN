@@ -39,6 +39,7 @@ class BoardClubPresenter: BoardClubContract.Presenter {
 
         view.recyclerView().apply {
             adapter = mAdapter
+
             layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notice_entire_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rectangle1_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/notice_visible_imageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_expand_more_black_18dp"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorLightLightGray"/>
+
+        <TextView
+            android:id="@+id/notice_title_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"
+            android:fontFamily="@font/goyang"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="남서울대학교 커뮤니티 '남대인' 오픈!"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorLightLightGray"/>
+
+    <TextView
+        android:id="@+id/notice_content_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:padding="15dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="12sp"
+        android:fontFamily="@font/goyang"
+        tools:text="안녕하세요. 남서울대학교 커뮤니티입니다.
+
+처음으로 오픈하게 된 점 진심으로 감사드립니다.
+
+앞으로 더욱 더 노력하는 남대인이 되겠습니다.
+
+감사합니다."
+        tools:visibility="visible"/>
+
+
+</LinearLayout>

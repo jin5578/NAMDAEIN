@@ -65,4 +65,8 @@ object Model {
     data class subwayTimeTable(val order: Int,
                                val destination: String,
                                val time: String)
+
+    data class noticeInformation(val order: Int,
+                                 val noticeTitle: String,
+                                 val noticeContent: String)
 }
