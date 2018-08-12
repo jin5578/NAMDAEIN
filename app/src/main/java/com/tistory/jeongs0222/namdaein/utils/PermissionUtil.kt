@@ -1,7 +1,6 @@
 package com.tistory.jeongs0222.namdaein.utils
 
 import android.support.v4.app.FragmentManager
-import android.util.Log
 import com.gun0912.tedpermission.PermissionListener
 import java.util.ArrayList
 
