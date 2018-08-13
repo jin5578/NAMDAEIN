@@ -102,9 +102,6 @@ interface ApiService {
     @POST("register.php")
     fun register(@Field("userkey") userkey: String,
                  @Field("usernickname") usernickname: String,
-                 @Field("userage") userage: Int,
-                 @Field("usermajor") usermajor: String,
-                 @Field("usersex") usersex: String,
                  @Field("usertoken") usertoken: String): Observable<registers>
 
     data class registers(val value: Int, val message: String)   //0: 성공, 1: 실패

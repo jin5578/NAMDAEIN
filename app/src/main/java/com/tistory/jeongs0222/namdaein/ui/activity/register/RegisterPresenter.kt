@@ -68,7 +68,7 @@ class RegisterPresenter: RegisterContract.Presenter, TextWatcher {
             val nickname = view.register_nickname().text.toString()
 
             compositeDisposable
-                    .add(apiClient.register(google_uId!!, nickname, 0, "", "", google_token!!)
+                    .add(apiClient.register(google_uId!!, nickname, google_token!!)
                             .subscribeOn(Schedulers.io())
                             .doOnNext {
                                 if(it.value == 0) {
