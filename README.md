@@ -1,10 +1,10 @@
 
 
-## 남대인(NAMDAEIN)(h1)
+## 남대인(NAMDAEIN) (h1)
 ##### 남서울대학교 커뮤니티 어플리케이션
 
 
-###Screenshots
+### Screenshots
 
 <div>
   
