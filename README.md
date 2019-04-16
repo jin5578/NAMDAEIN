@@ -14,12 +14,14 @@
 
 ##### 메인페이지
 
+<img width="300" src="https://user-images.githubusercontent.com/24897699/46848078-c5f24900-ce22-11e8-95c2-6e64763d51ff.png">
+
+##### 장터페이지
 
 <img width="300" src="https://user-images.githubusercontent.com/24897699/46848076-c559b280-ce22-11e8-81ff-402000c0c9bb.png">
 
 <img width="200" src="https://user-images.githubusercontent.com/24897699/46848077-c5f24900-ce22-11e8-8432-80eb0d3908bb.png">
 
-<img width="200" src="https://user-images.githubusercontent.com/24897699/46848078-c5f24900-ce22-11e8-95c2-6e64763d51ff.png">
 
 <img width="200" src="https://user-images.githubusercontent.com/24897699/46848080-c68adf80-ce22-11e8-9967-f0b17a0e17ea.png">
 
