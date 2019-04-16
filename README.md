@@ -1,21 +1,47 @@
 
 
-## 남대인(NAMDAEIN)
+# 남대인(NAMDAEIN)
 
-##### 대학생활 플랫폼 어플리케이션
+> 대학생활 플랫폼 어플리케이션
 
-##### 남서울대학교 학우들이 소통을 나누거나 중고장터를 통해 물건을 사고 팔 수 있는 어플리케이션입니다.
-
-
+남서울대학교 학우들이 소통을 나누거나 중고장터를 통해 물건을 사고 팔 수 있는 어플리케이션입니다.
 
 
-### Screenshots
+## 개발 환경
+
+* 개발 툴
+
+    * Android Studio
+    
+* 언어
+
+    * Kotlin
+
+* Code Architecture
+
+    * MVP Pattern
+
+* 라이브러리
+
+    * Google Firebase
+    * Glide
+    * RecyclerView
+    * Retrofit2
+
+* 서버
+
+    * MySQL
+    * SQLite
+    * PHP
+    
+
+## Screenshots
 
 <div>
 
 <img width="300" src="https://user-images.githubusercontent.com/24897699/46848079-c5f24900-ce22-11e8-93d3-f20fc5f8b6a1.png">
 
-##### 메인페이지
+> 메인페이지
 
 <img width="300" src="https://user-images.githubusercontent.com/24897699/46848078-c5f24900-ce22-11e8-95c2-6e64763d51ff.png">
 
