@@ -18,14 +18,21 @@
 
 ##### 장터페이지
 
+<img width="300" src="https://user-images.githubusercontent.com/24897699/46848077-c5f24900-ce22-11e8-8432-80eb0d3908bb.png">
+
+##### 장터상세페이지
+
+<img width="300" src="https://user-images.githubusercontent.com/24897699/46848081-c68adf80-ce22-11e8-8083-d2d8f8abfb2d.png">
+
+##### 게시판페이지
+
+<img width="300" src="https://user-images.githubusercontent.com/24897699/46848080-c68adf80-ce22-11e8-9967-f0b17a0e17ea.png">
+
+##### 게시판상세페에지
+
 <img width="300" src="https://user-images.githubusercontent.com/24897699/46848076-c559b280-ce22-11e8-81ff-402000c0c9bb.png">
 
-<img width="200" src="https://user-images.githubusercontent.com/24897699/46848077-c5f24900-ce22-11e8-8432-80eb0d3908bb.png">
-
-
-<img width="200" src="https://user-images.githubusercontent.com/24897699/46848080-c68adf80-ce22-11e8-9967-f0b17a0e17ea.png">
-
-<img width="200" src="https://user-images.githubusercontent.com/24897699/46848081-c68adf80-ce22-11e8-8083-d2d8f8abfb2d.png">
+##### 더보기페이지
 
 </div>
   
